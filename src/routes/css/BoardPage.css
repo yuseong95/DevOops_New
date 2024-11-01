@@ -1,0 +1,23 @@
+/* src/routes/css/BoardPage.css */
+
+.board-page {
+  padding: 20px;
+}
+
+.board-page h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.board-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}

@@ -7,11 +7,11 @@
   font-family: Arial, sans-serif;
 }
 
-.header-logo a{
+.header-logo a {
   color: #ffffff;
   font-size: 24px;
   font-weight: bold;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 .header-nav {
@@ -24,7 +24,8 @@
   margin-left: auto;
 }
 
-.header-nav a, .header-login a {
+.header-nav a,
+.header-login a {
   color: #ffffff;
   text-decoration: none;
   font-size: 16px;
@@ -32,4 +33,37 @@
 
 .header a:hover {
   text-decoration: underline;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dropdown-link {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #555;
 }

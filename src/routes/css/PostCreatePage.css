@@ -1,0 +1,40 @@
+/* src/routes/css/PostCreatePage.css */
+
+.post-create-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-create-page h2 {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.post-create-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.post-create-page select,
+.post-create-page input[type="text"] {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.post-create-page .quill-editor {
+  min-height: 300px;
+  margin-bottom: 15px;
+}
+
+.quill-editor .ql-container {
+  min-height: 300px;
+}
