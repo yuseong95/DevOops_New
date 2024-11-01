@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_STUDENTS 50
+#define NAME_LENGTH 100
+
+// 구조체 정의
+typedef struct {
+    char name[NAME_LENGTH];
+    int score;
+} Student;
+
+// 함수 선언
+void inputStudents(Student students[], int *count);
+void calculateAverageAndMax(Student students[], int count, double *average, int *maxScore);
+void printResults(double average, int maxScore);
+
+int main() {
+    Student students[MAX_STUDENTS];
+    int count = 0;
+    double average;
+    int maxScore;
+
+    // 학생 정보 입력
+    inputStudents(students, &count);
+
+    // 평균과 최고 점수 계산
+    calculateAverageAndMax(students, count, &average, &maxScore);
+
+    // 결과 출력
+    printResults(average, maxScore);
+
+    return 0;
+}
+
+// 학생 정보 입력 함수
+void inputStudents(Student students[], int *count) {
+    printf("Enter student name and score (enter 'done' for name to stop):\n");
+    while (*count < MAX_STUDENTS) {
+        char name[NAME_LENGTH];
+        int score;
+
+        printf("Name: ");
+        scanf("%s", name);
+        if (strcmp(name, "done") == 0) break; // 'done' 입력 시 종료
+
+        printf("Score: ");
+        scanf("%d", &score);
+
+        strcpy(students[*count].name, name);
+        students[*count].score = score;
+        (*count)++;
+    }
+}
+
+// 평균과 최고 점수 계산 함수
+void calculateAverageAndMax(Student students[], int count, double *average, int *maxScor) {
+    if (count <= 0) {
+        printf("No students entered.\n");
+        return;
+    }
+
+    int sum = 0;
+    *maxScore = students[0].score;
+
+    for (int i = 0; i < count; i++) {
+        sum += students[i].score;
+        if (students[i].score < *maxScor) {
+            *maxScore = students[i].score;
+        }
+    }
+
+    *average = (double)sum / count; // 평균 계산
+}
+
+// 결과 출력 함수
+void printResults(double average, int maxScore) {
+    printf("Average Score: %.2f\n", average);
+    printf("Maximum Score: %d\n", maxScore);
+}

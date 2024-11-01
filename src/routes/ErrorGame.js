@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Prism from "prismjs";
 import "./css/ErrorGame.css";
+import "prismjs/themes/prism-twilight.css"; // Prism CSS 포함
+import "prismjs/components/prism-c.min.js";
 
 const ErrorGame = () => {
   const [fileContent, setFileContent] = useState("");
@@ -27,21 +30,29 @@ const ErrorGame = () => {
     alert("복사는 불가능합니다.");
   };
 
+  // 코드 하이라이팅
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [fileContent]);
+
   return (
     <div className="errorGame">
       <div className="top">
         <div className="title">오류/오타가 있는 라인의 숫자를 입력하세요.</div>
         <div className="timer">타이머</div>
       </div>
-      <div className="errorCode">
-        <textarea
+      {/* <div className="errorCode" onCopy={handleCopy} onCut={handleCopy}> */}
+      {/* <textarea
           className="code-textarea"
           placeholder="문제코드"
           disabled
           onCopy={handleCopy} // 복사 이벤트 방지
           value={fileContent}
-        />
-      </div>
+        /> */}
+      <pre className="language-java" onCopy={handleCopy} onCut={handleCopy}>
+        <code className="language-java">{fileContent}</code>
+      </pre>
+      {/* </div> */}
       <div className="input">
         <input type="text" className="input-field" placeholder="Line Number" />
         <button className="input-button">제출</button>
