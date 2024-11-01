@@ -16,7 +16,7 @@ const Profile = () => {
       {/* 프로필 이미지와 아이디 */}
       <div className="profile-header">
         <img
-          src="https://via.placeholder.com/100"
+          src={user.profileImage} // 사용자 프로필 이미지 사용
           alt="Profile"
           className="profile-image"
         />
