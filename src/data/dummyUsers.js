@@ -4,7 +4,7 @@ const dummyUsers = [
       id: 'ckals413',
       password: '1234',
       skills: ['Kotlin', 'C', 'Java'], // 구현 가능 기술
-      badges: ['Gold', '1달 연속 접속'], // 뱃지
+      badges: ['Gold', 'Siver'], // 뱃지
       githubId: 'ckals413-github' // GitHub ID
     },
     {
