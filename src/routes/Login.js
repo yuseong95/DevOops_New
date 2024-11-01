@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import dummyUsers from '../data/dummyUsers'; // 더미 데이터 파일을 가져옴
 import './css/Login.css';
 
 const Login = () => {
@@ -6,13 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-
-  // 더미 사용자 데이터 배열
-  const dummyUsers = [
-    { id: 'ckals413', password: '1234' },
-    { id: 'ffffff', password: '1234' },
-    { id: 'testuser3', password: '123456' },
-  ];
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,6 +21,9 @@ const Login = () => {
     if (user) {
       setSuccessMessage('로그인 성공!');
       setErrorMessage('');
+      setTimeout(() => {
+        navigate('/profile', { state: { user } }); // 로그인 성공 시 사용자 데이터 전달
+      }, 500);
     } else {
       setErrorMessage('아이디 또는 비밀번호가 잘못되었습니다.');
       setSuccessMessage('');
