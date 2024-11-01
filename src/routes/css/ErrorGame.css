@@ -1,0 +1,67 @@
+.errorGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+}
+
+/* 문제 가이드 & 타이머 */
+.top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.title {
+  font-size: 18px; /* 글씨 크기 조정 */
+  font-weight: bold; /* 글씨 두께 조정 */
+  color: white;
+}
+
+/* 에러찾기 문제 부분 */
+.errorCode {
+  width: 80%;
+  height: 500px;
+  color: white;
+  border: solid 3px rgb(114, 7, 164);
+  border-radius: 5px;
+}
+
+.code-textarea {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  font-family: "D2coding", Courier, monospace;
+  resize: none; /* 크기 조절 비활성화 */
+  box-sizing: border-box; /* 패딩과 테두리가 요소의 전체 너비와 높이에 포함되도록 설정 */
+}
+
+/* 정답라인 입력 부분 */
+.input {
+  display: flex;
+  gap: 20px;
+}
+
+.input-field {
+  width: 80px;
+  border-radius: 20px;
+  padding: 5px 10px;
+  color: rgb(145, 23, 202);
+  text-align: center;
+  border: solid 3px rgb(145, 23, 202);
+}
+
+.input-button {
+  width: 50px;
+  height: 30px;
+  color: white;
+  border-radius: 20px;
+  background-color: rgb(145, 23, 202);
+  /* border: solid 3px rgb(145, 23, 202); */
+}
