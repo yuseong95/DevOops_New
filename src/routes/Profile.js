@@ -57,6 +57,11 @@ const Profile = () => {
       <div className="contributions">
         <h3>{user.githubId}의 GitHub Contributions</h3>
         {/* GitHub 잔디밭을 불러오는 컴포넌트 추가 */}
+        <img
+          src={`https://ghchart.rshah.org/33333/${user.githubId}`}
+          alt={`${user.githubId}'s GitHub Contributions`}
+          className="contribution-chart"
+        />
       </div>
     </div>
   );
