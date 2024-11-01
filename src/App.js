@@ -1,44 +1,24 @@
-// src/App.js
-import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./routes/Home";
-import BoardPage from "./routes/BoardPage";
-import PostCreatePage from "./routes/PostCreatePage";
-import PostDetailPage from "./routes/PostDetailPage";
-import dummyPosts from "./data/dummyPosts"; // 더미 데이터 import
+import Login from "./routes/Login"; // 로그인 경로 추가
+import Profile from "./routes/Profile"; // profile 컴포넌트 불러오기
+import BoardRoutes from "./routes/BoardRoutes"; // 게시판 관련 경로
 
 function App() {
-  const [posts, setPosts] = useState(dummyPosts); // 초기값을 더미 데이터로 설정
-
-  const addPost = (newPost) => {
-    const fullPost = {
-      id: Date.now(),
-      ...newPost,
-    };
-    setPosts((prevPosts) => [...prevPosts, fullPost]);
-  };
-
   return (
     <>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/board/free"
-          element={<BoardPage posts={posts} boardType="free" />}
-        />
-        <Route
-          path="/board/team"
-          element={<BoardPage posts={posts} boardType="team" />}
-        />
-        <Route
-          path="/board/create"
-          element={<PostCreatePage addPost={addPost} />}
-        />
-        <Route path="/post/:id" element={<PostDetailPage posts={posts} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+        {/* <Route path="/" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} /> */}
+        <Route path="/board/*" element={<BoardRoutes />} />
+        {/* 게시판 경로 설정 */}
       </Routes>
     </>
   );

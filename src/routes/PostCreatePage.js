@@ -15,8 +15,12 @@ const PostCreatePage = ({ addPost }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addPost({ title, content, boardType });
-    navigate(`/board/${boardType}`);
+    if (addPost) {
+      addPost({ title, content, boardType });
+      navigate(`/board/${boardType}`);
+    } else {
+      console.error("addPost function is not defined");
+    }
   };
 
   return (

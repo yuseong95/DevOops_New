@@ -4,37 +4,10 @@ import "./css/Header.css";
 
 const Header = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [buttonHovered, setButtonHovered] = useState(false);
-  const [menuHovered, setMenuHovered] = useState(false);
 
-  // 드롭다운을 열기 위한 조건 설정
-  const updateDropdownVisibility = () => {
-    setIsDropdownVisible(buttonHovered || menuHovered);
-  };
-
-  // 버튼에 마우스 진입 시
-  const handleButtonEnter = () => {
-    setButtonHovered(true);
-    setIsDropdownVisible(true);
-  };
-
-  // 버튼에서 마우스 떠날 시
-  const handleButtonLeave = () => {
-    setButtonHovered(false);
-    updateDropdownVisibility();
-  };
-
-  // 드롭다운 메뉴에 마우스 진입 시
-  const handleMenuEnter = () => {
-    setMenuHovered(true);
-    setIsDropdownVisible(true);
-  };
-
-  // 드롭다운 메뉴에서 마우스 떠날 시
-  const handleMenuLeave = () => {
-    setMenuHovered(false);
-    updateDropdownVisibility();
-  };
+  // 마우스가 드롭다운 영역에 들어가고 나갈 때
+  const handleMouseEnter = () => setIsDropdownVisible(true);
+  const handleMouseLeave = () => setIsDropdownVisible(false);
 
   return (
     <header className="header">
@@ -45,19 +18,15 @@ const Header = () => {
         <Link to="/ranking">랭킹</Link>
         <Link to="/challenge">일일챌린지</Link>
 
-        {/* 드롭다운 메뉴 */}
+        {/* 드롭다운 메뉴 전체를 감싸는 div에 이벤트 추가 */}
         <div
           className="dropdown"
-          onMouseEnter={handleButtonEnter}
-          onMouseLeave={handleButtonLeave}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <span className="dropdown-link">게시판</span>
           {isDropdownVisible && (
-            <div
-              className="dropdown-content"
-              onMouseEnter={handleMenuEnter}
-              onMouseLeave={handleMenuLeave}
-            >
+            <div className="dropdown-content">
               <Link
                 to="/board/free"
                 onClick={() => setIsDropdownVisible(false)}
