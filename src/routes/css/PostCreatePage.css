@@ -1,16 +1,16 @@
 /* src/routes/css/PostCreatePage.css */
 
 .post-create-page {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .post-create-page h2 {
-  font-size: 1.8em;
+  font-size: 2em;
   color: #333;
   margin-bottom: 20px;
   text-align: center;
@@ -19,22 +19,51 @@
 .post-create-page form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  color: #333;
+  width: 100%;
 }
 
 .post-create-page select,
 .post-create-page input[type="text"] {
-  padding: 10px;
-  font-size: 1em;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 12px;
+  font-size: 1.1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  width: 100%; /* 부모 컨테이너의 너비에 맞게 설정 */
+  box-sizing: border-box; /* 패딩 포함한 너비 설정 */
 }
 
 .post-create-page .quill-editor {
-  min-height: 300px;
-  margin-bottom: 15px;
+  min-height: 500px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  width: 100%; /* Quill 에디터가 부모 컨테이너의 너비에 맞게 확장 */
+  box-sizing: border-box;
 }
 
-.quill-editor .ql-container {
-  min-height: 300px;
+.post-create-page .ql-editor {
+  min-height: 500px;
+}
+
+.post-create-page button {
+  padding: 15px;
+  font-size: 1.2em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.post-create-page button:hover {
+  background-color: #0056b3;
 }

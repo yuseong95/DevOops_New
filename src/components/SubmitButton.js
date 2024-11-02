@@ -3,15 +3,17 @@ import React from "react";
 import "./css/SubmitButton.css";
 
 const SubmitButton = ({
-  onClick,
   label,
-  color = "#fff",
-  backgroundColor = "#007bff",
+  backgroundColor,
+  color,
+  fontSize = "1em",
+  padding = "10px 20px",
+  onClick,
 }) => (
   <button
     className="submit-button"
+    style={{ backgroundColor, color, fontSize, padding }}
     onClick={onClick}
-    style={{ color, backgroundColor }}
   >
     {label}
   </button>
