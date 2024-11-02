@@ -12,7 +12,6 @@ const BoardPage = ({ posts, boardType }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // URL에서 현재 페이지를 가져옴, 기본값은 1페이지
   const query = new URLSearchParams(location.search);
   const initialPage = parseInt(query.get("page")) || 1;
 
@@ -25,13 +24,16 @@ const BoardPage = ({ posts, boardType }) => {
   const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE);
 
   useEffect(() => {
-    setCurrentPage(initialPage); // URL에서 페이지 번호가 변경될 때 상태 업데이트
+    setCurrentPage(initialPage);
   }, [initialPage]);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    navigate(`?page=${pageNumber}`); // 페이지 변경 시 URL을 업데이트
+    navigate(`?page=${pageNumber}`);
   };
+
+  // 빈 자리를 채울 더미 카드 생성
+  const placeholders = Array(ITEMS_PER_PAGE - currentPosts.length).fill(null);
 
   return (
     <div className="board-page">
@@ -52,6 +54,12 @@ const BoardPage = ({ posts, boardType }) => {
         <div className="board-container">
           {currentPosts.map((post) => (
             <BoardCard key={post.id} post={post} />
+          ))}
+          {placeholders.map((_, index) => (
+            <div
+              key={`placeholder-${index}`}
+              className="board-card placeholder"
+            ></div>
           ))}
         </div>
 

@@ -1,12 +1,16 @@
 /* src/routes/css/BoardPage.css */
 
 .board-content-wrapper {
-  max-width: 1300px; /* wrapper의 고정 너비 설정 */
+  max-width: 1300px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f7f7f7;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-height: 1000px; /* 고정된 최소 높이 설정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .board-header {
@@ -25,7 +29,12 @@
 .board-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개의 카드 */
-  gap: 25px; /* 카드 간 간격 */
+  gap: 25px;
+}
+
+.board-card.placeholder {
+  visibility: hidden;
+  height: 200px; /* 실제 카드와 동일한 높이 설정 */
 }
 
 .pagination {
