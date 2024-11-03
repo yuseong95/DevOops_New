@@ -86,3 +86,7 @@ pre {
   background-color: rgb(145, 23, 202);
   /* border: solid 3px rgb(145, 23, 202); */
 }
+
+p {
+  color: white;
+}
