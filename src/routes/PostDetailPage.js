@@ -1,23 +1,32 @@
 // src/routes/PostDetailPage.js
 import React from "react";
 import { useParams } from "react-router-dom";
+import timeAgo from "../utils/timeAgo"; // timeAgo 함수 임포트
+import "./css/PostDetailPage.css"; // CSS 파일 임포트
 
 const PostDetailPage = ({ posts }) => {
   const { id } = useParams();
-
-  // id가 숫자 또는 문자열일 수 있으므로 일치하는지 확인
   const post = posts.find((p) => p.id === Number(id) || String(p.id) === id);
-
-  console.log("PostDetailPage - id:", id); // 디버깅용 콘솔 로그
-  console.log("PostDetailPage - post:", post); // 디버깅용 콘솔 로그
 
   if (!post) return <div>게시글을 찾을 수 없습니다.</div>;
 
   return (
-    <div>
+    <div className="post-detail-page">
       <h2>{post.title}</h2>
-      <p dangerouslySetInnerHTML={{ __html: post.content }}></p>
-      <small>작성일: {new Date(post.createdAt).toLocaleString()}</small>
+      <div
+        className="content"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      ></div>
+      <div className="date">
+        {/* 절대적 날짜 */}
+        작성일:{" "}
+        {post.createdAt
+          ? new Date(post.createdAt).toLocaleString()
+          : "날짜 정보 없음"}
+        <br />
+        {/* 상대적 시간 표시 */}(
+        {post.createdAt ? timeAgo(new Date(post.createdAt)) : "알 수 없음"})
+      </div>
     </div>
   );
 };

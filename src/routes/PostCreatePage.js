@@ -16,7 +16,13 @@ const PostCreatePage = ({ addPost }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (addPost) {
-      addPost({ title, content, boardType });
+      const newPost = {
+        title,
+        content,
+        boardType,
+        createdAt: new Date().toISOString(), // 현재 날짜와 시간 추가
+      };
+      addPost(newPost);
       navigate(`/board/${boardType}`);
     } else {
       console.error("addPost function is not defined");
