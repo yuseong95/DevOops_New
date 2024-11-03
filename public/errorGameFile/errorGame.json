@@ -1,128 +1,128 @@
 [
   {
     "id": 1,
-    "fileName": "test.txt",
-    "answer": "3",
+    "fileName": "quiz1.txt",
+    "answer": "16",
     "comment": "'.'대신 ','가 사용되었습니다."
   },
   {
     "id": 2,
-    "fileName": "test2.txt",
-    "answer": "5",
+    "fileName": "quiz2.txt",
+    "answer": "68",
     "comment": "'>'대신 '<'가 사용되었습니다."
   },
   {
     "id": 3,
-    "fileName": "test.txt",
-    "answer": "3",
-    "comment": "'.'대신 ','가 사용되었습니다."
+    "fileName": "quiz17.txt",
+    "answer": "43",
+    "comment": "student.average_score() -> '()'가 빠졌습니다."
   },
   {
     "id": 4,
-    "fileName": "test2.txt",
-    "answer": "5",
-    "comment": "'>'대신 '<'가 사용되었습니다."
+    "fileName": "quiz3.txt",
+    "answer": "36",
+    "comment": "아이템 이름에 공백이 포함되어야 한다면, scanner.nextLine()을 사용해야 합니다."
   },
   {
     "id": 5,
-    "fileName": "test.txt",
-    "answer": "3",
-    "comment": "'.'대신 ','가 사용되었습니다."
+    "fileName": "quiz10.txt",
+    "answer": "63",
+    "comment": "해제된 포인터에 접근했습니다."
   },
   {
     "id": 6,
-    "fileName": "test2.txt",
-    "answer": "5",
-    "comment": "'>'대신 '<'가 사용되었습니다."
+    "fileName": "quiz16.txt",
+    "answer": "53",
+    "comment": "','대신 '.'이 사용되었습니다."
   },
   {
     "id": 7,
-    "fileName": "test.txt",
-    "answer": "3",
-    "comment": "'.'대신 ','가 사용되었습니다."
+    "fileName": "quiz5.txt",
+    "answer": "31",
+    "comment": "num2가 0이 아닌지 확인해야 합니다. (ArithmeticException)"
   },
   {
     "id": 8,
-    "fileName": "test2.txt",
-    "answer": "5",
-    "comment": "'>'대신 '<'가 사용되었습니다."
+    "fileName": "quiz9.txt",
+    "answer": "53",
+    "comment": "'display_employees'대신 'display_empolyees'가 사용되었습니다."
   },
   {
     "id": 9,
-    "fileName": "test.txt",
-    "answer": "3",
-    "comment": "'.'대신 ','가 사용되었습니다."
+    "fileName": "quiz21.txt",
+    "answer": "56",
+    "comment": "콜론(:)이 누락되었습니다."
   },
   {
     "id": 10,
-    "fileName": "test2.txt",
-    "answer": "5",
-    "comment": "'>'대신 '<'가 사용되었습니다."
+    "fileName": "quiz4.txt",
+    "answer": "36",
+    "comment": "과목명에 공백이 포함되어야 한다면, scanner.nextLine()을 사용해야 합니다."
   },
   {
     "id": 11,
-    "fileName": "test.txt",
-    "answer": "3",
-    "comment": "'.'대신 ','가 사용되었습니다."
+    "fileName": "quiz11.txt",
+    "answer": "21",
+    "comment": "== 연산자는 문자열의 메모리 주소를 비교하기 때문에 strcmp()를 사용해야 합니다."
   },
   {
     "id": 12,
-    "fileName": "test2.txt",
-    "answer": "5",
-    "comment": "'>'대신 '<'가 사용되었습니다."
+    "fileName": "quiz20.txt",
+    "answer": "21",
+    "comment": "b가 0이 아닌지 확인해야 합니다. (ZeroDivisionError)"
   },
   {
     "id": 13,
-    "fileName": "test.txt",
-    "answer": "3",
-    "comment": "'.'대신 ','가 사용되었습니다."
+    "fileName": "quiz6.txt",
+    "answer": "41",
+    "comment": "'book.toString()'대신 'book.tostring()'이 사용되었습니다."
   },
   {
     "id": 14,
-    "fileName": "test2.txt",
-    "answer": "5",
-    "comment": "'>'대신 '<'가 사용되었습니다."
+    "fileName": "quiz14.txt",
+    "answer": "7",
+    "comment": "<= 연산자를 사용하여 배열의 경계를 넘어선 인덱스를 참조하게 됩니다."
   },
   {
     "id": 15,
-    "fileName": "test.txt",
-    "answer": "3",
-    "comment": "'.'대신 ','가 사용되었습니다."
+    "fileName": "quiz19.txt",
+    "answer": "57",
+    "comment": "문자열과 정수의 덧셈은 불가합니다."
   },
   {
     "id": 16,
-    "fileName": "test2.txt",
-    "answer": "5",
-    "comment": "'>'대신 '<'가 사용되었습니다."
+    "fileName": "quiz8.txt",
+    "answer": "27",
+    "comment": "getResult() 메서드는 인스턴스 메서드로 정의되었기 때문에, 정적 메서드인 main에서 직접 호출할 수 없습니다."
   },
   {
     "id": 17,
-    "fileName": "test.txt",
-    "answer": "3",
-    "comment": "'.'대신 ','가 사용되었습니다."
+    "fileName": "quiz12.txt",
+    "answer": "39",
+    "comment": "'=='대신 '='가 사용되었습니다."
   },
   {
     "id": 18,
-    "fileName": "test2.txt",
-    "answer": "5",
-    "comment": "'>'대신 '<'가 사용되었습니다."
+    "fileName": "quiz18.txt",
+    "answer": "9",
+    "comment": "'break'대신 'return'이 사용되었습니다."
   },
   {
     "id": 19,
-    "fileName": "test.txt",
-    "answer": "3",
-    "comment": "'.'대신 ','가 사용되었습니다."
+    "fileName": "quiz7.txt",
+    "answer": "44",
+    "comment": "'customers'대신 'customer'가 사용되었습니다."
   },
   {
     "id": 20,
-    "fileName": "test2.txt",
-    "answer": "5",
-    "comment": "'>'대신 '<'가 사용되었습니다."
+    "fileName": "quiz13.txt",
+    "answer": "18",
+    "comment": "'i'와 'j'의 자리가 바뀌었습니다."
   },
   {
     "id": 21,
-    "fileName": "test.txt",
-    "answer": "3",
-    "comment": "'.'대신 ','가 사용되었습니다."
+    "fileName": "quiz15.txt",
+    "answer": "4",
+    "comment": "'gender'대신 'gnder'가 사용되었습니다."
   }
 ]

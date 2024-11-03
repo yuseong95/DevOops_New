@@ -1,0 +1,66 @@
+1  #include <stdio.h>
+2  #include <stdlib.h>
+3  
+4  typedef struct Node {
+5      int data;
+6      struct Node *next;
+7  } Node;
+8  
+9  Node* create_node(int data) {
+10     Node *new_node = (Node *)malloc(sizeof(Node));
+11     if (new_node == NULL) {
+12         printf("메모리 할당 실패\n");
+13         return NULL;
+14     }
+15     new_node->data = data;
+16     new_node->next = NULL;
+17     return new_node;
+18 }
+19 
+20 void append(Node **head, int data) {
+21     Node *new_node = create_node(data);
+22     if (*head == NULL) {
+23         *head = new_node;
+24         return;
+25     }
+26 
+27     Node *temp = *head;
+28     while (temp->next != NULL) {
+29         temp = temp->next;
+30     }
+31     temp->next = new_node;
+32 }
+33 
+34 void print_list(Node *head) {
+35     Node *temp = head;
+36     while (temp != NULL) {
+37         printf("%d -> ", temp->data);
+38         temp = temp->next;
+39     }
+40     printf("NULL\n");
+41 }
+42 
+43 void free_list(Node *head) {
+44     Node *temp;
+45     while (head != NULL) {
+46         temp = head;
+47         head = head->next;
+48         free(temp);
+49     }
+50 }
+51 
+52 int main() {
+53     Node *head = NULL;
+54 
+55     append(&head, 10);
+56     append(&head, 20);
+57     append(&head, 30);
+58 
+59     print_list(head);
+60 
+61     free_list(head);
+62 
+63     printf("첫 번째 요소: %d\n", head->data);
+64 
+65     return 0;
+66 }

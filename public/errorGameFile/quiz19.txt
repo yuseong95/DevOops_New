@@ -1,0 +1,100 @@
+1  class Student:
+2      def __init__(self, name, age, grade):
+3          self.name = name           # 학생 이름
+4          self.age = age             # 학생 나이
+5          self.grade = grade         # 학생 학년
+6  
+7      def display_info(self):
+8          # 학생 정보를 출력
+9          print(f"Name: {self.name}, Age: {self.age}, Grade: {self.grade}")
+10 
+11 class Classroom:
+12     def __init__(self):
+13         self.students = []         # 학생 리스트 초기화
+14  
+15     def add_student(self, student):
+16         # 새로운 학생을 리스트에 추가
+17         self.students.append(student)
+18  
+19     def remove_student(self, name):
+20         # 이름으로 학생을 찾아 제거
+21         for i, student in enumerate(self.students):
+22             if student.name == name:
+23                 del self.students[i]
+24                 print(f"{name} has been removed from the classroom.")
+25                 return
+26         print(f"{name} not found in the classroom.")
+27  
+28     def display_students(self):
+29         # 모든 학생 정보를 출력
+30         if not self.students:
+31             print("No students in the classroom.")
+32         else:
+33             print("Classroom students:")
+34             for student in self.students:
+35                 student.display_info()
+36  
+37     def calculate_average_age(self):
+38         # 모든 학생의 나이 평균 계산
+39         total_age = 0
+40         for student in self.students:
+41             total_age += student.age
+42         if len(self.students) > 0:
+43             return total_age / len(self.students)
+44         else:
+45             return 0
+46  
+47     def display_class_summary(self):
+48         # 클래스 요약 정보 출력
+49         print("\nClass Summary:")
+50         for student in self.students:
+51             student.display_info()
+52  
+53         average_age = self.calculate_average_age()
+54         print(f"\nAverage Age: {average_age}")
+55  
+56         // 총 학생 수 출력
+57         print("Total Students: " + len(self.students))
+58  
+59 def main():
+60     classroom = Classroom()
+61  
+62     while True:
+63         # 사용자에게 옵션을 표시
+64         print("\n1. Add Student")
+65         print("2. Remove Student")
+66         print("3. Display All Students")
+67         print("4. Display Class Summary")
+68         print("5. Exit")
+69         choice = input("Choose an option: ")
+70  
+71         if choice == '1':
+72             # 학생 추가
+73             name = input("Enter student's name: ")
+74             age = int(input("Enter student's age: "))
+75             grade = input("Enter student's grade: ")
+76             classroom.add_student(Student(name, age, grade))
+77  
+78         elif choice == '2':
+79             # 학생 제거
+80             name = input("Enter the name of the student to remove: ")
+81             classroom.remove_student(name)
+82  
+83         elif choice == '3':
+84             # 모든 학생 정보 출력
+85             classroom.display_students()
+86  
+87         elif choice == '4':
+88             # 클래스 요약 정보 출력
+89             classroom.display_class_summary()
+90  
+91         elif choice == '5':
+92             # 프로그램 종료
+93             print("Exiting program.")
+94             break
+95  
+96         else:
+97             print("Invalid option, please try again.")
+98  
+99 if __name__ == "__main__":
+100     main()

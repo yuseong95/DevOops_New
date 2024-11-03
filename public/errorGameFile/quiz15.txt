@@ -1,0 +1,25 @@
+1  def print_person_info(person):
+2      print("이름:", person["name"])
+3      print("나이:", person["age"])
+4      print("성별:", person["gnder"])
+5  
+6  def main():
+7      person = {"name": "Alice", "age": 25, "gender": "female"}
+8      print_person_info(person)
+9  
+10     # 딕셔너리 업데이트
+11     person["age"] = 26
+12     person["gender"] = "male"
+13     
+14     print("\n수정된 정보:")
+15     print_person_info(person)
+16  
+17     # 새로운 키 추가 및 정보 출력
+18     person["occupation"] = "Engineer"
+19     print("\n추가된 직업 정보:")
+20     print("이름:", person["name"])
+21     print("직업:", person["occupation"])
+22  
+23 if __name__ == "__main__":
+24     main()
+25  

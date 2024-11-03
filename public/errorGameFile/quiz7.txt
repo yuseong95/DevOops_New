@@ -1,0 +1,58 @@
+1  import java.util.ArrayList;
+2  import java.util.Scanner;
+3  
+4  public class CustomerManagementSystem {
+5      static class Customer {
+6          String name;
+7          int age;
+8  
+9          Customer(String name, int age) {
+10             this.name = name;
+11             this.age = age;
+12         }
+13  
+14         @Override
+15         public String toString() {
+16             return "이름: " + name + ", 나이: " + age;
+17         }
+18     }
+19  
+20     public static void main(String[] args) {
+21         ArrayList<Customer> customers = new ArrayList<>();
+22         Scanner scanner = new Scanner(System.in);
+23         int choice;
+24  
+25         do {
+26             System.out.println("고객 관리 시스템");
+27             System.out.println("1. 고객 추가");
+28             System.out.println("2. 고객 목록 보기");
+29             System.out.println("3. 종료");
+30             System.out.print("선택하세요: ");
+31             choice = scanner.nextInt();
+32  
+33             switch (choice) {
+34                 case 1:
+35                     System.out.print("고객 이름: ");
+36                     String name = scanner.next();
+37                     System.out.print("고객 나이: ");
+38                     int age = scanner.nextInt();
+39                     customers.add(new Customer(name, age));
+40                     System.out.println("고객이 추가되었습니다.");
+41                     break;
+42                 case 2:
+43                     System.out.println("고객 목록:");
+44                     for (Customer customer : customer) {
+45                         System.out.println(customer);
+46                     }
+47                     break;
+48                 case 3:
+49                     System.out.println("프로그램을 종료합니다.");
+50                     break;
+51                 default:
+52                     System.out.println("잘못된 선택입니다.");
+53             }
+54         } while (choice != 3);
+55  
+56         scanner.close();
+57     }
+58 }

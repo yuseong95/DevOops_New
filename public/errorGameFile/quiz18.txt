@@ -1,0 +1,38 @@
+1  class ShoppingList:
+2      def __init__(self):
+3          self.items = ["apple", "banana", "carrot", "date"]
+4  
+5      def search_item(self, item_name):
+6          for item in self.items:
+7              if item == item_name:
+8                  print(f"{item_name} is in the shopping list.")
+9                  return
+10  
+11         print(f"{item_name} is not in the shopping list.")
+12  
+13 def main():
+14     shopping_list = ShoppingList()
+15     while True:
+16         print("\n1. Search for an item")
+17         print("2. Show all items")
+18         print("3. Exit")
+19         choice = input("Choose an option: ")
+20  
+21         if choice == '1':
+22             item_name = input("Enter item name to search: ")
+23             shopping_list.search_item(item_name)
+24  
+25         elif choice == '2':
+26             print("Shopping List:")
+27             for item in shopping_list.items:
+28                 print("-", item)
+29  
+30         elif choice == '3':
+31             print("Exiting program.")
+32             return  # 프로그램 종료
+33  
+34         else:
+35             print("Invalid option, try again.")
+36  
+37 if __name__ == "__main__":
+38     main()

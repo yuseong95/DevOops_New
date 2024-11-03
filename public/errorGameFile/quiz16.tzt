@@ -1,0 +1,79 @@
+1  class Product:
+2      def __init__(self, name, price, quantity):
+3          self.name = name
+4          self.price = price
+5          self.quantity = quantity
+6  
+7      def display_info(self):
+8          print(f"Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}")
+9  
+10 class Inventory:
+11     def __init__(self):
+12         self.products = []
+13  
+14     def add_product(self, product):
+15         self.products.append(product)
+16  
+17     def remove_product(self, name):
+18         for i in range(len(self.products)):
+19             if self.products[i].name == name:
+20                 del self.products[i]
+21                 print(f"{name} has been removed.")
+22                 return
+23         print("Product not found.")
+24  
+25     def display_all_products(self):
+26         if not self.products:
+27             print("No products available.")
+28         else:
+29             for product in self.products:
+30                 product.display_info()
+31  
+32     def find_product(self, name):
+33         for product in self.products:
+34             if product.name == name:
+35                 return product
+36         return None
+37  
+38 def main():
+39     inventory = Inventory()
+40  
+41     while True:
+42         print("\n1. Add Product")
+43         print("2. Remove Product")
+44         print("3. Display All Products")
+45         print("4. Find Product")
+46         print("5. Exit")
+47         choice = input("Choose an option: ")
+48  
+49         if choice == '1':
+50             name = input("Enter product name: ")
+51             price = float(input("Enter product price: "))
+52             quantity = int(input("Enter product quantity: "))
+53             inventory.add_product(Product(name, price. quantity))
+54  
+55         elif choice == '2':
+56             name = input("Enter product name to remove: ")
+57             inventory.remove_product(name)
+58  
+59         elif choice == '3':
+60             inventory.display_all_products()
+61  
+62         elif choice == '4':
+63             name = input("Enter product name to find: ")
+64             product = inventory.find_product(name)
+65             if product:
+66                 product.display_info()
+67             else:
+68                 print("Product not found.")
+69  
+70         elif choice == '5':
+71             print("Exiting program.")
+72             break
+73  
+74         else:
+75             print("Invalid option.")
+76  
+77 if __name__ == "__main__":
+78     main()
+79  

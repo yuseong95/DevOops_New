@@ -1,0 +1,78 @@
+1  class Library:
+2      def __init__(self):
+3          self.books = []  # 도서 목록을 저장할 리스트
+4  
+5      def add_book(self, title, author):
+6          # 도서 정보를 딕셔너리로 저장하고 리스트에 추가
+7          book = {"title": title, "author": author}
+8          self.books.append(book)
+9          print(f"'{title}' by {author} has been added.")
+10 
+11     def remove_book(self, title):
+12         # 제목으로 도서를 찾아 제거
+13         for i, book in enumerate(self.books):
+14             if book["title"] == title:
+15                 del self.books[i]
+16                 print(f"'{title}' has been removed.")
+17                 return
+18         print(f"'{title}' not found in the library.")
+19  
+20     def display_books(self):
+21         # 모든 도서 정보를 출력
+22         if not self.books:
+23             print("No books available.")
+24         else:
+25             print("Library Books:")
+26             for i, book in enumerate(self.books, 1):
+27                 print(f"{i}. {book['title']} by {book['author']}")
+28  
+29     def search_book(self, title):
+30         # 제목으로 도서를 검색하고 결과 출력
+31         for book in self.books:
+32             if book["title"] == title:
+33                 print(f"Found: '{book['title']}' by {book['author']}")
+34                 return
+35         print(f"'{title}' not found in the library.")
+36  
+37 def main():
+38     library = Library()
+39  
+40     while True:
+41         # 메뉴 출력
+42         print("\nLibrary Menu")
+43         print("1. Add Book")
+44         print("2. Remove Book")
+45         print("3. Display Books")
+46         print("4. Search Book")
+47         print("5. Exit")
+48         choice = input("Choose an option: ")
+49  
+50         if choice == '1':
+51             # 도서 추가
+52             title = input("Enter book title: ")
+53             author = input("Enter book author: ")
+54             library.add_book(title, author)
+55         
+56         elif choice == '2'
+57             title = input("Enter book title to remove: ")
+58             library.remove_book(title)
+59  
+60         elif choice == '3':
+61             # 도서 목록 출력
+62             library.display_books()
+63  
+64         elif choice == '4':
+65             # 도서 검색
+66             title = input("Enter book title to search: ")
+67             library.search_book(title)
+68  
+69         elif choice == '5':
+70             # 프로그램 종료
+71             print("Exiting the library system.")
+72             break
+73  
+74         else:
+75             print("Invalid option. Please try again.")
+76  
+77 if __name__ == "__main__":
+78     main()

@@ -1,0 +1,83 @@
+1  class Student:
+2      def __init__(self, name, scores):
+3          self.name = name       # 학생 이름
+4          self.scores = scores   # 학생의 성적 리스트
+5  
+6      def average_score(self):
+7          # 평균 성적 계산
+8          if len(self.scores) > 0:
+9              return sum(self.scores) / len(self.scores)
+10         else:
+11             return 0
+12  
+13 class GradeManager:
+14     def __init__(self):
+15         self.students = []      # 학생 목록 초기화
+16  
+17     def add_student(self, student):
+18         # 학생 추가
+19         self.students.append(student)
+20  
+21     def remove_student(self, name):
+22         # 이름으로 학생 제거
+23         for i, student in enumerate(self.students):
+24             if student.name == name:
+25                 del self.students[i]
+26                 print(f"{name} has been removed.")
+27                 return
+28         print("Student not found.")
+29  
+30     def display_all_students(self):
+31         # 모든 학생의 평균 성적 출력
+32         for student in self.students:
+33             print(f"Name: {student.name}, Average Score: {student.average_score()}")
+34  
+35     def find_top_student(self):
+36         # 최고 성적 학생 찾기
+37         if not self.students:
+38             print("No students available.")
+39             return
+40  
+41         top_student = self.students[0]
+42         for student in self.students:
+43             if student.average_score < top_student.average_score:
+44                 top_student = student
+45  
+46         print(f"Top Student: {top_student.name}, Average Score: {top_student.average_score()}")
+47  
+48 def main():
+49     manager = GradeManager()
+50  
+51     while True:
+52         # 메뉴 출력
+53         print("\n1. Add Student")
+54         print("2. Remove Student")
+55         print("3. Display All Students")
+56         print("4. Find Top Student")
+57         print("5. Exit")
+58         choice = input("Choose an option: ")
+59  
+60         if choice == '1':
+61             name = input("Enter student name: ")
+62             scores = list(map(int, input("Enter scores separated by space: ").split()))
+63             manager.add_student(Student(name, scores))
+64  
+65         elif choice == '2':
+66             name = input("Enter student name to remove: ")
+67             manager.remove_student(name)
+68  
+69         elif choice == '3':
+70             manager.display_all_students()
+71  
+72         elif choice == '4':
+73             manager.find_top_student()
+74  
+75         elif choice == '5':
+76             print("Exiting program.")
+77             break
+78  
+79         else:
+80             print("Invalid option.")
+81  
+82 if __name__ == "__main__":
+83     main()
