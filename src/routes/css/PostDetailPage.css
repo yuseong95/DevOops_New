@@ -1,34 +1,212 @@
+/* src/routes/css/PostDetailPage.css */
+
 .post-detail-page {
   max-width: 800px;
-  margin: 40px auto;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .post-detail-page h2 {
-  font-size: 2em;
   color: #333;
+  font-size: 2em;
   margin-bottom: 15px;
-  border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 10px;
 }
 
-.post-detail-page .content {
-  font-size: 1.1em;
-  color: #555;
-  line-height: 1.6;
+.like-section {
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center;
+  margin-top: 20px;
+}
+
+.like-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  font-size: 1em;
+  color: #ff4d4d;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.like-button:hover {
+  color: #ff3333;
+}
+
+.comment-section {
+  margin-top: 30px;
+}
+
+.comment-section h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.comment-form {
+  width: 95%;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: #fff; /* 폼의 배경을 하얀색으로 설정 */
+  padding: 15px; /* 내부 여백 추가 */
+  border-radius: 8px; /* 둥근 모서리 추가 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
+}
+
+.comment-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff; /* 입력창 배경색 하얀색 */
+}
+
+.comment-submit {
+  padding: 10px 15px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-submit:hover {
+  background-color: #0056b3;
+}
+
+.comment-list {
+  list-style: none;
+  padding: 0;
+}
+
+.comment-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 모달 스타일 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal button:hover {
+  background-color: #0056b3;
+}
+
+/* 댓글 섹션 스타일 */
+.comment-section {
+  margin-top: 30px;
+}
+
+.comment-section h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.comment-form {
+  display: flex;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-.post-detail-page .content p {
-  margin: 1em 0;
+.comment-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: none; /* 크기 조절 비활성화 */
+  overflow-y: auto; /* 3줄 이상일 때 스크롤 */
+  max-height: 100px; /* 최대 높이 제한 */
 }
 
-.post-detail-page .date {
+.comment-submit {
+  padding: 10px 15px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-submit:hover {
+  background-color: #0056b3;
+}
+
+.comment-list {
+  list-style: none;
+  padding: 0;
+}
+
+.comment-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.comment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85em;
+  color: #888;
+}
+
+.comment-date {
+  font-size: 0.85em;
+  color: #888;
+}
+
+.comment-like-button {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  cursor: pointer;
   font-size: 0.9em;
-  color: #999;
-  text-align: right;
-  margin-top: 20px;
+  padding: 5px;
+  transition: color 0.3s;
+}
+
+.comment-like-button:hover {
+  color: #ff3333;
 }
