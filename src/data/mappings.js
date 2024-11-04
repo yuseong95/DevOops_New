@@ -20,6 +20,7 @@ export const badgeIcons = {
     'Node.js': 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg',
     Python: 'https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg',
     Django: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Django_logo.svg',
-    'Machine Learning': '🤖' // 이모티콘 사용 예시
+    MachineLearning : '🤖' // 이모티콘 사용 예시
   };
   
+

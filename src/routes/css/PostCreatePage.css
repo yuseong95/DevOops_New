@@ -1,0 +1,147 @@
+/* src/routes/css/PostCreatePage.css */
+
+.post-create-page {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.post-create-page h2 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.post-create-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  color: #333;
+  width: 100%;
+}
+
+.post-create-page select,
+.post-create-page input[type="text"] {
+  padding: 12px;
+  font-size: 1.1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  width: 100%; /* 부모 컨테이너의 너비에 맞게 설정 */
+  box-sizing: border-box; /* 패딩 포함한 너비 설정 */
+}
+
+.post-create-page .quill-editor {
+  min-height: 500px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  width: 100%; /* Quill 에디터가 부모 컨테이너의 너비에 맞게 확장 */
+  box-sizing: border-box;
+}
+
+.post-create-page .ql-editor {
+  min-height: 500px;
+}
+
+/* 작성 완료 버튼 스타일 */
+.submit-button {
+  padding: 15px;
+  font-size: 1.2em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* 취소 버튼 스타일 */
+.cancel-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #666;
+  background-color: #ddd; /* 회색 배경 */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: #bbb; /* 더 어두운 회색으로 hover 효과 */
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* 모달 스타일 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  font-size: 1em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-buttons button:first-child {
+  background-color: #ddd;
+}
+
+.modal-buttons button:last-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #bbb;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,66 @@
+/* src/routes/css/BoardPage.css */
+
+.board-content-wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-height: 1000px; /* 고정된 최소 높이 설정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.board-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.board-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개의 카드 */
+  gap: 25px;
+}
+
+.board-card.placeholder {
+  visibility: hidden;
+  height: 200px; /* 실제 카드와 동일한 높이 설정 */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1em;
+  color: #333;
+}

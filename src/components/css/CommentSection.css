@@ -1,0 +1,68 @@
+.comment-section {
+  margin-top: 30px;
+}
+
+.comment-section h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.comment-form {
+  width: 95%;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: none;
+  overflow-y: auto;
+  max-height: 100px;
+  background-color: #fff;
+}
+
+.comment-submit {
+  padding: 10px 15px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-submit:hover {
+  background-color: #0056b3;
+}
+
+.comment-list {
+  list-style: none;
+  padding: 0;
+}
+
+.comment-like-button,
+.reply-like-button {
+  background: none;
+  border: 1px solid #ff4d4d; /* 테두리 색상 */
+  border-radius: 12px; /* 둥근 모서리 */
+  color: #ff4d4d;
+  cursor: pointer;
+  font-size: 0.9em;
+  padding: 5px 10px; /* 패딩 조정 */
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.comment-like-button:hover,
+.reply-like-button:hover {
+  color: #ff3333;
+  background-color: rgba(255, 77, 77, 0.1); /* hover 시 배경 추가 */
+}

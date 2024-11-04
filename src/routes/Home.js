@@ -1,10 +1,10 @@
-import React from 'react';
-import Slider from 'react-slick';
-import './css/Home.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import sampleImage from '../images/sample.png';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Slider from "react-slick";
+import "./css/Home.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import sampleImage from "../images/sample.png";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const sliderSettings = {
@@ -48,7 +48,9 @@ const Home = () => {
             <h2>오류 찾기</h2>
           </div>
         </Link>
-        <Link to="/board" className="card-link">
+        <Link to="/board/free" className="card-link">
+          {" "}
+          {/* 자유 게시판으로 이동 */}
           <div className="card">
             <img src={sampleImage} alt="게시판" className="card-image" />
             <h2>게시판</h2>
