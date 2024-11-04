@@ -30,6 +30,7 @@ const dummyUsers = [
     badges: ['Bronze', '1주 연속 접속'],
     githubId: 'testuser3-github',
     profileImage: 'https://media.istockphoto.com/id/1143958799/ko/%EC%82%AC%EC%A7%84/%ED%9D%B0%EC%83%89-%EC%A0%88%EC%97%B0-%EC%95%85%EC%96%B4.jpg?s=612x612&w=0&k=20&c=BDnKV9wf0qa4F-G6zvTOG1shW5YYKCCd9indY6R_DjY=',
+
   },
 ];
 

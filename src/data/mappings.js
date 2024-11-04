@@ -23,3 +23,4 @@ export const badgeIcons = {
     MachineLearning : '🤖' // 이모티콘 사용 예시
   };
   
+

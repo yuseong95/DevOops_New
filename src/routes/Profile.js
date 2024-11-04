@@ -57,7 +57,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-
       <div className="contributions">
         <h3>{user.githubId}의 GitHub Contributions</h3>
         <img
@@ -69,5 +68,4 @@ const Profile = () => {
     </div>
   );
 };
-
 export default Profile;
