@@ -32,10 +32,3 @@ export const formatPercentage = (props) => {
   const { percentage = 0 } = props; // 기본값을 0으로 설정
   return percentage.toFixed(0) + '%';
 };
-
-export const debug = (props) => {
-  const { str } = props;
-  if (process.env.NODE_ENV === 'development') {
-    console.debug(str);
-  }
-};
