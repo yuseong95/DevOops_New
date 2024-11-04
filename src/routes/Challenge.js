@@ -17,7 +17,7 @@ const Challenge = () => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[35vh]">
+    <div className="flex flex-col items-center justify-center min-h-[35vh] ">
       <CountdownTimer timeLeft={timeLeft} />
       <WordsContainer>
         <GeneratedWords key={words} words={words} />
@@ -44,7 +44,7 @@ const Challenge = () => {
 
 const WordsContainer = ({ children }) => {
   return (
-    <div className="relative text-3xl max-w-xl leading-relaxed break-all mt-3">
+    <div className="relative text-3xl max-w-5xl leading-relaxed break-all mt-3">
       {children}
     </div>
   );

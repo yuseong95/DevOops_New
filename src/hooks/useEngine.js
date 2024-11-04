@@ -4,7 +4,7 @@ import useCountdown from './useCountDown';
 import useTypings from './useTypings';
 import useWords from './useWords';
 
-const NUMBER_OF_WORDS = 12;
+const NUMBER_OF_WORDS = 40;
 const COUNTDOWN_SECONDS = 30;
 
 const useEngine = () => {

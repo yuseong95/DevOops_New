@@ -1,0 +1,13 @@
+public static void main(String[] args) {
+        List<String> names = new ArrayList<>();
+        Collections.addAll(names, "Alice", "Bob", "Charlie", "Diana", "Edward", "Frank");
+
+        try {
+            printNamesWithIterator(names);
+            String longestName = findLongestName(names);
+            System.out.println("Longest name: " + longestName);
+            performComplexCalculation(42);
+        } catch (Exception e) {
+            System.err.println("An error occurred: " + e.getMessage());
+        }
+    }
