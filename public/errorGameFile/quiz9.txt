@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_EMPLOYEES 100
+
+typedef struct {
+    char name[50];
+    int age;
+} Employee;
+
+int add_employee(Employee employees[], int *count, char name[], int age) {
+    if (*count >= MAX_EMPLOYEES) {
+        printf("더 이상 직원을 추가할 수 없습니다.\n");
+        return 1;
+    }
+    strcpy(employees[*count].name, name);
+    employees[*count].age = age;
+    (*count)++;
+    return 0;
+}
+
+void display_employees(Employee employees[], int count) {
+    printf("직원 목록:\n");
+    for (int i = 0; i < count; i++) {
+        printf("이름: %s, 나이: %d\n", employees[i].name, employees[i].age);
+    }
+}
+
+int main() {
+    Employee employees[MAX_EMPLOYEES];
+    int employee_count = 0;
+    int choice;
+    char name[50];
+    int age;
+
+    do {
+        printf("직원 관리 시스템\n");
+        printf("1. 직원 추가\n");
+        printf("2. 직원 목록 보기\n");
+        printf("3. 종료\n");
+        printf("선택하세요: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("직원 이름: ");
+                scanf("%s", name);
+                printf("직원 나이: ");
+                scanf("%d", &age);
+                add_employee(employees, &employee_count, name, age);
+                break;
+            case 2:
+                display_empolyees(employees, employee_count);
+                break;
+            case 3:
+                printf("프로그램을 종료합니다.\n");
+                break;
+            default:
+                printf("잘못된 선택입니다.\n");
+        }
+    } while (choice != 3);
+
+    return 0;
+}

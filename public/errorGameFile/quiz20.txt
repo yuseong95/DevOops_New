@@ -1,0 +1,78 @@
+1  class Calculator:
+2      def __init__(self):
+3          self.history = []  # 계산 기록을 저장할 리스트
+4  
+5      def add(self, a, b):
+6          result = a + b
+7          self.history.append(f"{a} + {b} = {result}")
+8          return result
+9  
+10     def subtract(self, a, b):
+11         result = a - b
+12         self.history.append(f"{a} - {b} = {result}")
+13         return result
+14  
+15     def multiply(self, a, b):
+16         result = a * b
+17         self.history.append(f"{a} * {b} = {result}")
+18         return result
+19  
+20     def divide(self, a, b):
+21         result = a / b
+22         self.history.append(f"{a} / {b} = {result}")
+23         return result
+24  
+25     def display_history(self):
+26         if not self.history:
+27             print("No calculation history.")
+28         else:
+29             print("Calculation History:")
+30             for entry in self.history:
+31                 print(entry)
+32  
+33 def main():
+34     calculator = Calculator()
+35  
+36     while True:
+37         print("\nSimple Calculator")
+38         print("1. Add")
+39         print("2. Subtract")
+40         print("3. Multiply")
+41         print("4. Divide")
+42         print("5. Show History")
+43         print("6. Exit")
+44         choice = input("Choose an option: ")
+45  
+46         if choice in ['1', '2', '3', '4']:
+47             a = float(input("Enter the first number: "))
+48             b = float(input("Enter the second number: "))
+49  
+50             if choice == '1':
+51                 result = calculator.add(a, b)
+52                 print(f"Result: {result}")
+53             
+54             elif choice == '2':
+55                 result = calculator.subtract(a, b)
+56                 print(f"Result: {result}")
+57             
+58             elif choice == '3':
+59                 result = calculator.multiply(a, b)
+60                 print(f"Result: {result}")
+61             
+62             elif choice == '4':
+63                 # b가 0일 경우 ZeroDivisionError 발생 가능
+64                 result = calculator.divide(a, b)  # 오류 발생 지점
+65                 print(f"Result: {result}")
+66  
+67         elif choice == '5':
+68             calculator.display_history()  # 계산 기록 출력
+69  
+70         elif choice == '6':
+71             print("Exiting the calculator.")
+72             break
+73  
+74         else:
+75             print("Invalid option. Please try again.")
+76  
+77 if __name__ == "__main__":
+78     main()

@@ -1,0 +1,46 @@
+1  #include <stdio.h>
+2  #include <stdlib.h>
+3  #include <string.h>
+4  
+5  typedef struct {
+6      char title[50];
+7      char author[50];
+8  } Book;
+9  
+10 void initialize_books(Book books[], int *book_count) {
+11     strcpy(books[0].title, "C Programming");
+12     strcpy(books[0].author, "Author A");
+13     strcpy(books[1].title, "Data Structures");
+14     strcpy(books[1].author, "Author B");
+15     *book_count = 2;
+16 }
+17  
+18 Book *search_book(Book books[], int book_count, char *search_title) {
+19     for (int i = 0; i < book_count; i++) {
+20         // 제목 비교
+21         if (books[i].title == search_title) {
+22             return &books[i];
+23         }
+24     }
+25     return NULL;
+26 }
+27  
+28 int main() {
+29     Book books[10];
+30     int book_count = 0;
+31     initialize_books(books, &book_count);
+32  
+33     char search_title[50];
+34  
+35     printf("검색할 책 제목을 입력하세요: ");
+36     scanf("%s", search_title);
+37  
+38     Book *found_book = search_book(books, book_count, search_title);
+39     if (found_book != NULL) {
+40         printf("책을 찾았습니다: 제목 - %s, 저자 - %s\n", found_book->title, found_book->author);
+41     } else {
+42         printf("책을 찾을 수 없습니다.\n");
+43     }
+44  
+45     return 0;
+46 }

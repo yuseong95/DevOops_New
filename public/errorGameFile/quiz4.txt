@@ -1,0 +1,60 @@
+1  import java.util.ArrayList;
+2  import java.util.Scanner;
+3  
+4  public class GradeCalculator {
+5      static class Subject {
+6          String name;
+7          int score;
+8  
+9          Subject(String name, int score) {
+10             this.name = name;
+11             this.score = score;
+12         }
+13  
+14         @Override
+15         public String toString() {
+16             return "과목: " + name + ", 점수: " + score;
+17         }
+18     }
+19  
+20     public static void main(String[] args) {
+21         ArrayList<Subject> subjects = new ArrayList<>();
+22         Scanner scanner = new Scanner(System.in);
+23         int choice;
+24  
+25         do {
+26             System.out.println("학점 계산기");
+27             System.out.println("1. 과목 추가");
+28             System.out.println("2. 평균 학점 계산");
+29             System.out.println("3. 종료");
+30             System.out.print("선택하세요: ");
+31             choice = scanner.nextInt();
+32  
+33             switch (choice) {
+34                 case 1:
+35                     System.out.print("과목 이름: ");
+36                     String name = scanner.next();
+37                     System.out.print("점수: ");
+38                     int score = scanner.nextInt();
+39                     subjects.add(new Subject(name, score));
+40                     System.out.println("과목이 추가되었습니다.");
+41                     break;
+42                 case 2:
+43                     int totalScore = 0;
+44                     for (Subject subject : subjects) {
+45                         totalScore += subject.score;
+46                     }
+47                     double average = (double) totalScore / subjects.size();
+48                     System.out.println("평균 학점: " + average);
+49                     break;
+50                 case 3:
+51                     System.out.println("프로그램을 종료합니다.");
+52                     break;
+53                 default:
+54                     System.out.println("잘못된 선택입니다.");
+55             }
+56         } while (choice != 3);
+57  
+58         scanner.close();
+59     }
+60 }

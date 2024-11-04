@@ -1,0 +1,80 @@
+1  #include <stdio.h>
+2  #include <string.h>
+3
+4  #define MAX_STUDENTS 50
+5  #define NAME_LENGTH 100
+6
+7  // 구조체 정의
+8  typedef struct {
+9    char name[NAME_LENGTH];
+10   int score;
+11 } Student;
+12
+13 // 함수 선언
+14 void inputStudents(Student students[], int *count);
+15 void calculateAverageAndMax(Student students[], int count, double *average, int *maxScore);
+16 void printResults(double average, int maxScore);
+17
+18 int main() {
+19     Student students[MAX_STUDENTS];
+20     int count = 0;
+21     double average;
+22     int maxScore;
+23
+24     // 학생 정보 입력
+25     inputStudents(students, &count);
+26 
+27     // 평균과 최고 점수 계산
+28     calculateAverageAndMax(students, count, &average, &maxScore);
+29
+30     // 결과 출력
+31     printResults(average, maxScore);
+32
+33     return 0;
+34 }
+35
+36 // 학생 정보 입력 함수
+37 void inputStudents(Student students[], int *count) {
+38     printf("Enter student name and score (enter 'done' for name to stop):\n");
+39     while (*count < MAX_STUDENTS) {
+40         char name[NAME_LENGTH];
+41         int score;
+42
+43         printf("Name: ");
+44         scanf("%s", name);
+45         if (strcmp(name, "done") == 0) break; // 'done' 입력 시 종료
+46
+47         printf("Score: ");
+48         scanf("%d", &score);
+49
+50         strcpy(students[*count].name, name);
+51         students[*count].score = score;
+52         (*count)++;
+53     }
+54 }
+55
+56 // 평균과 최고 점수 계산 함수
+57 void calculateAverageAndMax(Student students[], int count, double *average, int *maxScor) {
+58     if (count <= 0) {
+59         printf("No students entered.\n");
+60         return;
+61     }
+62
+63     int sum = 0;
+64     *maxScore = students[0].score;
+65
+66     for (int i = 0; i < count; i++) {
+67         sum += students[i].score;
+68         if (students[i].score < *maxScor) {
+69             *maxScore = students[i].score;
+70         }
+71     }
+72
+73     *average = (double)sum / count; // 평균 계산
+74 }
+75
+76 // 결과 출력 함수
+77 void printResults(double average, int maxScore) {
+78     printf("Average Score: %.2f\n", average);
+79     printf("Maximum Score: %d\n", maxScore);
+80 }

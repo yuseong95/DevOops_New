@@ -1,0 +1,53 @@
+1  #include <stdio.h>
+2  
+3  int add(int a, int b) {
+4      return a + b;
+5  }
+6  
+7  int subtract(int a, int b) {
+8      return a - b;
+9  }
+10 
+11 int multiply(int a, int b) {
+12     return a * b;
+13 }
+14 
+15 int divide(int a, int b) {
+16     if (b == 0) {
+17         printf("0으로 나눌 수 없습니다.\n");
+18         return 0;
+19     }
+20     return a / b;
+21 }
+22 
+23 int main() {
+24     int num1, num2, choice;
+25     char operator;
+26 
+27     printf("간단한 계산기 프로그램입니다.\n");
+28     printf("첫 번째 숫자를 입력하세요: ");
+29     scanf("%d", &num1);
+30     printf("두 번째 숫자를 입력하세요: ");
+31     scanf("%d", &num2);
+32     printf("연산을 선택하세요 (+, -, *, /): ");
+33     scanf(" %c", &operator);
+34 
+35     int result;
+36
+37     if (operator == '+') {
+38         result = add(num1, num2);
+39     } else if (operator = '-') {
+40         result = subtract(num1, num2);
+41     } else if (operator == '*') {
+42         result = multiply(num1, num2);
+43     } else if (operator == '/') {
+44         result = divide(num1, num2);
+45     } else {
+46         printf("잘못된 연산자입니다.\n");
+47         return 1;
+48     }
+49 
+50     printf("결과: %d\n", result);
+51 
+52     return 0;
+53 }

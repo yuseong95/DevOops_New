@@ -1,0 +1,47 @@
+1  import java.util.Scanner;
+2 
+3  public class SimpleCalculator {
+4      public static void main(String[] args) {
+5          Scanner scanner = new Scanner(System.in);
+6          
+7          System.out.println("간단한 계산기를 시작합니다.");
+8          
+9          System.out.print("첫 번째 숫자를 입력하세요: ");
+10         double num1 = scanner.nextDouble();
+11        
+12         System.out.print("두 번째 숫자를 입력하세요: ");
+13         double num2 = scanner.nextDouble();
+14         
+15         System.out.print("연산자를 입력하세요 (+, -, *, /): ");
+16         char operator = scanner.next(),charAt(0);
+17        
+18         double result;
+19        
+20         switch (operator) {
+21             case '+':
+22                 result = num1 + num2;
+23                 break;
+24             case '-':
+25                 result = num1 - num2;
+26                 break;
+27             case '*':
+28                 result = num1 * num2;
+29                 break;
+30             case '/':
+31                 if (num2 != 0) {
+32                     result = num1 / num2;
+33                 } else {
+34                     System.out.println("0으로 나눌 수 없습니다.");
+35                     return; // 잘못된 연산인 경우 함수 종료
+36                 }
+37                 break;
+38             default:
+39                 System.out.println("잘못된 연산자입니다.");
+40                 return; // 잘못된 연산인 경우 함수 종료
+41         }
+42        
+43         System.out.println("결과: " + result);
+44        
+45         scanner.close();
+46     }
+47  }

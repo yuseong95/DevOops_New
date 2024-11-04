@@ -1,0 +1,31 @@
+1  import java.util.Scanner;
+2  
+3  public class Calculator {
+4      private int result;
+5  
+6      public void add(int number) {
+7          result += number;
+8      }
+9  
+10     public int getResult() {
+11         return result;
+12     }
+13 
+14     public static void main(String[] args) {
+15         Scanner scanner = new Scanner(System.in);
+16 
+17         System.out.print("첫 번째 숫자를 입력하세요: ");
+18         int num1 = scanner.nextInt();
+19 
+20         System.out.print("두 번째 숫자를 입력하세요: ");
+21         int num2 = scanner.nextInt();
+22 
+23         Calculator calculator = new Calculator();
+24         calculator.add(num1);
+25         calculator.add(num2);
+26 
+27         System.out.println("합계: " + getResult());
+28 
+29         scanner.close();
+30     }
+31 }

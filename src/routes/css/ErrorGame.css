@@ -1,0 +1,91 @@
+.errorGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+}
+
+/* 문제 가이드 & 타이머 */
+.top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 30px;
+}
+
+.title {
+  padding-left: 8vw;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+/* 에러찾기 문제 부분 */
+.errorCode {
+  /* color: white; */
+  border: solid 3px rgb(114, 7, 164);
+  border-radius: 5px;
+}
+
+pre {
+  width: 80%;
+  height: 500px;
+  background-color: #2d2d2d;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  border: solid 3px rgb(114, 7, 164);
+}
+
+.language-java {
+  overflow-y: auto; /* 세로 스크롤 */
+  background: #2d2d2d;
+  color: white;
+  border-radius: 4px;
+}
+
+/* 스크롤바 스타일 */
+.language-java {
+  scrollbar-width: thin; /* 얇은 스크롤바 */
+  scrollbar-color: rgb(114, 7, 164) rgb(0, 0, 0);
+}
+
+/* 정답라인 입력 부분 */
+.input {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Y축 중앙 정렬 */
+  gap: 20px;
+}
+
+.input-anwser {
+  width: 80px !important;
+  height: 30px !important;
+  color: rgb(162, 103, 190) !important;
+  border: solid 3px rgb(114, 7, 164) !important;
+  border-radius: 20px !important;
+  font-size: 15px !important;
+  text-align: center;
+  font-weight: bold;
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.input-button {
+  width: 50px;
+  height: 34px;
+  color: white;
+  border-radius: 20px;
+  background-color: rgb(145, 23, 202);
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  color: white;
+}
