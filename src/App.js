@@ -8,6 +8,7 @@ import Home from './routes/Home';
 import Login from './routes/Login';
 import Profile from './routes/Profile';
 import ProfileEdit from './routes/ProfileEdit';
+import Challenge from './routes/Challenge';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/edit" element={<ProfileEdit />} />
+        <Route path="/challenge" element={<Challenge />} />
       </Routes>
     </UserProvider>
   );
