@@ -1,26 +1,29 @@
+// src/routes/Login.js
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import dummyUsers from '../data/dummyUsers'; // 더미 데이터 가져오기
+import { useUser } from '../context/UserContext';
+import dummyUsers from '../data/dummyUsers';
 import './css/Login.css';
 
 const Login = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { loginUser } = useUser();
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // 입력된 id와 password를 가진 사용자를 찾아봄
     const user = dummyUsers.find(
       (user) => user.id === id && user.password === password
     );
 
     if (user) {
       setErrorMessage('');
-      // 로그인 성공 시 Profile 페이지로 사용자 데이터 전달
-      navigate('/profile', { state: { user } });
+      loginUser(user); // 로그인 시 context에 사용자 정보 저장
+      navigate('/profile');
     } else {
       setErrorMessage('아이디 또는 비밀번호가 잘못되었습니다.');
     }

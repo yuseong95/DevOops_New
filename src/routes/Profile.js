@@ -1,11 +1,22 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { badgeIcons, skillIcons } from '../data/mappings'; // 매핑 데이터 가져오기
+// src/routes/Profile.js
+
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { badgeIcons, skillIcons } from '../data/mappings';
 import './css/Profile.css';
 
 const Profile = () => {
-  const location = useLocation();
-  const user = location.state?.user;
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (storedUser) {
+      setUser(storedUser);
+    } else {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   if (!user) {
     return <p>로그인이 필요합니다.</p>;
@@ -13,30 +24,24 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-      {/* 프로필 이미지와 아이디 */}
       <div className="profile-header">
-        <img
-          src={user.profileImage} // 사용자 프로필 이미지 사용
-          alt="Profile"
-          className="profile-image"
-        />
+        <img src={user.profileImage} alt="Profile" className="profile-image" />
         <h1 className="profile-id">{user.id}</h1>
+        <button onClick={() => navigate('/profile/edit')}>정보 수정</button>
       </div>
 
       <div className="info-sections">
-        {/* 획득 배지 */}
         <div className="badges-section">
           <h3>획득 배지</h3>
           <div className="badges">
             {user.badges.map((badge, index) => (
               <span key={index} className="badge">
-                {badgeIcons[badge] || '🏅'} {/* 배지 아이콘 매핑 */}
+                {badgeIcons[badge] || '🏅'}
               </span>
             ))}
           </div>
         </div>
 
-        {/* 스택 아이콘 */}
         <div className="stack-section">
           <h3>스택</h3>
           <div className="stack-icons">
@@ -45,7 +50,7 @@ const Profile = () => {
                 {skillIcons[skill] ? (
                   <img src={skillIcons[skill]} alt={skill} className="skill-image" />
                 ) : (
-                  <span>{skill}</span> // 매핑되지 않은 기술은 텍스트로 표시
+                  <span>{skill}</span>
                 )}
               </div>
             ))}
@@ -53,10 +58,13 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* GitHub 잔디밭 */}
       <div className="contributions">
         <h3>{user.githubId}의 GitHub Contributions</h3>
-        {/* GitHub 잔디밭을 불러오는 컴포넌트 추가 */}
+        <img
+          src={`https://ghchart.rshah.org/33333/${user.githubId}`}
+          alt={`${user.githubId}'s GitHub Contributions`}
+          className="contribution-chart"
+        />
       </div>
     </div>
   );
