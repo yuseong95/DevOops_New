@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { countErrors, debug } from '../utils/helpers';
+import { countErrors } from '../utils/helpers';
 import useCountdown from './useCountDown';
 import useTypings from './useTypings';
 import useWords from './useWords';
@@ -21,7 +21,6 @@ const useEngine = () => {
   const areWordsFinished = cursor === words.length;
 
   const restart = useCallback(() => {
-    debug('restarting...');
     resetCountdown();
     resetTotalTyped();
     setState('start');
@@ -31,7 +30,6 @@ const useEngine = () => {
   }, [clearTyped, updateWords, resetCountdown, resetTotalTyped]);
 
   const sumErrors = useCallback(() => {
-    debug(`cursor: ${cursor} - words.length: ${words.length}`);
     const wordsReached = words.substring(0, Math.min(cursor, words.length));
     setErrors(
       (prevErrors) =>
@@ -50,7 +48,6 @@ const useEngine = () => {
   // Sets state to 'finish' when time runs out
   useEffect(() => {
     if (!timeLeft && state === 'run') {
-      debug('time is up...');
       setState('finish');
       sumErrors();
     }
@@ -59,7 +56,6 @@ const useEngine = () => {
   // Checks if all words are completed and generates new words
   useEffect(() => {
     if (areWordsFinished) {
-      debug('words are finished...');
       sumErrors();
       updateWords();
       clearTyped();
