@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import "./css/LikeSection.css";
 
 const LikeSection = () => {
-  const [postLikes, setPostLikes] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+  const [postLikes, setPostLikes] = useState(0); // 좋아요 수 상태
+  const [showModal, setShowModal] = useState(false); // 모달 표시 상태
 
+  // 좋아요 버튼 클릭 시 모달 표시
   const handleLikeClick = () => {
     setShowModal(true);
   };
 
+  // 모달 닫기
   const closeModal = () => {
     setShowModal(false);
   };

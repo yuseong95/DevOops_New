@@ -7,12 +7,14 @@ import SelectBoardType from "../components/SelectBoardType";
 import "./css/PostCreatePage.css";
 
 const PostCreatePage = ({ addPost }) => {
+  // 제목, 내용, 게시판 종류, 모달 표시 상태를 위한 state
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [boardType, setBoardType] = useState("free");
-  const [showModal, setShowModal] = useState(false); // 모달 표시 상태
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
+  // 게시글 작성 제출 함수
   const handleSubmit = (e) => {
     e.preventDefault();
     if (addPost) {
@@ -20,24 +22,27 @@ const PostCreatePage = ({ addPost }) => {
         title,
         content,
         boardType,
-        createdAt: new Date().toISOString(), // 현재 날짜와 시간 추가
+        createdAt: new Date().toISOString(), // 작성 시간 추가
       };
-      addPost(newPost);
-      navigate(`/board/${boardType}`);
+      addPost(newPost); // 게시글 추가 함수 호출
+      navigate(`/board/${boardType}`); // 해당 게시판으로 이동
     } else {
       console.error("addPost function is not defined");
     }
   };
 
+  // 작성 취소 시 모달 표시 함수
   const handleCancel = () => {
-    setShowModal(true); // 모달 열기
+    setShowModal(true);
   };
 
+  // 모달의 "확인" 클릭 시 게시글 작성 취소
   const confirmCancel = () => {
     setShowModal(false);
     navigate(`/board/${boardType}`);
   };
 
+  // 모달 닫기 함수
   const closeModal = () => {
     setShowModal(false);
   };
@@ -49,8 +54,8 @@ const PostCreatePage = ({ addPost }) => {
       [{ list: "ordered" }, { list: "bullet" }],
       ["bold", "italic", "underline", "strike"],
       [{ align: [] }],
-      ["link", "image"], // 링크와 이미지 기능 추가
-      ["clean"], // 형식 제거 버튼
+      ["link", "image"],
+      ["clean"],
     ],
   };
 
@@ -72,13 +77,16 @@ const PostCreatePage = ({ addPost }) => {
     <div className="post-create-page">
       <h2>글 작성</h2>
       <form onSubmit={handleSubmit}>
+        {/* 게시판 종류 선택 */}
         <SelectBoardType boardType={boardType} setBoardType={setBoardType} />
+        {/* 제목 입력 */}
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="제목을 입력하세요"
         />
+        {/* 내용 입력 에디터 */}
         <div className="quill-editor">
           <ReactQuill
             value={content}
@@ -88,6 +96,7 @@ const PostCreatePage = ({ addPost }) => {
             formats={formats}
           />
         </div>
+        {/* 작성 취소, 완료 버튼 */}
         <div className="button-container">
           <button
             type="button"
