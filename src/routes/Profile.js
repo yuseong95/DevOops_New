@@ -1,10 +1,13 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+//import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom'; // useLocation과 useNavigate를 함께 import
+
 import { badgeIcons, skillIcons } from '../data/mappings'; // 매핑 데이터 가져오기
 import './css/Profile.css';
 
 const Profile = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // navigate 변수를 선언하여 사용
   const user = location.state?.user;
 
   if (!user) {
@@ -21,6 +24,7 @@ const Profile = () => {
           className="profile-image"
         />
         <h1 className="profile-id">{user.id}</h1>
+        <button onClick={() => navigate('/profile/edit', {state:{user}})}>정보 수정</button> {/* Edit 버튼 */}
       </div>
 
       <div className="info-sections">
