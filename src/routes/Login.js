@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
 import dummyUsers from '../data/dummyUsers';
 import './css/Login.css';
 
@@ -9,6 +10,7 @@ const Login = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { loginUser } = useUser();
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -20,7 +22,7 @@ const Login = () => {
 
     if (user) {
       setErrorMessage('');
-      localStorage.setItem('loggedInUser', JSON.stringify(user));
+      loginUser(user); // 로그인 시 context에 사용자 정보 저장
       navigate('/profile');
     } else {
       setErrorMessage('아이디 또는 비밀번호가 잘못되었습니다.');

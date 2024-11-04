@@ -1,23 +1,16 @@
 // src/components/Header.js
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
 import './css/Header.css';
 
 const Header = () => {
-  const [user, setUser] = useState(null);
+  const { user, logoutUser } = useUser();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (storedUser) {
-      setUser(storedUser);
-    }
-  }, []);
-
   const handleLogout = () => {
-    localStorage.removeItem('loggedInUser');
-    setUser(null);
+    logoutUser();
     navigate('/login');
   };
 
