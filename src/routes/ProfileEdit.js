@@ -1,13 +1,11 @@
+// src/routes/ProfileEdit.js
+
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import dummyUsers from '../data/dummyUsers'; // dummyUsers import
+import { useNavigate } from 'react-router-dom';
 import './css/ProfileEdit.css';
 
 const ProfileEdit = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const user = location.state?.user;
-
   const [userInfo, setUserInfo] = useState({
     id: '',
     email: '',
@@ -17,23 +15,13 @@ const ProfileEdit = () => {
   });
 
   useEffect(() => {
-    if (user) {
-      const matchedUser = dummyUsers.find((u) => u.id === user.id);
-  
-      if (matchedUser) {
-        setUserInfo({
-          id: matchedUser.id,
-          email: matchedUser.email || 'user@example.com', // 기본값 설정
-          password: matchedUser.password,
-          name: matchedUser.name || '홍길동', // 기본값 설정
-          profileImage: matchedUser.profileImage,
-        });
-      }
+    const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (storedUser) {
+      setUserInfo(storedUser);
     } else {
       navigate('/login');
     }
-  }, [user, navigate]);
-  
+  }, [navigate]);
 
   const handleChange = (field, value) => {
     setUserInfo((prev) => ({
@@ -56,7 +44,7 @@ const ProfileEdit = () => {
 
     localStorage.setItem('loggedInUser', JSON.stringify(userInfo));
     alert('회원 정보가 저장되었습니다.');
-    navigate('/profile', { state: { user: userInfo } });
+    navigate('/profile');
   };
 
   return (

@@ -1,3 +1,5 @@
+// src/data/dummyUsers.js
+
 const dummyUsers = [
   {
     id: 'ckals413',
@@ -12,7 +14,7 @@ const dummyUsers = [
   {
     id: 'f',
     password: 'f',
-    name: '짱구', // 필드가 누락되지 않았는지 확인
+    name: '짱구',
     email: 'sinJJang@naver.com',
     skills: ['JavaScript', 'React', 'Node.js'],
     badges: ['Silver', '1달 연속 접속'],
@@ -22,7 +24,7 @@ const dummyUsers = [
   {
     id: 'd',
     password: 'd',
-    name: '테스트 사용자', // 모든 사용자에게 name과 email 필드 추가
+    name: '테스트 사용자',
     email: 'testuser3@gmail.com',
     skills: ['Python', 'Django', 'MachineLearning'],
     badges: ['Bronze', '1주 연속 접속'],
