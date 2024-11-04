@@ -6,7 +6,7 @@ import "prismjs/themes/prism-twilight.css";
 import "prismjs/components/prism-java.min.js";
 import "prismjs/components/prism-c.min.js";
 import ErrorGameResult from "../components/ErrorGameResult";
-//import Timer from "../components/Timer";
+import Timer from "../components/Timer";
 
 const ErrorGame = () => {
   const [files, setFiles] = useState([]); // 오늘의 3문제 배열
@@ -167,7 +167,7 @@ const ErrorGame = () => {
     <div className="errorGame">
       <div className="top">
         <div className="title">오류/오타가 있는 라인의 숫자를 입력하세요.</div>
-        <div className="timer">{/* <Timer /> */}</div>
+        <div className="timer">{<Timer />}</div>
       </div>
       {!explanationMode && (
         <>

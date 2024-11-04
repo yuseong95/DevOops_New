@@ -10,13 +10,14 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 30px;
 }
 
 .title {
-  font-size: 18px; /* 글씨 크기 조정 */
-  font-weight: bold; /* 글씨 두께 조정 */
+  padding-left: 8vw;
+  font-size: 18px;
+  font-weight: bold;
   color: white;
 }
 

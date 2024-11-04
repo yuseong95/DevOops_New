@@ -1,0 +1,28 @@
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  padding-right: 4vw;
+}
+
+h1 {
+  font-family: "Press Start 2P", monospace;
+  color: #8216a0;
+  font-size: 25px;
+  margin: 0;
+  letter-spacing: 1px; /* 글자 간격 */
+}
+
+button {
+  margin-top: 10px;
+  font-size: 5px; /* 버튼 글꼴 크기 조정 */
+  background-color: #8216a0; /* 버튼 색상 */
+  color: black;
+  border: none;
+}
+
+button:hover {
+  background-color: #35263a;
+}
