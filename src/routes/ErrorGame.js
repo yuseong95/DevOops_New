@@ -182,8 +182,8 @@ const ErrorGame = () => {
           <div className="input">
             <input
               type="text"
-              className="input-field"
-              placeholder="Line Number"
+              className="input-anwser"
+              placeholder="Line"
               value={userAnswers[currentFile]}
               onChange={handleAnswerUpdate}
             />
