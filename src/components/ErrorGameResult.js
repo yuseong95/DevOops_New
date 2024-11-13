@@ -3,6 +3,7 @@ import "./css/ErrorGameResult.css";
 import { useNavigate } from "react-router-dom";
 
 const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {
+  const maxTime = 600000; // 기준 10분(ms단위)
   const navigate = useNavigate();
 
   const goToHome = () => {
@@ -16,12 +17,18 @@ const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {
     return `${minutes}분 ${seconds}초 ${milliseconds}`;
   };
 
+  // score 계산 함수
+  const calculateScore = () => {
+    const score = ((maxTime - runningTime) * count) / 1000;
+    return Math.max(0, score); // 최소 점수는 0
+  };
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <p>점수:</p>
-        <p>맞은 문제: {count}개</p>
-        <p>시간: {formatTime(runningTime)}</p>
+        <p>SCORE: {calculateScore()}</p>
+        <p>ANSWER: {count} / 3</p>
+        <p>TIME: {formatTime(runningTime)}</p>
         <button onClick={onShowExplanation}>해설보기</button>
         <button onClick={goToHome}>메인으로</button>
       </div>

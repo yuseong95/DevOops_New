@@ -174,7 +174,9 @@ const ErrorGame = () => {
   return (
     <div className="errorGame">
       <div className="top">
-        <div className="title">오류/오타가 있는 라인의 숫자를 입력하세요.</div>
+        <div className="title">
+          오류/오타가 있는 라인의 숫자를 입력하세요. (10분 초과시 0점)
+        </div>
         {/* 타이머 */}
         <div className="timer">
           {
@@ -212,11 +214,13 @@ const ErrorGame = () => {
               placeholder="Line"
               value={userAnswers[currentFile]}
               onChange={handleAnswerUpdate}
+              disabled={!showQuiz}
             />
             <button
               className="input-button"
               onClick={handleNext}
               count={resultCount}
+              disabled={!showQuiz}
             >
               {currentFile < 2 ? "다음" : "제출"}
             </button>
