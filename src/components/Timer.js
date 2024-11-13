@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./css/Timer.css";
 
-const Timer = () => {
+const Timer = ({ onStart, onStop }) => {
   const [time, setTime] = useState(0);
-  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     let interval = null;
-    if (isActive) {
+    if (onStart) {
       interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 10); // 밀리초 단위
+        setTime((prevTime) => prevTime + 10); // ms 단위
       }, 10); // 10ms마다 업데이트
-    } else if (!isActive && time !== 0) {
+    } else {
       clearInterval(interval);
+      onStop(time);
     }
     return () => clearInterval(interval);
-  }, [isActive, time]);
-
-  const toggleTimer = () => {
-    setIsActive(!isActive);
-  };
+  }, [onStart, onStop, time]);
 
   const formatTime = (time) => {
     const minutes = String(Math.floor((time / 60000) % 60)).padStart(2, "0");
@@ -31,7 +27,6 @@ const Timer = () => {
   return (
     <div className="timer">
       <h1>{formatTime(time)}</h1>
-      <button onClick={toggleTimer}>{isActive ? "Pause" : "Start"}</button>
     </div>
   );
 };

@@ -9,10 +9,11 @@ import ErrorGameResult from "../components/ErrorGameResult";
 import Timer from "../components/Timer";
 
 const ErrorGame = () => {
+  const [showQuiz, setShowQuiz] = useState(false); // 문제 보이기
   const [files, setFiles] = useState([]); // 오늘의 3문제 배열
   const [, /*currentSetIndex*/ setCurrentSetIndex] = useState(0); // 문제 세트의 인덱스(0~6개 3문제씩 총 21문제)
   const [currentFile, setCurrentFile] = useState(0); // 현재 보여지는 문제의 인덱스(0,1,2)
-  const [fileContent, setFileContent] = useState(""); // 문제 파일의 내용
+  const [fileContent, setFileContent] = useState("READY"); // 문제 파일의 내용
   const [userAnswers, setUserAnswers] = useState(["", "", ""]); // user가 입력한 3문제의 답
   const [answers, setAnswers] = useState([]); // 실제 3문제의 답
   const [comments, setComments] = useState([]); // 문제 해설
@@ -20,6 +21,7 @@ const ErrorGame = () => {
   const [resultCount, setResultCount] = useState(null); // 맞은 문제 수
   const [explanationMode, setExplanationMode] = useState(false); // 해설 모드 (초기값 false)
   const [explanationIndex, setExplanationIndex] = useState(0); // 현재 보여지는 해설의 인덱스(0,1,2)
+  const [time, setTime] = useState(null); // 소요 시간
   const preRef = useRef(null); // 문제 스크롤바 제어
   const navigate = useNavigate();
 
@@ -55,9 +57,6 @@ const ErrorGame = () => {
         const todayComments = currentSet.map((file) => file.comment);
         setAnswers(todayAnswers);
         setComments(todayComments);
-
-        // 세트의 첫 문제 가져오기
-        loadFileContent(currentSet[0]);
       } catch (error) {
         console.error(error);
       }
@@ -70,6 +69,12 @@ const ErrorGame = () => {
   useEffect(() => {
     Prism.highlightAll();
   }, [fileContent]);
+
+  // 문제풀이 시작, 타이머 시작
+  const handleStart = () => {
+    setShowQuiz(true);
+    loadFileContent(files[0]);
+  };
 
   const calculateTodaySetIndex = () => {
     const today = new Date();
@@ -134,7 +139,6 @@ const ErrorGame = () => {
     } else {
       // 해설 모드일 경우
 
-      // 해설 모드
       if (explanationIndex < 2) {
         setExplanationIndex((prevIndex) => prevIndex + 1);
         loadFileContent(files[explanationIndex + 1]);
@@ -163,22 +167,44 @@ const ErrorGame = () => {
     setExplanationIndex(0);
   };
 
+  const handleTimer = (time) => {
+    setTime(time);
+  };
+
   return (
     <div className="errorGame">
       <div className="top">
         <div className="title">오류/오타가 있는 라인의 숫자를 입력하세요.</div>
-        <div className="timer">{<Timer />}</div>
+        {/* 타이머 */}
+        <div className="timer">
+          {
+            <Timer
+              onStart={showQuiz && resultCount === null}
+              onStop={handleTimer}
+            />
+          }
+        </div>
       </div>
       {!explanationMode && (
         <>
           <pre
-            className="language-java"
+            className="line-numbers"
             onCopy={handleCopy}
             onCut={handleCopy}
             ref={preRef}
           >
-            <code className="language-java">{fileContent}</code>
+            {!showQuiz && (
+              <button className="start-button" onClick={handleStart}>
+                시작버튼
+              </button>
+            )}
+            {showQuiz ? (
+              <code className="language-java">{fileContent}</code>
+            ) : (
+              "READY?"
+            )}
           </pre>
+
           <div className="input">
             <input
               type="text"
@@ -203,6 +229,7 @@ const ErrorGame = () => {
         <ErrorGameResult
           count={resultCount}
           onShowExplanation={handleExplanationMode}
+          runningTime={time}
         />
       )}
 
