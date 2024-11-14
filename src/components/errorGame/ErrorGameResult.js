@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/ErrorGameResult.css";
+import "../css/ErrorGameResult.css";
 import { useNavigate } from "react-router-dom";
 
 const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {

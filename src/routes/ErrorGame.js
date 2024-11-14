@@ -5,8 +5,12 @@ import "./css/ErrorGame.css";
 import "prismjs/themes/prism-twilight.css";
 import "prismjs/components/prism-java.min.js";
 import "prismjs/components/prism-c.min.js";
-import ErrorGameResult from "../components/ErrorGameResult";
-import Timer from "../components/Timer";
+import ErrorGameResult from "../components/errorGame/ErrorGameResult";
+//import Timer from "../components/Timer";
+import ErrorGameTop from "../components/errorGame/ErrorGameTop";
+import ErrorGameQuiz from "../components/errorGame/ErrorGameQuiz";
+import ErrorGameInput from "../components/errorGame/ErrorGameInput";
+import ErrorGameExplanation from "../components/errorGame/ErrorGameExplanation";
 
 // 초기 상태
 const initState = {
@@ -108,6 +112,13 @@ const ErrorGame = () => {
     Prism.highlightAll();
   }, [fileContent]);
 
+  // 해설 모드가 활성화되고 explanationIndex가 변경될 때마다 load 다시
+  useEffect(() => {
+    if (explanationMode && files.length > 0) {
+      loadFileContent(files[explanationIndex]);
+    }
+  }, [explanationMode, explanationIndex, files]);
+
   // 문제풀이 시작, 타이머 시작
   const handleStart = () => {
     dispatch({ type: "START" });
@@ -169,11 +180,6 @@ const ErrorGame = () => {
       if (explanationIndex < 2) {
         dispatch({ type: "NEXT_EXPLANATION" });
         loadFileContent(files[explanationIndex + 1]);
-
-        // <pre> 스크롤바 맨 위로
-        if (preRef.current) {
-          preRef.current.scrollTop = 0;
-        }
       } else {
         // 마지막 해설을 본 후 "메인으로" 버튼을 누르면 메인 페이지로 이동
         goToHome();
@@ -197,58 +203,39 @@ const ErrorGame = () => {
 
   return (
     <div className="errorGame">
-      <div className="top">
-        <div className="title">
-          오류/오타가 있는 라인의 숫자를 입력하세요. (10분 초과시 0점)
-        </div>
-        {/* 타이머 */}
-        <div className="timer">
-          {
-            <Timer
-              onStart={showQuiz && resultCount === null}
-              onStop={handleTimer}
-            />
-          }
-        </div>
-      </div>
-      {!explanationMode && (
+      <ErrorGameTop
+        showQuiz={showQuiz}
+        resultCount={resultCount}
+        handleTimer={handleTimer}
+      />
+      {!explanationMode ? (
         <>
-          <pre
-            className="line-numbers"
-            onCopy={handleCopy}
-            onCut={handleCopy}
+          <ErrorGameQuiz
+            showQuiz={showQuiz}
+            fileContent={fileContent}
+            handleStart={handleStart}
+            handleCopy={handleCopy}
             ref={preRef}
-          >
-            {!showQuiz && (
-              <button className="start-button" onClick={handleStart}>
-                시작버튼
-              </button>
-            )}
-            {showQuiz ? (
-              <code className="language-java">{fileContent}</code>
-            ) : (
-              "READY?"
-            )}
-          </pre>
+          />
 
-          <div className="input">
-            <input
-              type="text"
-              className="input-anwser"
-              placeholder="Line"
-              value={userAnswers[currentFile]}
-              onChange={handleAnswerUpdate}
-              disabled={!showQuiz}
-            />
-            <button
-              className="input-button"
-              onClick={handleNext}
-              disabled={!showQuiz}
-            >
-              {currentFile < 2 ? "다음" : "제출"}
-            </button>
-          </div>
+          <ErrorGameInput
+            showQuiz={showQuiz}
+            currentFile={currentFile}
+            userAnswer={userAnswers[currentFile]}
+            handleAnswerUpdate={handleAnswerUpdate}
+            handleNext={handleNext}
+          />
         </>
+      ) : (
+        <ErrorGameExplanation
+          fileContent={fileContent}
+          userAnswer={userAnswers[explanationIndex]}
+          correctAnswer={todayAnswers[explanationIndex]}
+          comment={todayComments[explanationIndex]}
+          explanationIndex={explanationIndex}
+          handleNext={handleNext}
+          handleCopy={handleCopy}
+        />
       )}
 
       {/* 결과 모달창 */}
@@ -258,29 +245,6 @@ const ErrorGame = () => {
           onShowExplanation={handleExplanationMode}
           runningTime={time}
         />
-      )}
-
-      {/* 해설 보기 모드 */}
-      {explanationMode && (
-        <>
-          <pre
-            className="language-java"
-            onCopy={handleCopy}
-            onCut={handleCopy}
-            ref={preRef}
-          >
-            <code className="language-java">{fileContent}</code>
-          </pre>
-
-          <div className="explanation">
-            <p>내 답안: {userAnswers[explanationIndex]}</p>
-            <p>정답: {todayAnswers[explanationIndex]}</p>
-            <p>해설: {todayComments[explanationIndex]}</p>
-          </div>
-          <button className="input-button" onClick={handleNext}>
-            {explanationIndex < 2 ? "다음" : "메인으로"}
-          </button>
-        </>
       )}
     </div>
   );
