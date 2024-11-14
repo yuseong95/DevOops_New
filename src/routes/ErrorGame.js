@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import Prism from "prismjs";
 import "./css/ErrorGame.css";
@@ -15,9 +15,6 @@ const ErrorGame = () => {
   const [currentFile, setCurrentFile] = useState(0); // 현재 보여지는 문제의 인덱스(0,1,2)
   const [fileContent, setFileContent] = useState("READY"); // 문제 파일의 내용
   const [userAnswers, setUserAnswers] = useState(["", "", ""]); // user가 입력한 3문제의 답
-  const [answers, setAnswers] = useState([]); // 실제 3문제의 답
-  const [comments, setComments] = useState([]); // 문제 해설
-
   const [resultCount, setResultCount] = useState(null); // 맞은 문제 수
   const [explanationMode, setExplanationMode] = useState(false); // 해설 모드 (초기값 false)
   const [explanationIndex, setExplanationIndex] = useState(0); // 현재 보여지는 해설의 인덱스(0,1,2)
@@ -28,6 +25,20 @@ const ErrorGame = () => {
   const goToHome = () => {
     navigate("/"); // 메인페이지로 이동
   };
+
+  // 오늘의 세트 인덱스 계산 함수
+  const calculateTodaySetIndex = () => {
+    const today = new Date();
+    const dayNumber = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
+    return dayNumber % 7;
+  };
+
+  // 현재날짜에 따라 변하므로 useMemo 사용
+  const todaySetIndex = useMemo(() => calculateTodaySetIndex(), []);
+
+  // file이 변경되지 않으면 바뀌지 않으므로 useMemo 사용
+  const answers = useMemo(() => files.map((file) => file.answer), [files]);
+  const comments = useMemo(() => files.map((file) => file.comment), [files]);
 
   // 문제 파일 목록 가져오기
   useEffect(() => {
@@ -42,7 +53,6 @@ const ErrorGame = () => {
         setFiles(data);
 
         // 오늘의 세트 인덱스 계산
-        const todaySetIndex = calculateTodaySetIndex();
         setCurrentSetIndex(todaySetIndex);
 
         // 오늘의 세트 (3문제) 가져오기
@@ -51,19 +61,13 @@ const ErrorGame = () => {
 
         // 현재 세트 파일들 설정
         setFiles(currentSet);
-
-        // 세트의 정답, 해설들 설정
-        const todayAnswers = currentSet.map((file) => file.answer);
-        const todayComments = currentSet.map((file) => file.comment);
-        setAnswers(todayAnswers);
-        setComments(todayComments);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchFiles();
-  }, []);
+  }, [todaySetIndex]);
 
   // file 내용이 바뀔때마다 코드 하이라이팅
   useEffect(() => {
@@ -76,12 +80,6 @@ const ErrorGame = () => {
     loadFileContent(files[0]);
   };
 
-  const calculateTodaySetIndex = () => {
-    const today = new Date();
-    const dayNumber = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
-    return dayNumber % 7;
-  };
-
   const loadFileContent = async (file) => {
     try {
       // 해당 파일 불러오기
@@ -92,9 +90,6 @@ const ErrorGame = () => {
 
       const text = await response.text();
       setFileContent(text);
-
-      // 정답 배열에 오늘의 3문제 정답 저장
-      //setAnswers((prevAnswers) => [...prevAnswers, file.answer]);
     } catch (error) {
       console.error(error);
     }
@@ -108,7 +103,6 @@ const ErrorGame = () => {
       0
     );
 
-    //alert(`맞은 문제: ${correctCount}개`);
     setResultCount(correctCount);
   };
 
