@@ -1,4 +1,5 @@
 import React from "react";
+import "../../routes/css/ErrorGame.css";
 
 const ErrorGameExplanation = ({
   fileContent,
@@ -15,9 +16,18 @@ const ErrorGameExplanation = ({
         <code className="language-java">{fileContent}</code>
       </pre>
       <div className="explanation">
-        <p>내 답안: {userAnswer}</p>
-        <p>정답: {correctAnswer}</p>
-        <p>해설: {comment}</p>
+        <p>
+          <span className="label">나의 답: </span>
+          <span className="value">{userAnswer}</span>
+        </p>
+        <p>
+          <span className="label">정답: </span>
+          <span className="value">{correctAnswer}</span>
+        </p>
+        <p>
+          <span className="label">해설: </span>
+          <span className="value">{comment}</span>
+        </p>
       </div>
       <button className="input-button" onClick={handleNext}>
         {explanationIndex < 2 ? "다음" : "메인으로"}

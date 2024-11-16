@@ -1,4 +1,5 @@
 import React from "react";
+import "../../routes/css/ErrorGame.css";
 
 // 답 입력, 제출 버튼
 const ErrorGameInput = ({
@@ -9,7 +10,7 @@ const ErrorGameInput = ({
   handleNext,
 }) => {
   return (
-    <div className="input">
+    <div className="input-field">
       <input
         type="text"
         className="input-answer"

@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import "../../routes/css/ErrorGame.css";
 
 // 시작 버튼, 문제 코드
 const ErrorGameQuiz = forwardRef(
@@ -12,14 +13,10 @@ const ErrorGameQuiz = forwardRef(
       >
         {!showQuiz && (
           <button className="start-button" onClick={handleStart}>
-            시작
+            START
           </button>
         )}
-        {showQuiz ? (
-          <code className="language-java">{fileContent}</code>
-        ) : (
-          "READY?"
-        )}
+        {showQuiz ? <code className="language-java">{fileContent}</code> : ""}
       </pre>
     );
   }

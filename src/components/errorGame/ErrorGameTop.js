@@ -1,5 +1,6 @@
 import React from "react";
 import Timer from "./Timer.js";
+import "../../routes/css/ErrorGame.css";
 
 // 문제 설명, 타이머
 const ErrorGameTop = ({ showQuiz, resultCount, handleTimer }) => {

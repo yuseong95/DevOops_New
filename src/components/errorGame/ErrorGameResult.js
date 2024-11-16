@@ -26,11 +26,26 @@ const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <p>SCORE: {calculateScore()}</p>
-        <p>ANSWER: {count} / 3</p>
-        <p>TIME: {formatTime(runningTime)}</p>
-        <button onClick={onShowExplanation}>해설보기</button>
-        <button onClick={goToHome}>메인으로</button>
+        <p className="result-text">
+          <span className="label">SCORE: </span>
+          <span className="value">{calculateScore()}</span>
+        </p>
+        <p className="result-text">
+          <span className="label">ANSWER: </span>
+          <span className="value">{count} / 3</span>
+        </p>
+        <p className="result-text">
+          <span className="label">TIME: </span>
+          <span className="value">{formatTime(runningTime)}</span>
+        </p>
+        <p>
+          <button className="result-button" onClick={onShowExplanation}>
+            해설보기
+          </button>
+          <button className="result-button" onClick={goToHome}>
+            메인으로
+          </button>
+        </p>
       </div>
     </div>
   );

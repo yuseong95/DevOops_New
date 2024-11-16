@@ -1,8 +1,12 @@
 .errorGame {
+  font-family: "D2coding", "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: 100vh;
   background-color: black;
+  gap: 20px;
 }
 
 /* 문제 가이드 & 타이머 */
@@ -21,21 +25,39 @@
   color: white;
 }
 
-/* 에러찾기 문제 부분 */
-.errorCode {
-  /* color: white; */
-  border: solid 3px rgb(114, 7, 164);
-  border-radius: 5px;
-}
-
+/* 문제 부분 */
 pre {
-  width: 80%;
-  height: 500px;
+  position: relative;
+  width: 900px;
+  height: 700px;
   background-color: #2d2d2d;
   color: white;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 5px;
   border: solid 3px rgb(114, 7, 164);
+  overflow: auto;
+}
+
+.start-button {
+  font-family: "D2coding", "Roboto", sans-serif;
+  position: absolute; /* 중앙에 배치 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgba(45, 45, 45, 0.8);
+  color: white;
+  border: solid 1px white;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 }
 
 .language-java {
@@ -51,30 +73,28 @@ pre {
   scrollbar-color: rgb(114, 7, 164) rgb(0, 0, 0);
 }
 
-/* 정답라인 입력 부분 */
-.input {
+/* 정답 입력 부분 */
+.input-field {
   display: flex;
   justify-content: center;
   align-items: center; /* Y축 중앙 정렬 */
   gap: 20px;
 }
 
-.input-anwser {
-  width: 80px !important;
-  height: 30px !important;
-  color: rgb(162, 103, 190) !important;
-  border: solid 3px rgb(114, 7, 164) !important;
-  border-radius: 20px !important;
-  font-size: 15px !important;
+input[type="text"] {
+  width: 85px;
+  height: 38px;
+  color: rgb(162, 103, 190);
+  border: solid 3px rgb(114, 7, 164);
+  border-radius: 20px;
+  font-size: 18px;
   text-align: center;
   font-weight: bold;
-  background-color: transparent !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  background-color: transparent;
 }
 
 .input-button {
-  width: 50px;
+  width: 70px;
   height: 34px;
   color: white;
   border-radius: 20px;
@@ -88,4 +108,20 @@ pre {
 
 p {
   color: white;
+}
+
+/* 해설 부분 */
+.explanation {
+  border: solid 2px white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.label {
+  color: #ffffff;
+}
+
+.value {
+  color: #ffd700;
+  font-weight: normal;
 }
