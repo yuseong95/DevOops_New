@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useRef, useMemo, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../context/UserContext";
 import Prism from "prismjs";
 import "./css/ErrorGame.css";
 import "prismjs/themes/prism-twilight.css";
 import "prismjs/components/prism-java.min.js";
 import "prismjs/components/prism-c.min.js";
 import ErrorGameResult from "../components/errorGame/ErrorGameResult";
-//import Timer from "../components/Timer";
 import ErrorGameTop from "../components/errorGame/ErrorGameTop";
 import ErrorGameQuiz from "../components/errorGame/ErrorGameQuiz";
 import ErrorGameInput from "../components/errorGame/ErrorGameInput";
@@ -44,7 +42,6 @@ const reducer = (state, action) => {
   }
 };
 
-// 오늘의 세트 인덱스 계산 함수
 const calculateTodaySetIndex = () => {
   const today = new Date();
   const dayNumber = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
@@ -52,7 +49,7 @@ const calculateTodaySetIndex = () => {
 };
 
 const ErrorGame = () => {
-  const [state, dispatch] = useReducer(reducer, initState);
+  const [state, dispatchLocal] = useReducer(reducer, initState);
   const {
     showQuiz,
     currentFile,
@@ -66,29 +63,24 @@ const ErrorGame = () => {
   const [fileContent, setFileContent] = useState("READY"); // 문제 파일의 내용
   const [time, setTime] = useState(null); // 소요 시간
 
-  const preRef = useRef(null); // 문제 스크롤바 제어
-  const { user } = useUser(); // 로그인된 사용자
+  const preRef = useRef(null);
   const navigate = useNavigate();
 
-  // 현재날짜에 따라 변하므로 useMemo 사용
   const todaySetIndex = useMemo(() => calculateTodaySetIndex(), []);
-  // file이 변경되지 않으면 바뀌지 않으므로 useMemo 사용
   const todayAnswers = useMemo(() => files.map((file) => file.answer), [files]);
   const todayComments = useMemo(
     () => files.map((file) => file.comment),
     [files]
   );
 
-  const goToHome = () => {
-    navigate("/"); // 메인페이지로 이동
-  };
-
   useEffect(() => {
-    if (!user) {
+    // 비로그인 상태라면 로그인 페이지로 이동
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (!loggedInUser) {
       alert("로그인이 필요합니다.");
-      navigate("/login"); // 로그인페이지로 이동
+      navigate("/login");
     }
-  }, [user, navigate]);
+  }, [navigate]);
 
   // 문제 파일 목록 가져오기
   useEffect(() => {
@@ -100,13 +92,8 @@ const ErrorGame = () => {
         }
 
         const data = await response.json();
-        setFiles(data);
-
-        // 오늘의 세트 (3문제) 가져오기
         const startIndex = todaySetIndex * 3;
         const currentSet = data.slice(startIndex, startIndex + 3);
-
-        // 현재 세트 파일들 설정
         setFiles(currentSet);
       } catch (error) {
         console.error(error);
@@ -116,27 +103,23 @@ const ErrorGame = () => {
     fetchFiles();
   }, [todaySetIndex]);
 
-  // file 내용이 바뀔때마다 코드 하이라이팅
   useEffect(() => {
     Prism.highlightAll();
   }, [fileContent]);
 
-  // 해설 모드가 활성화되고 explanationIndex가 변경될 때마다 load 다시
   useEffect(() => {
     if (explanationMode && files.length > 0) {
       loadFileContent(files[explanationIndex]);
     }
   }, [explanationMode, explanationIndex, files]);
 
-  // 문제풀이 시작, 타이머 시작
   const handleStart = () => {
-    dispatch({ type: "START" });
+    dispatchLocal({ type: "START" });
     loadFileContent(files[0]);
   };
 
   const loadFileContent = async (file) => {
     try {
-      // 해당 파일 불러오기
       const response = await fetch(`errorGameFile/${file.fileName}`);
       if (!response.ok) {
         throw new Error("File fetch error.");
@@ -157,53 +140,37 @@ const ErrorGame = () => {
       0
     );
 
-    dispatch({ type: "RESULT_COUNT", count: correctCount });
+    dispatchLocal({ type: "RESULT_COUNT", count: correctCount });
   };
 
-  // 복사 이벤트 방지
-  const handleCopy = (event) => {
-    event.preventDefault();
-    alert("복사는 불가능합니다.");
-  };
-
-  // "다음" 또는 "제출" 버튼 클릭 핸들러
   const handleNext = () => {
-    // 문제풀이 모드일 경우
     if (!explanationMode) {
-      // 마지막 문제가 아니라면 다음 문제 불러오기
       if (currentFile < 2) {
-        dispatch({ type: "NEXT_QUIZ" });
+        dispatchLocal({ type: "NEXT_QUIZ" });
         loadFileContent(files[currentFile + 1]);
 
-        // <pre> 스크롤바 맨 위로
         if (preRef.current) {
           preRef.current.scrollTop = 0;
         }
       } else {
-        // 마지막 문제이면 정답 확인
         checkAnswers();
       }
     } else {
-      // 해설 모드일 경우
-
       if (explanationIndex < 2) {
-        dispatch({ type: "NEXT_EXPLANATION" });
+        dispatchLocal({ type: "NEXT_EXPLANATION" });
         loadFileContent(files[explanationIndex + 1]);
       } else {
-        // 마지막 해설을 본 후 "메인으로" 버튼을 누르면 메인 페이지로 이동
-        goToHome();
+        navigate("/ranking");
       }
     }
   };
 
-  // user의 답 업데이트
   const handleAnswerUpdate = (event) => {
-    dispatch({ type: "UPDATE_ANSWER", answer: event.target.value });
+    dispatchLocal({ type: "UPDATE_ANSWER", answer: event.target.value });
   };
 
-  // 해설 모드로 바꾸기
   const handleExplanationMode = () => {
-    dispatch({ type: "EXPLANATION_MODE" });
+    dispatchLocal({ type: "EXPLANATION_MODE" });
   };
 
   const handleTimer = (time) => {
@@ -223,10 +190,8 @@ const ErrorGame = () => {
             showQuiz={showQuiz}
             fileContent={fileContent}
             handleStart={handleStart}
-            handleCopy={handleCopy}
             ref={preRef}
           />
-
           <ErrorGameInput
             showQuiz={showQuiz}
             currentFile={currentFile}
@@ -243,11 +208,9 @@ const ErrorGame = () => {
           comment={todayComments[explanationIndex]}
           explanationIndex={explanationIndex}
           handleNext={handleNext}
-          handleCopy={handleCopy}
         />
       )}
 
-      {/* 결과 모달창 */}
       {resultCount !== null && !explanationMode && (
         <ErrorGameResult
           count={resultCount}

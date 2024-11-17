@@ -1,14 +1,12 @@
 import React from "react";
 import "../css/ErrorGameResult.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateScore } from "../../redux/userActions";
 
 const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {
-  const maxTime = 600000; // 기준 10분(ms단위)
   const navigate = useNavigate();
-
-  const goToRanking = () => {
-    navigate("/rank"); // 랭킹페이지로 이동
-  };
+  const dispatch = useDispatch();
 
   const formatTime = (time) => {
     const minutes = String(Math.floor((time / 60000) % 60));
@@ -19,8 +17,21 @@ const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {
 
   // score 계산 함수
   const calculateScore = () => {
+    const maxTime = 600000; // 기준 10분(ms단위)
     const score = ((maxTime - runningTime) * count) / 1000;
     return Math.max(0, score); // 최소 점수는 0
+  };
+
+  const handleSaveScore = () => {
+    const finalScore = calculateScore();
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser")); // 현재 로그인된 사용자 정보
+
+    if (loggedInUser) {
+      dispatch(updateScore(loggedInUser.id, finalScore)); // Redux 액션 호출
+      //console.log(finalScore);
+    } else {
+      console.error("로그인된 사용자 정보를 찾을 수 없습니다.");
+    }
   };
 
   return (
@@ -39,10 +50,22 @@ const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {
           <span className="value">{formatTime(runningTime)}</span>
         </p>
         <p>
-          <button className="result-button" onClick={onShowExplanation}>
+          <button
+            className="result-button"
+            onClick={() => {
+              handleSaveScore();
+              onShowExplanation();
+            }}
+          >
             해설보기
           </button>
-          <button className="result-button" onClick={goToRanking}>
+          <button
+            className="result-button"
+            onClick={() => {
+              handleSaveScore();
+              navigate("/ranking");
+            }}
+          >
             랭킹보기
           </button>
         </p>

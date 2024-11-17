@@ -10,6 +10,9 @@ const ErrorGameExplanation = ({
   handleNext,
   handleCopy,
 }) => {
+  // 버튼 텍스트
+  const buttonText = explanationIndex < 2 ? "다음" : "랭킹보기";
+
   return (
     <>
       <pre className="language-java" onCopy={handleCopy} onCut={handleCopy}>
@@ -30,7 +33,7 @@ const ErrorGameExplanation = ({
         </p>
       </div>
       <button className="input-button" onClick={handleNext}>
-        {explanationIndex < 2 ? "다음" : "메인으로"}
+        {buttonText}
       </button>
     </>
   );
