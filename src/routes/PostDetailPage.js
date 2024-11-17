@@ -1,38 +1,46 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import timeAgo from "../utils/timeAgo";
 import LikeSection from "../components/LikeSection";
 import CommentSection from "../components/CommentSection";
 import "./css/PostDetailPage.css";
 
-const PostDetailPage = ({ posts }) => {
-  // URL의 id 파라미터를 가져와 해당 id의 게시글을 찾음
+const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const post = posts.find((p) => p.id === Number(id) || String(p.id) === id);
 
-  // 게시글이 없을 경우 메시지를 표시
   if (!post) return <div>게시글을 찾을 수 없습니다.</div>;
+
+  // 삭제 핸들러
+  const handleDelete = () => {
+    if (window.confirm("정말로 이 게시글을 삭제하시겠습니까?")) {
+      setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id)); // 게시글 제거
+      navigate(`/board/${post.boardType}`); // 삭제 후 해당 게시판으로 이동
+    }
+  };
 
   return (
     <div className="post-detail-page">
-      {/* 게시글 제목 */}
       <h2>{post.title}</h2>
-
-      {/* 게시글 내용 */}
       <div className="content-wrapper">
         <div
           className="content"
           dangerouslySetInnerHTML={{ __html: post.content }}
         ></div>
       </div>
-
-      {/* 작성일과 경과 시간 표시 */}
       <div className="date">
         작성일: {new Date(post.createdAt).toLocaleString()} (
         {timeAgo(new Date(post.createdAt))})
       </div>
 
-      {/* 좋아요 섹션과 댓글 섹션 */}
+      {/* 삭제 버튼 - 로그인 사용자와 작성자가 동일한 경우에만 표시 */}
+      {loggedInUser && loggedInUser.id === post.authorId && (
+        <button className="delete-button" onClick={handleDelete}>
+          삭제
+        </button>
+      )}
+
       <LikeSection />
       <CommentSection />
     </div>

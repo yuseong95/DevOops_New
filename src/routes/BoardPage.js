@@ -7,7 +7,7 @@ import "./css/BoardPage.css";
 
 const ITEMS_PER_PAGE = 12;
 
-const BoardPage = ({ posts, boardType }) => {
+const BoardPage = ({ posts, boardType, setPosts }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -33,14 +33,19 @@ const BoardPage = ({ posts, boardType }) => {
 
   const handleWriteClick = () => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    console.log("로그인된 사용자:", loggedInUser);
 
     if (loggedInUser) {
-      // 로그인 상태라면 글쓰기 페이지로 이동
+      console.log("글쓰기 페이지로 이동");
       navigate("/board/create");
     } else {
-      // 로그인 상태가 아니라면 경고 메시지 표시
       alert("로그인이 필요합니다. 로그인 후 이용해주세요.");
     }
+  };
+
+  // 게시글 삭제 핸들러
+  const handleDelete = (postId) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
   };
 
   const placeholders = Array(ITEMS_PER_PAGE - currentPosts.length).fill(null);
@@ -56,13 +61,18 @@ const BoardPage = ({ posts, boardType }) => {
             color="#fff"
             fontSize="1.2em"
             padding="12px 24px"
-            onClick={handleWriteClick} // 버튼 클릭 이벤트 핸들러 추가
+            onClick={handleWriteClick}
           />
         </div>
 
         <div className="board-container">
           {currentPosts.map((post) => (
-            <BoardCard key={post.id} post={post} />
+            <BoardCard
+              key={post.id}
+              post={post}
+              loggedInUser={JSON.parse(localStorage.getItem("loggedInUser"))}
+              onDelete={handleDelete}
+            />
           ))}
           {placeholders.map((_, index) => (
             <div
