@@ -5,7 +5,7 @@ const UserTypings = ({ userInput, words, className = '' }) => {
   const typedCharacters = userInput.split('');
 
   return (
-    <div className={className}>
+    <div className={`${className} whitespace-nowrap`}>
       {typedCharacters.map((char, index) => (
         <Character
           key={`${char}_${index}`}

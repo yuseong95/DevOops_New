@@ -1,68 +1,103 @@
-import { useCallback, useEffect, useState } from 'react';
-import { countErrors } from '../utils/helpers';
-import useCountdown from './useCountDown';
-import useTypings from './useTypings';
+import { useCallback, useEffect, useState, useRef } from 'react';
+import { countErrors, calculateAccuracyPercentage } from '../utils/helpers';
+import useCountdown from './useCountdown';
 import useWords from './useWords';
 
-const NUMBER_OF_WORDS = 40;
-const COUNTDOWN_SECONDS = 30;
+const COUNTDOWN_SECONDS = 10;
 
 const useEngine = () => {
   const [state, setState] = useState('start');
   const { timeLeft, startCountdown, resetCountdown } =
     useCountdown(COUNTDOWN_SECONDS);
-  const { words, updateWords } = useWords(NUMBER_OF_WORDS);
-  const { cursor, typed, clearTyped, totalTyped, resetTotalTyped } = useTypings(
-    state !== 'finish'
-  );
-  const [errors, setErrors] = useState(0);
+  const { currentLine, nextLineText, nextLine, resetLines } = useWords();
+  const [typed, setTyped] = useState(''); // UI 업데이트용 상태
+  const totalTyped = useRef(0); // 총 입력된 문자 수
+  const [errors, setErrors] = useState(0); // 에러 수
+  const typedRef = useRef(''); // 동기적으로 입력 상태를 관리
+  const stateRef = useRef(state);
+  const currentLineRef = useRef(currentLine);
 
-  const isStarting = state === 'start' && cursor > 0;
-  const areWordsFinished = cursor === words.length;
+  // 최신 상태를 ref에 저장
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
+
+  useEffect(() => {
+    currentLineRef.current = currentLine;
+  }, [currentLine]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const key = e.key;
+      e.preventDefault();
+
+      if (stateRef.current === 'finish') return;
+
+      if (stateRef.current === 'start' && key.length === 1 && key !== 'Enter') {
+        setState('run');
+        startCountdown();
+      }
+
+      if (key === 'Enter') {
+        const expected = currentLineRef.current;
+        const actual = typedRef.current;
+        const lineErrors = countErrors({ actual, expected });
+
+        setErrors((prevErrors) => prevErrors + lineErrors);
+
+        // 입력 초기화 및 다음 줄 이동
+        typedRef.current = '';
+        setTyped(''); // UI 업데이트
+        nextLine();
+      } else if (key === 'Backspace') {
+        typedRef.current = typedRef.current.slice(0, -1);
+        setTyped(typedRef.current); // UI 동기화
+        totalTyped.current = Math.max(0, totalTyped.current - 1);
+      } else if (key.length === 1) {
+        typedRef.current += key;
+        setTyped(typedRef.current); // UI 동기화
+        totalTyped.current += 1;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [startCountdown, nextLine]);
+
+  useEffect(() => {
+    if (timeLeft <= 0 && state === 'run') {
+      setState('finish');
+    }
+  }, [timeLeft, state]);
+
+  const accuracyPercentage = calculateAccuracyPercentage({
+    errors,
+    total: totalTyped.current,
+  });
 
   const restart = useCallback(() => {
     resetCountdown();
-    resetTotalTyped();
     setState('start');
     setErrors(0);
-    updateWords();
-    clearTyped();
-  }, [clearTyped, updateWords, resetCountdown, resetTotalTyped]);
+    resetLines();
+    typedRef.current = ''; // 입력 초기화
+    setTyped(''); // UI 초기화
+    totalTyped.current = 0;
+  }, [resetCountdown, resetLines]);
 
-  const sumErrors = useCallback(() => {
-    const wordsReached = words.substring(0, Math.min(cursor, words.length));
-    setErrors(
-      (prevErrors) =>
-        prevErrors + countErrors({ actual: typed, expected: wordsReached })
-    );
-  }, [typed, words, cursor]);
-
-  // Starts countdown as soon as typing begins
-  useEffect(() => {
-    if (isStarting) {
-      setState('run');
-      startCountdown();
-    }
-  }, [isStarting, startCountdown]);
-
-  // Sets state to 'finish' when time runs out
-  useEffect(() => {
-    if (!timeLeft && state === 'run') {
-      setState('finish');
-      sumErrors();
-    }
-  }, [timeLeft, state, sumErrors]);
-
-  // Checks if all words are completed and generates new words
-  useEffect(() => {
-    if (areWordsFinished) {
-      sumErrors();
-      updateWords();
-      clearTyped();
-    }
-  }, [clearTyped, areWordsFinished, updateWords, sumErrors]);
-
-  return { state, words, typed, errors, restart, timeLeft, totalTyped };
+  return {
+    state,
+    currentLine,
+    nextLineText,
+    typed,
+    errors,
+    totalTyped: totalTyped.current,
+    accuracyPercentage,
+    restart,
+    timeLeft,
+  };
 };
 
 export default useEngine;

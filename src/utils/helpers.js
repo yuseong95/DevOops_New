@@ -1,31 +1,28 @@
+// helpers.js
 export const isKeyboardCodeAllowed = ({ code }) => {
-  return (
-    code.startsWith('Key') ||
-    code.startsWith('Digit') ||
-    code === 'Backspace' ||
-    code === 'Space'
-  );
+  return true; // 모든 키 허용
 };
-export const countErrors = (props) => {
-  const { actual, expected } = props;
-  const expectedCharacters = expected.split('');
 
-  return expectedCharacters.reduce((errors, expectedChar, i) => {
-    const actualChar = actual[i];
-    if (actualChar !== expectedChar) {
+export const countErrors = ({ actual, expected }) => {
+  const maxLength = Math.max(actual.length, expected.length);
+  let errors = 0;
+
+  for (let i = 0; i < maxLength; i++) {
+    if (actual[i] !== expected[i]) {
       errors++;
     }
-    return errors;
-  }, 0);
+  }
+
+  return errors;
 };
 
-export const calculateAccuracyPercentage = (props) => {
-  const { errors, total } = props;
+export const calculateAccuracyPercentage = ({ errors, total }) => {
   if (total > 0) {
     const corrects = total - errors;
+    if (total - errors < 0) return 0;
     return (corrects / total) * 100;
   }
-  return 0;
+  return 100; // total이 0일 때 100% 반환
 };
 
 export const formatPercentage = (props) => {
