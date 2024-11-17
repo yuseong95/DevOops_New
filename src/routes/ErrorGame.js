@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useMemo, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 import Prism from "prismjs";
 import "./css/ErrorGame.css";
 import "prismjs/themes/prism-twilight.css";
@@ -66,6 +67,7 @@ const ErrorGame = () => {
   const [time, setTime] = useState(null); // 소요 시간
 
   const preRef = useRef(null); // 문제 스크롤바 제어
+  const { user } = useUser(); // 로그인된 사용자
   const navigate = useNavigate();
 
   // 현재날짜에 따라 변하므로 useMemo 사용
@@ -80,6 +82,13 @@ const ErrorGame = () => {
   const goToHome = () => {
     navigate("/"); // 메인페이지로 이동
   };
+
+  useEffect(() => {
+    if (!user) {
+      alert("로그인이 필요합니다.");
+      navigate("/login"); // 로그인페이지로 이동
+    }
+  }, [user, navigate]);
 
   // 문제 파일 목록 가져오기
   useEffect(() => {

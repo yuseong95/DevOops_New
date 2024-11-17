@@ -60,8 +60,8 @@
 60                 print(f"Result: {result}")
 61             
 62             elif choice == '4':
-63                 # b가 0일 경우 ZeroDivisionError 발생 가능
-64                 result = calculator.divide(a, b)  # 오류 발생 지점
+63                 
+64                 result = calculator.divide(a, b)
 65                 print(f"Result: {result}")
 66  
 67         elif choice == '5':

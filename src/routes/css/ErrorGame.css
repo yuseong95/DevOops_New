@@ -81,7 +81,7 @@ pre {
   gap: 20px;
 }
 
-input[type="text"] {
+.input-field input[type="text"] {
   width: 85px;
   height: 38px;
   color: rgb(162, 103, 190);

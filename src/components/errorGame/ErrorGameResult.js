@@ -6,8 +6,8 @@ const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {
   const maxTime = 600000; // 기준 10분(ms단위)
   const navigate = useNavigate();
 
-  const goToHome = () => {
-    navigate("/"); // 메인페이지로 이동
+  const goToRanking = () => {
+    navigate("/rank"); // 랭킹페이지로 이동
   };
 
   const formatTime = (time) => {
@@ -42,8 +42,8 @@ const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {
           <button className="result-button" onClick={onShowExplanation}>
             해설보기
           </button>
-          <button className="result-button" onClick={goToHome}>
-            메인으로
+          <button className="result-button" onClick={goToRanking}>
+            랭킹보기
           </button>
         </p>
       </div>
