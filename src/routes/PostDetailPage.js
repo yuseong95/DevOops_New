@@ -41,7 +41,7 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
         </button>
       )}
 
-      <LikeSection />
+      <LikeSection loggedInUser={loggedInUser} postId={post.id} />
       <CommentSection />
     </div>
   );
