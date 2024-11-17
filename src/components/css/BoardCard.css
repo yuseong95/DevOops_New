@@ -50,4 +50,5 @@
   box-orient: vertical; /* 표준 속성 추가 */
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #333;
 }
