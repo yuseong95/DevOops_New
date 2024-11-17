@@ -1,5 +1,6 @@
 .comment-section {
   margin-top: 30px;
+  color: #000;
 }
 
 .comment-section h3 {
@@ -28,6 +29,7 @@
   overflow-y: auto;
   max-height: 100px;
   background-color: #fff;
+  color: #000;
 }
 
 .comment-submit {

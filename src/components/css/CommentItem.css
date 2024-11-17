@@ -70,6 +70,7 @@
   border-radius: 4px;
   resize: none;
   max-height: 80px;
+  color: #000;
 }
 
 .reply-submit {
