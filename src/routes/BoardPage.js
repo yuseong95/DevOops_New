@@ -16,10 +16,13 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
 
   const [currentPage, setCurrentPage] = useState(initialPage);
 
-  const filteredPosts = posts.filter((post) => post.boardType === boardType);
+  const filteredPosts = posts
+    .filter((post) => post.boardType === boardType) // 선택된 게시판 필터링
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // 작성 날짜 기준으로 정렬
+
   const indexOfLastPost = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost); // 현재 페이지에 해당하는 게시글
   const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE);
 
   useEffect(() => {
