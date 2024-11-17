@@ -3,7 +3,7 @@ import { countErrors, calculateAccuracyPercentage } from '../utils/helpers';
 import useCountdown from './useCountdown';
 import useWords from './useWords';
 
-const COUNTDOWN_SECONDS = 10;
+const COUNTDOWN_SECONDS = 30;
 
 const useEngine = () => {
   const [state, setState] = useState('start');
