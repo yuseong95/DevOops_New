@@ -10,13 +10,16 @@ const useEngine = () => {
   const { timeLeft, startCountdown, resetCountdown } =
     useCountdown(COUNTDOWN_SECONDS);
   const { currentLine, nextLineText, nextLine, resetLines } = useWords();
-  const [typed, setTyped] = useState(''); // UI 업데이트용 상태
-  const totalTyped = useRef(0); // 총 입력된 문자 수
-  const [errors, setErrors] = useState(0); // 에러 수
-  const typedRef = useRef(''); // 동기적으로 입력 상태를 관리
+  const [typed, setTyped] = useState('');
+  const totalTyped = useRef(0);
+  const [errors, setErrors] = useState(0);
+  const inputBuffer = useRef(''); // 키 입력을 즉시 처리하기 위한 버퍼
+
   const stateRef = useRef(state);
   const currentLineRef = useRef(currentLine);
-
+  useEffect(() => {
+    console.log('Typed state updated:', typed);
+  }, [typed]);
   // 최신 상태를 ref에 저장
   useEffect(() => {
     stateRef.current = state;
@@ -33,29 +36,31 @@ const useEngine = () => {
 
       if (stateRef.current === 'finish') return;
 
+      // 타이핑 시작 시 상태 변경
       if (stateRef.current === 'start' && key.length === 1 && key !== 'Enter') {
         setState('run');
         startCountdown();
       }
 
-      if (key === 'Enter') {
+      if (stateRef.current != 'start' && key === 'Enter') {
         const expected = currentLineRef.current;
-        const actual = typedRef.current;
+        const actual = inputBuffer.current; // 버퍼에서 현재 입력된 내용 가져오기
         const lineErrors = countErrors({ actual, expected });
-
         setErrors((prevErrors) => prevErrors + lineErrors);
 
         // 입력 초기화 및 다음 줄 이동
-        typedRef.current = '';
-        setTyped(''); // UI 업데이트
+        inputBuffer.current = ''; // 입력 버퍼 초기화
+        setTyped('');
         nextLine();
       } else if (key === 'Backspace') {
-        typedRef.current = typedRef.current.slice(0, -1);
-        setTyped(typedRef.current); // UI 동기화
+        // 입력 버퍼에서 마지막 문자 제거
+        inputBuffer.current = inputBuffer.current.slice(0, -1);
+        setTyped(inputBuffer.current); // UI 동기화
         totalTyped.current = Math.max(0, totalTyped.current - 1);
       } else if (key.length === 1) {
-        typedRef.current += key;
-        setTyped(typedRef.current); // UI 동기화
+        // 입력 버퍼에 문자 추가
+        inputBuffer.current += key;
+        setTyped(inputBuffer.current); // UI 동기화
         totalTyped.current += 1;
       }
     };
@@ -82,8 +87,8 @@ const useEngine = () => {
     setState('start');
     setErrors(0);
     resetLines();
-    typedRef.current = ''; // 입력 초기화
-    setTyped(''); // UI 초기화
+    inputBuffer.current = ''; // 입력 버퍼 초기화
+    setTyped(''); // 상태 초기화
     totalTyped.current = 0;
   }, [resetCountdown, resetLines]);
 

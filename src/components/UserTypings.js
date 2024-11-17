@@ -1,8 +1,14 @@
 import cn from 'classnames';
 import Caret from './Caret';
+import { useEffect } from 'react';
 
 const UserTypings = ({ userInput, words, className = '' }) => {
+  const sanitizedWords = words.trim(); // 앞뒤 공백 제거
   const typedCharacters = userInput.split('');
+  useEffect(() => {
+    console.log('userInput:', userInput);
+    console.log('words:', words);
+  }, [userInput, words]);
 
   return (
     <div className={`${className} whitespace-nowrap`}>
@@ -10,7 +16,7 @@ const UserTypings = ({ userInput, words, className = '' }) => {
         <Character
           key={`${char}_${index}`}
           actual={char}
-          expected={words[index]}
+          expected={sanitizedWords[index]}
         />
       ))}
       <Caret className={className} />

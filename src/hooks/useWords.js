@@ -1,6 +1,5 @@
 // useWords.js
 import { useCallback, useEffect, useState } from 'react';
-
 const useWords = () => {
   const [lines, setLines] = useState([]);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
@@ -10,7 +9,7 @@ const useWords = () => {
       try {
         const response = await fetch('/challengeFile/code.txt');
         const text = await response.text();
-        const codeLines = text.split('\n');
+        const codeLines = text.split('\n').map((line) => line.trim()); // 공백 제거
         setLines(codeLines);
       } catch (error) {
         console.error('Error fetching code.txt:', error);
@@ -22,8 +21,8 @@ const useWords = () => {
   }, []);
 
   const nextLine = useCallback(() => {
-    setCurrentLineIndex(
-      (prevIndex) => (prevIndex + 1 < lines.length ? prevIndex + 1 : 0) // 마지막 줄이면 처음으로
+    setCurrentLineIndex((prevIndex) =>
+      prevIndex + 1 < lines.length ? prevIndex + 1 : 0
     );
   }, [lines.length]);
 

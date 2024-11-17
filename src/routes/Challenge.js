@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import GeneratedWords from '../components/GeneratedWords';
 import RestartButton from '../components/RestartButton';
 import Results from '../components/Results';
@@ -17,7 +17,9 @@ const Challenge = () => {
     restart,
     timeLeft,
   } = useEngine();
-
+  useEffect(() => {
+    console.log('Typed state updated!!!:', typed);
+  }, [typed]);
   return (
     <div className="flex flex-col items-center justify-center min-h-[35vh] ">
       <CountdownTimer timeLeft={timeLeft} />
