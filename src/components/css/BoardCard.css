@@ -34,6 +34,11 @@
 .board-card h3 {
   font-size: 1.2em;
   margin-bottom: 10px;
+  color: #333;
+}
+
+.board-card .card-footer {
+  color: #333;
 }
 
 .board-card p {
