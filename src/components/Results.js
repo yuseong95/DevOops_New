@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { formatPercentage, formatScore } from '../utils/helpers';
+import { IoCloseCircle } from 'react-icons/io5';
 
 const Results = ({
   state,
@@ -8,59 +9,48 @@ const Results = ({
   total,
   className = '',
   calScore,
+  onClose, // 모달 닫기 핸들러
 }) => {
   if (state !== 'finish') {
     return null;
   }
 
-  const initial = { opacity: 0 };
-  const animate = { opacity: 1 };
+  const initial = { opacity: 0, y: -50 };
+  const animate = { opacity: 1, y: 0 };
+  const exit = { opacity: 0, y: 50 };
 
   return (
-    <motion.ul
-      initial={initial}
-      animate={animate}
-      className={`flex flex-col items-center text-primary-400 space-y-3 ${className}`}
-    >
-      <motion.li
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+      <motion.div
         initial={initial}
         animate={animate}
+        exit={exit}
         transition={{ duration: 0.3 }}
-        className="text-xl font-semibold"
+        className={`bg-gray-900 text-white rounded-lg shadow-lg p-8 w-full max-w-2xl ${className}`}
       >
-        Results
-      </motion.li>
-      <motion.li
-        initial={initial}
-        animate={animate}
-        transition={{ duration: 0.3, delay: 0.5 }}
-      >
-        Accuracy: {formatPercentage({ percentage: accuracyPercentage })}
-      </motion.li>
-      <motion.li
-        initial={initial}
-        animate={animate}
-        transition={{ duration: 0.3, delay: 1 }}
-        className="text-red-500"
-      >
-        Errors: {errors}
-      </motion.li>
-      <motion.li
-        initial={initial}
-        animate={animate}
-        transition={{ duration: 0.3, delay: 1.4 }}
-      >
-        Typed: {total}
-      </motion.li>
-      <motion.li
-        initial={initial}
-        animate={animate}
-        transition={{ duration: 0.3, delay: 1.8 }}
-        className="text-green-600 font-bold"
-      >
-        Score: {formatScore({ score: calScore })}
-      </motion.li>
-    </motion.ul>
+        <h2 className="text-3xl font-bold mb-6 text-center text-yellow-400">
+          Results
+        </h2>
+        <ul className="space-y-5 text-lg text-center">
+          <li className="text-yellow-500">
+            Accuracy: {formatPercentage({ percentage: accuracyPercentage })}
+          </li>
+          <li className="text-red-600">Errors: {errors}</li>
+          <li className="text-yellow-500">Typed: {total}</li>
+          <li className="text-green-500 font-bold">
+            Score: {formatScore({ score: calScore })}
+          </li>
+        </ul>
+
+        <div className="flex justify-center mt-6">
+          <IoCloseCircle
+            onClick={onClose}
+            className="text-red-500 hover:text-red-700 cursor-pointer"
+            size={50}
+          />
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

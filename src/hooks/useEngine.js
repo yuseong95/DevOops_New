@@ -80,8 +80,14 @@ const useEngine = () => {
       setState('finish');
       const expected = currentLineRef.current;
       const actual = inputBuffer.current; // 버퍼에서 현재 입력된 내용 가져오기
-      const lineErrors = countErrors({ actual, expected });
-      setErrors((prevErrors) => prevErrors + lineErrors);
+      const maxLength = actual.length;
+      let errors = 0;
+      for (let i = 0; i < maxLength; i++) {
+        if (actual[i] !== expected[i]) {
+          errors++;
+        }
+      }
+      setErrors((prevErrors) => prevErrors + errors);
     }
   }, [timeLeft, state]);
 
