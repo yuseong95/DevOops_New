@@ -1,19 +1,43 @@
-import { faker } from '@faker-js/faker';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-const generateWords = (count) => {
-  // count를 사용하여 지정된 단어 수 생성
-  return faker.lorem.words(count);
-};
+const useWords = () => {
+  const [lines, setLines] = useState([]);
+  const [currentLineIndex, setCurrentLineIndex] = useState(0);
 
-const useWords = (count) => {
-  const [words, setWords] = useState(generateWords(count));
+  useEffect(() => {
+    const fetchCodeText = async () => {
+      try {
+        const dayOfWeek = new Date().getDay();
+        const fileName = `/challengeFile/code${
+          dayOfWeek === 0 ? 6 : dayOfWeek - 1
+        }.txt`;
+        const response = await fetch(fileName);
+        const text = await response.text();
+        const codeLines = text.split('\n').map((line) => line.trim()); // 공백 제거
+        setLines(codeLines);
+      } catch (error) {
+        console.error('Error fetching code file:', error);
+        setLines([]);
+      }
+    };
 
-  const updateWords = useCallback(() => {
-    setWords(generateWords(count));
-  }, [count]);
+    fetchCodeText();
+  }, []);
 
-  return { words, updateWords };
+  const nextLine = useCallback(() => {
+    setCurrentLineIndex((prevIndex) =>
+      prevIndex + 1 < lines.length ? prevIndex + 1 : 0
+    );
+  }, [lines.length]);
+
+  const resetLines = useCallback(() => {
+    setCurrentLineIndex(0);
+  }, []);
+
+  const currentLine = lines[currentLineIndex] || '';
+  const nextLineText = lines[(currentLineIndex + 1) % lines.length] || '';
+
+  return { currentLine, nextLineText, nextLine, resetLines };
 };
 
 export default useWords;

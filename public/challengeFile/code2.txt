@@ -1,0 +1,71 @@
+public class Deque<T> {
+    private Node<T> head, tail;
+    private int size;
+    private static class Node<T> {
+        T data;
+        Node<T> prev, next;
+        Node(T data) {
+            this.data = data;
+        }
+    }
+    public void addFirst(T item) {
+        Node<T> newNode = new Node<>(item);
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        }
+        size++;
+    }
+    public void addLast(T item) {
+        Node<T> newNode = new Node<>(item);
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            newNode.prev = tail;
+            tail.next = newNode;
+            tail = newNode;
+        }
+        size++;
+    }
+    public T removeFirst() {
+        if (isEmpty()) throw new NoSuchElementException();
+        T data = head.data;
+        head = head.next;
+        if (head == null) {
+            tail = null;
+        } else {
+            head.prev = null;
+        }
+        size--;
+        return data;
+    }
+    public T removeLast() {
+        if (isEmpty()) throw new NoSuchElementException();
+        T data = tail.data;
+        tail = tail.prev;
+        if (tail == null) {
+            head = null;
+        } else {
+            tail.next = null;
+        }
+        size--;
+        return data;
+    }
+    public T peekFirst() {
+        if (isEmpty()) throw new NoSuchElementException();
+        return head.data;
+    }
+    public T peekLast() {
+        if (isEmpty()) throw new NoSuchElementException();
+        return tail.data;
+    }
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    public int size() {
+        return size;
+    }
+}

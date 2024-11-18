@@ -1,51 +1,116 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import GeneratedWords from '../components/GeneratedWords';
 import RestartButton from '../components/RestartButton';
 import Results from '../components/Results';
 import UserTypings from '../components/UserTypings';
 import useEngine from '../hooks/useEngine';
-import { calculateAccuracyPercentage } from '../utils/helpers';
 
 const Challenge = () => {
-  const { words, typed, timeLeft, errors, state, restart, totalTyped } =
-    useEngine();
-
-  // calculateAccuracyPercentage에 필요한 매개변수를 props 객체로 전달
-  const accuracyPercentage = calculateAccuracyPercentage({
+  const {
+    state,
+    currentLine,
+    nextLineText,
+    typed,
     errors,
-    total: totalTyped,
-  });
+    totalTyped,
+    accuracyPercentage,
+    restart,
+    timeLeft,
+    calScore,
+  } = useEngine();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showToast, setShowToast] = useState(true); // Control toast visibility
+
+  useEffect(() => {
+    // Hide the toast after 3 seconds
+    const timer = setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+
+    return () => clearTimeout(timer); // Cleanup timeout
+  }, []);
+
+  useEffect(() => {
+    // Show modal when the game ends
+    if (state === 'finish') {
+      setIsModalOpen(true);
+    }
+  }, [state]);
+
+  const closeModal = () => {
+    setIsModalOpen(false); // Close the modal
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[35vh] ">
+      <br />
+      <br />
       <CountdownTimer timeLeft={timeLeft} />
       <WordsContainer>
-        <GeneratedWords key={words} words={words} />
-        <UserTypings
-          className="absolute inset-0 text-yellow-500 font-mono text-4xl"
-          words={words}
-          userInput={typed}
-        />
+        <div className="w-full max-w-4xl">
+          <div className="relative font-mono text-2xl">
+            <GeneratedWords key={currentLine} words={currentLine} />
+            <UserTypings
+              className="absolute inset-0 text-yellow-500 font-mono text-4xl"
+              words={currentLine}
+              userInput={typed}
+            />
+          </div>
+        </div>
       </WordsContainer>
+      <NextLinePreview
+        className="font-mono text-2xl opacity-50"
+        nextLineText={nextLineText}
+      />
       <RestartButton
         className={'mx-auto mt-10 text-slate-500'}
         onRestart={restart}
       />
-      <Results
-        className="mt-10  text-yellow-500"
-        state={state}
-        errors={errors}
-        total={totalTyped}
-        accuracyPercentage={accuracyPercentage}
-      />
+      {/* Toast message */}
+      {showToast && (
+        <div className="mt-2 p-2 font-sans font-bold text-yellow-500 rounded shadow">
+          타이핑시 챌린지가 시작됩니다.
+        </div>
+      )}
+      {/* Modal controlled by isModalOpen */}
+      {isModalOpen && (
+        <Results
+          className="mt-10 text-yellow-500"
+          state={state}
+          errors={errors}
+          total={totalTyped}
+          accuracyPercentage={accuracyPercentage}
+          calScore={calScore}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };
 
 const WordsContainer = ({ children }) => {
   return (
-    <div className="relative text-3xl max-w-5xl leading-relaxed break-all mt-3">
-      {children}
+    <div className="w-full max-w-5xl mt-4">
+      <p className="text-xl mb-2">Current Line:</p>
+      <div
+        className={`relative font-mono text-2xl bg-gray-700 p-4 rounded overflow-x-auto`}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
+
+const NextLinePreview = ({ nextLineText, className = '' }) => {
+  return (
+    <div className="w-full max-w-5xl mt-4">
+      <p className="text-xl mb-2 opacity-50">Next Line:</p>
+      <div
+        className={`relative font-mono text-2xl bg-gray-700 p-4 rounded opacity-30 overflow-x-auto`}
+      >
+        {nextLineText}
+      </div>
     </div>
   );
 };
