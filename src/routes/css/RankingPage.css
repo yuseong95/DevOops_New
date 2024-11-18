@@ -1,0 +1,14 @@
+.ranking-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ranking-list li {
+  margin: 8px 0;
+  font-size: 1.2rem;
+}
+
+.ranking-list li.highlight {
+  color: gold;
+  font-weight: bold;
+}

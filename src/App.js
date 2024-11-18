@@ -11,6 +11,7 @@ import ProfileEdit from "./routes/ProfileEdit";
 import Challenge from "./routes/Challenge";
 import BoardRoutes from "./routes/BoardRoutes"; // 게시판 관련 경로
 import ErrorGame from "./routes/ErrorGame";
+import RankingPage from "./routes/RankingPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/challenge" element={<Challenge />} />
         <Route path="/board/*" element={<BoardRoutes />} />
         <Route path="/findError" element={<ErrorGame />} />
+        <Route path="/ranking" element={<RankingPage />} />
       </Routes>
     </UserProvider>
   );
