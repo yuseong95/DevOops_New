@@ -60,6 +60,7 @@ const ErrorGame = () => {
 
     if (currentUser?.errorGameScore !== -1) {
       console.log("사용자는 이미 게임을 완료했습니다.");
+      dispatchLocal({ type: "EXPLANATION_MODE" });
     }
   }, [navigate]);
 
