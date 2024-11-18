@@ -42,12 +42,13 @@
 }
 
 .board-card p {
-  font-size: 0.9em;
-  color: #666;
-  margin-bottom: 15px;
+  display: -webkit-box;
+  display: box; /* 표준 속성 추가 */
+  -webkit-line-clamp: 3; /* 원하는 줄 수 */
+  line-clamp: 3; /* 표준 속성 추가 */
+  -webkit-box-orient: vertical;
+  box-orient: vertical; /* 표준 속성 추가 */
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* 원하는 줄 수로 설정 */
-  -webkit-box-orient: vertical;
+  color: #333;
 }

@@ -1,4 +1,3 @@
-// src/routes/PostCreatePage.js
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -7,47 +6,50 @@ import SelectBoardType from "../components/SelectBoardType";
 import "./css/PostCreatePage.css";
 
 const PostCreatePage = ({ addPost }) => {
-  // 제목, 내용, 게시판 종류, 모달 표시 상태를 위한 state
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [boardType, setBoardType] = useState("free");
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  // 게시글 작성 제출 함수
+  // 로그인된 사용자 정보 가져오기
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!loggedInUser) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
     if (addPost) {
       const newPost = {
         title,
         content,
         boardType,
-        createdAt: new Date().toISOString(), // 작성 시간 추가
+        author: loggedInUser.name, // 작성자 이름 추가
+        authorId: loggedInUser.id, // 작성자 ID 추가
+        createdAt: new Date().toISOString(),
       };
-      addPost(newPost); // 게시글 추가 함수 호출
-      navigate(`/board/${boardType}`); // 해당 게시판으로 이동
+      addPost(newPost);
+      navigate(`/board/${boardType}`);
     } else {
       console.error("addPost function is not defined");
     }
   };
 
-  // 작성 취소 시 모달 표시 함수
   const handleCancel = () => {
     setShowModal(true);
   };
 
-  // 모달의 "확인" 클릭 시 게시글 작성 취소
   const confirmCancel = () => {
     setShowModal(false);
     navigate(`/board/${boardType}`);
   };
 
-  // 모달 닫기 함수
   const closeModal = () => {
     setShowModal(false);
   };
 
-  // Quill 에디터 설정
   const modules = {
     toolbar: [
       [{ font: [] }],
@@ -77,16 +79,13 @@ const PostCreatePage = ({ addPost }) => {
     <div className="post-create-page">
       <h2>글 작성</h2>
       <form onSubmit={handleSubmit}>
-        {/* 게시판 종류 선택 */}
         <SelectBoardType boardType={boardType} setBoardType={setBoardType} />
-        {/* 제목 입력 */}
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="제목을 입력하세요"
         />
-        {/* 내용 입력 에디터 */}
         <div className="quill-editor">
           <ReactQuill
             value={content}
@@ -96,7 +95,6 @@ const PostCreatePage = ({ addPost }) => {
             formats={formats}
           />
         </div>
-        {/* 작성 취소, 완료 버튼 */}
         <div className="button-container">
           <button
             type="button"
@@ -105,17 +103,12 @@ const PostCreatePage = ({ addPost }) => {
           >
             취소
           </button>
-          <button
-            type="submit"
-            className="submit-button"
-            onClick={handleSubmit}
-          >
+          <button type="submit" className="submit-button">
             작성 완료
           </button>
         </div>
       </form>
 
-      {/* 취소 확인 모달 */}
       {showModal && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
