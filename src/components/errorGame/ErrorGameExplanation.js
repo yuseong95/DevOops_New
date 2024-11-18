@@ -21,7 +21,7 @@ const ErrorGameExplanation = ({
       <div className="explanation">
         <p>
           <span className="label">나의 답: </span>
-          <span className="value">{userAnswer}</span>
+          <span className="value">{userAnswer || "-"}</span>
         </p>
         <p>
           <span className="label">정답: </span>
