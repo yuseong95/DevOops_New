@@ -3,6 +3,8 @@ import { reducer, initState } from "../hooks/useReducer";
 import { calculateTodaySetIndex } from "../utils/todaySet";
 import { useErrorGameFiles } from "../hooks/useErrorGameFiles";
 import { useNavigate } from "react-router-dom";
+//import { syncUsers } from "../redux/userActions";
+import store from "../redux/store";
 import Prism from "prismjs";
 import "./css/ErrorGame.css";
 import "prismjs/themes/prism-twilight.css";
@@ -13,6 +15,7 @@ import ErrorGameTop from "../components/errorGame/ErrorGameTop";
 import ErrorGameQuiz from "../components/errorGame/ErrorGameQuiz";
 import ErrorGameInput from "../components/errorGame/ErrorGameInput";
 import ErrorGameExplanation from "../components/errorGame/ErrorGameExplanation";
+//import { syncWithDummyUsers } from "../redux/store";
 
 const ErrorGame = () => {
   const [state, dispatchLocal] = useReducer(reducer, initState);
@@ -41,9 +44,7 @@ const ErrorGame = () => {
   );
 
   useEffect(() => {
-    // 로그인 사용자 정보
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    const reduxState = JSON.parse(localStorage.getItem("reduxState"));
 
     // 비로그인 상태라면 로그인 페이지로 이동
     if (!loggedInUser) {
@@ -52,14 +53,13 @@ const ErrorGame = () => {
       return;
     }
 
-    // errorGameScore 확인
-    const currentUser = reduxState?.users.find(
+    const reduxState = store.getState(); // Redux 상태 가져오기
+    const currentUser = reduxState.users.find(
       (user) => user.id === loggedInUser.id
     );
 
-    // 이미 게임을 했다면 해설모드로
     if (currentUser?.errorGameScore !== -1) {
-      dispatchLocal({ type: "EXPLANATION_MODE" });
+      console.log("사용자는 이미 게임을 완료했습니다.");
     }
   }, [navigate]);
 

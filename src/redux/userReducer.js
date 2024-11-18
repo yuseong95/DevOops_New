@@ -26,6 +26,11 @@ const userReducer = (state = initiState, action) => {
           errorGameScore: -1,
         })),
       };
+    case "SYNC_USERS":
+      return {
+        ...state,
+        users: action.payload,
+      };
     default:
       return state;
   }
