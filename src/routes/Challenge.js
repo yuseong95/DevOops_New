@@ -34,6 +34,8 @@ const Challenge = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[35vh] ">
+      <br></br>
+      <br></br>
       <CountdownTimer timeLeft={timeLeft} />
       <WordsContainer>
         <div className="w-full max-w-4xl">
