@@ -7,6 +7,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.post-detail-page p {
+  color: #333;
+}
+
 .post-detail-page h2 {
   color: #333;
   font-size: 2em;
@@ -45,4 +49,20 @@
 .like-button:hover {
   color: #ff3333;
   border-color: #ff3333; /* hover 효과 추가 */
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #e60000;
 }

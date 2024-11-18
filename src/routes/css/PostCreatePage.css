@@ -37,6 +37,7 @@
   background-color: #fff;
   width: 100%; /* 부모 컨테이너의 너비에 맞게 설정 */
   box-sizing: border-box; /* 패딩 포함한 너비 설정 */
+  color: #000;
 }
 
 .post-create-page .quill-editor {
@@ -47,6 +48,7 @@
   padding: 10px;
   width: 100%; /* Quill 에디터가 부모 컨테이너의 너비에 맞게 확장 */
   box-sizing: border-box;
+  color: #000;
 }
 
 .post-create-page .ql-editor {
@@ -67,6 +69,10 @@
 
 .submit-button:hover {
   background-color: #0056b3;
+}
+
+.post-create-page p {
+  color: #000; /* 기본 단락 텍스트를 검정색으로 강제 설정 */
 }
 
 /* 취소 버튼 스타일 */
