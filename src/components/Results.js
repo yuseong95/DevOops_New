@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { formatPercentage, formatScore } from '../utils/helpers';
 import { IoCloseCircle } from 'react-icons/io5';
-
+  
 const Results = ({
   state,
   errors,
