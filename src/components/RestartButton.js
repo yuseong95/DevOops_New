@@ -10,14 +10,16 @@ const RestartButton = ({ onRestart, className = '' }) => {
   };
 
   return (
-    <button
-      tabIndex={-1} // to prevent focus
-      ref={buttonRef}
-      className={`block rounded px-8 py-2 hover:bg-slate-700/50 ${className}`}
-      onClick={handleClick}
-    >
-      <MdRefresh className="w-6 h-6" />
-    </button>
+    <>
+      <br></br>
+      <br></br>
+      <MdRefresh
+        className="w-10 h-10"
+        tabIndex={-1} // to prevent focus
+        ref={buttonRef}
+        onClick={handleClick}
+      />
+    </>
   );
 };
 

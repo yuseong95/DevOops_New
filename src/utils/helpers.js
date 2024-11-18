@@ -16,6 +16,16 @@ export const countErrors = ({ actual, expected }) => {
   return errors;
 };
 
+export const calcutateScore = ({ errors, total }) => {
+  if (total > 0) {
+    const corrects = total - errors;
+    if (total - errors < 0) return 0;
+    return (
+      total * (corrects / total) * (corrects / total) * (corrects / total) * 50
+    );
+  }
+  return 0;
+};
 export const calculateAccuracyPercentage = ({ errors, total }) => {
   if (total > 0) {
     const corrects = total - errors;
@@ -28,4 +38,9 @@ export const calculateAccuracyPercentage = ({ errors, total }) => {
 export const formatPercentage = (props) => {
   const { percentage = 0 } = props; // 기본값을 0으로 설정
   return percentage.toFixed(0) + '%';
+};
+
+export const formatScore = (props) => {
+  const { score = 0 } = props; // 기본값을 0으로 설정
+  return score.toFixed(0);
 };

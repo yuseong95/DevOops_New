@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { formatPercentage } from '../utils/helpers';
+import { formatPercentage, formatScore } from '../utils/helpers';
 
 const Results = ({
   state,
@@ -7,6 +7,7 @@ const Results = ({
   accuracyPercentage,
   total,
   className = '',
+  calScore,
 }) => {
   if (state !== 'finish') {
     return null;
@@ -50,6 +51,14 @@ const Results = ({
         transition={{ duration: 0.3, delay: 1.4 }}
       >
         Typed: {total}
+      </motion.li>
+      <motion.li
+        initial={initial}
+        animate={animate}
+        transition={{ duration: 0.3, delay: 1.8 }}
+        className="text-green-600 font-bold"
+      >
+        Score: {formatScore({ score: calScore })}
       </motion.li>
     </motion.ul>
   );

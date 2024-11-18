@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
-import { countErrors, calculateAccuracyPercentage } from '../utils/helpers';
+import {
+  countErrors,
+  calculateAccuracyPercentage,
+  calcutateScore,
+} from '../utils/helpers';
 import useCountdown from './useCountdown';
 import useWords from './useWords';
 
@@ -74,6 +78,10 @@ const useEngine = () => {
   useEffect(() => {
     if (timeLeft <= 0 && state === 'run') {
       setState('finish');
+      const expected = currentLineRef.current;
+      const actual = inputBuffer.current; // 버퍼에서 현재 입력된 내용 가져오기
+      const lineErrors = countErrors({ actual, expected });
+      setErrors((prevErrors) => prevErrors + lineErrors);
     }
   }, [timeLeft, state]);
 
@@ -81,6 +89,12 @@ const useEngine = () => {
     errors,
     total: totalTyped.current,
   });
+
+  const calScore = calcutateScore({
+    errors,
+    total: totalTyped.current,
+  });
+  console.log('Calculated Score:', calScore);
 
   const restart = useCallback(() => {
     resetCountdown();
@@ -102,6 +116,7 @@ const useEngine = () => {
     accuracyPercentage,
     restart,
     timeLeft,
+    calScore,
   };
 };
 

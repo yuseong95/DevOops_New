@@ -16,10 +16,12 @@ const Challenge = () => {
     accuracyPercentage,
     restart,
     timeLeft,
+    calScore,
   } = useEngine();
   useEffect(() => {
     console.log('Typed state updated!!!:', typed);
   }, [typed]);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[35vh] ">
       <CountdownTimer timeLeft={timeLeft} />
@@ -49,6 +51,7 @@ const Challenge = () => {
         errors={errors}
         total={totalTyped}
         accuracyPercentage={accuracyPercentage}
+        calScore={calScore}
       />
     </div>
   );

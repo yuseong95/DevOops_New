@@ -3,22 +3,18 @@ public class LinearQueue {
     private int front;
     private int rear;
     private int size;
-
     public LinearQueue(int capacity) {
         queue = new int[capacity];
         front = 0;
         rear = -1;
         size = 0;
     }
-
     public boolean isEmpty() {
         return size == 0;
     }
-
     public boolean isFull() {
         return size == queue.length;
     }
-
     public void enqueue(int data) {
         if (isFull()) {
             throw new IllegalStateException("Queue is full");
@@ -27,7 +23,6 @@ public class LinearQueue {
         queue[rear] = data;
         size++;
     }
-
     public int dequeue() {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
@@ -37,18 +32,15 @@ public class LinearQueue {
         size--;
         return data;
     }
-
     public int peek() {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
         return queue[front];
     }
-
     public int getSize() {
         return size;
     }
-
     public static void main(String[] args) {
         LinearQueue queue = new LinearQueue(5);
         queue.enqueue(10);
