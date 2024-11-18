@@ -1,5 +1,5 @@
-// useWords.js
 import { useCallback, useEffect, useState } from 'react';
+
 const useWords = () => {
   const [lines, setLines] = useState([]);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
@@ -7,12 +7,16 @@ const useWords = () => {
   useEffect(() => {
     const fetchCodeText = async () => {
       try {
-        const response = await fetch('/challengeFile/code.txt');
+        const dayOfWeek = new Date().getDay();
+        const fileName = `/challengeFile/code${
+          dayOfWeek === 0 ? 6 : dayOfWeek - 1
+        }.txt`;
+        const response = await fetch(fileName);
         const text = await response.text();
         const codeLines = text.split('\n').map((line) => line.trim()); // 공백 제거
         setLines(codeLines);
       } catch (error) {
-        console.error('Error fetching code.txt:', error);
+        console.error('Error fetching code file:', error);
         setLines([]);
       }
     };
