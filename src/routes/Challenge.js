@@ -20,22 +20,32 @@ const Challenge = () => {
   } = useEngine();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showToast, setShowToast] = useState(true); // Control toast visibility
 
   useEffect(() => {
-    // 게임이 끝나면 모달을 표시
+    // Hide the toast after 3 seconds
+    const timer = setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+
+    return () => clearTimeout(timer); // Cleanup timeout
+  }, []);
+
+  useEffect(() => {
+    // Show modal when the game ends
     if (state === 'finish') {
       setIsModalOpen(true);
     }
   }, [state]);
 
   const closeModal = () => {
-    setIsModalOpen(false); // 모달 닫기
+    setIsModalOpen(false); // Close the modal
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[35vh] ">
-      <br></br>
-      <br></br>
+      <br />
+      <br />
       <CountdownTimer timeLeft={timeLeft} />
       <WordsContainer>
         <div className="w-full max-w-4xl">
@@ -57,7 +67,13 @@ const Challenge = () => {
         className={'mx-auto mt-10 text-slate-500'}
         onRestart={restart}
       />
-      {/* 모달을 isModalOpen 상태로 제어 */}
+      {/* Toast message */}
+      {showToast && (
+        <div className="mt-2 p-2 font-sans font-bold text-yellow-500 rounded shadow">
+          타이핑시 챌린지가 시작됩니다.
+        </div>
+      )}
+      {/* Modal controlled by isModalOpen */}
       {isModalOpen && (
         <Results
           className="mt-10 text-yellow-500"
