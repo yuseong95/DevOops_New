@@ -1,5 +1,3 @@
-// src/components/CommentItem.js
-
 import React from "react";
 import timeAgo from "../utils/timeAgo";
 import "./css/CommentItem.css";
@@ -15,10 +13,10 @@ const CommentItem = ({
     e.preventDefault(); // 기본 제출 방지
     if (replyComment[parentCommentId]?.trim()) {
       const reply = {
-        id: Date.now(), // ID
+        id: Date.now(),
         content: replyComment[parentCommentId],
-        createdAt: new Date().toISOString(), // 생성 시간
-        likes: 0, // 초기 좋아요 수
+        createdAt: new Date().toISOString(),
+        likes: 0,
       };
       setComments((prevComments) =>
         prevComments.map((comment) =>
@@ -27,7 +25,11 @@ const CommentItem = ({
             : comment
         )
       );
-      setReplyComment((prev) => ({ ...prev, [parentCommentId]: undefined })); // 입력 초기화
+      setReplyComment((prev) => {
+        const updatedReplyComment = { ...prev };
+        delete updatedReplyComment[parentCommentId];
+        return updatedReplyComment;
+      });
     }
   };
 
