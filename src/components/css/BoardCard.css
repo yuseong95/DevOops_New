@@ -52,3 +52,34 @@
   font-size: 0.9em;
   color: #777;
 }
+
+.board-card-profile {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between; /* 왼쪽, 오른쪽 요소 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  font-size: 0.9em;
+  color: #777;
+  margin-top: 10px;
+}
+
+.card-left {
+  display: flex;
+  align-items: center; /* 프로필과 텍스트 세로 정렬 */
+}
+
+.card-right {
+  display: flex;
+  gap: 10px; /* 댓글 수와 좋아요 수 간 간격 */
+}
+
+.card-dot {
+  margin: 0 8px; /* 점 양옆 간격 */
+}

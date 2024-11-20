@@ -81,7 +81,11 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
           삭제
         </button>
       )}
-      <LikeSection loggedInUser={loggedInUser} postId={post.id} />
+      <LikeSection
+        loggedInUser={loggedInUser}
+        postId={post.id}
+        setPosts={setPosts}
+      />
       <CommentSection
         postId={post.id}
         comments={comments}

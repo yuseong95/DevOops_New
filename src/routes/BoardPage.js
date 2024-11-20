@@ -3,11 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BoardCard from "../components/BoardCard";
 import SubmitButton from "../components/SubmitButton";
 import Pagination from "../components/Pagination";
+import dummyUsers from "../data/dummyUsers";
 import "./css/BoardPage.css";
 
 const ITEMS_PER_PAGE = 12;
 
-const BoardPage = ({ posts, boardType, setPosts }) => {
+const BoardPage = ({ posts, comments, likes, boardType, setPosts }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,15 +16,43 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
   const initialPage = parseInt(query.get("page")) || 1;
 
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [showModal, setShowModal] = useState(false); // 모달 표시 상태
+  const [showModal, setShowModal] = useState(false);
 
-  const filteredPosts = posts
-    .filter((post) => post.boardType === boardType) // 선택된 게시판 필터링
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // 작성 날짜 기준으로 정렬
+  const enrichedPosts = posts.map((post) => {
+    const authorData = dummyUsers.find((user) => user.name === post.author);
+
+    const savedComments = localStorage.getItem(`comments-${post.id}`);
+    let commentCount = 0;
+    if (savedComments) {
+      try {
+        const parsedComments = JSON.parse(savedComments);
+        commentCount = parsedComments.reduce((count, comment) => {
+          return count + 1 + (comment.replies ? comment.replies.length : 0);
+        }, 0);
+      } catch (error) {
+        console.error("Error parsing comments:", error);
+      }
+    }
+
+    const storedLikes = localStorage.getItem(`likes_${post.id}`);
+    const likeCount = storedLikes ? Number(storedLikes) : post.likeCount || 0;
+
+    return {
+      ...post,
+      authorProfile:
+        authorData?.profileImage || "https://via.placeholder.com/32",
+      commentCount,
+      likeCount,
+    };
+  });
+
+  const filteredPosts = enrichedPosts
+    .filter((post) => post.boardType === boardType)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const indexOfLastPost = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost); // 현재 페이지에 해당하는 게시글
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE);
 
   useEffect(() => {
@@ -39,16 +68,14 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
     if (loggedInUser) {
-      console.log("글쓰기 페이지로 이동");
       navigate("/board/create");
     } else {
-      // 모달 표시
       setShowModal(true);
     }
   };
 
   const closeModal = () => {
-    setShowModal(false); // 모달 닫기
+    setShowModal(false);
   };
 
   const placeholders = Array(ITEMS_PER_PAGE - currentPosts.length).fill(null);
@@ -70,11 +97,7 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
 
         <div className="board-container">
           {currentPosts.map((post) => (
-            <BoardCard
-              key={post.id}
-              post={post}
-              loggedInUser={JSON.parse(localStorage.getItem("loggedInUser"))}
-            />
+            <BoardCard key={post.id} post={post} />
           ))}
           {placeholders.map((_, index) => (
             <div
@@ -91,7 +114,6 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
         />
       </div>
 
-      {/* 로그인 필요 모달 */}
       {showModal && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
