@@ -1,16 +1,12 @@
-/* src/routes/css/BoardPage.css */
-
 .board-content-wrapper {
-  max-width: 1300px;
+  max-width: 1200px; /* 전체 너비 */
   margin: 0 auto;
   padding: 20px;
-  background-color: #f7f7f7;
+  background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  min-height: 1000px; /* 고정된 최소 높이 설정 */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  min-height: 1000px;
+  position: relative; /* hover 시 효과 영역을 조정하기 위해 추가 */
 }
 
 .board-header {
@@ -22,19 +18,20 @@
 
 .board-header h2 {
   margin: 0;
-  font-size: 1.5em;
+  font-size: 1.8em; /* 큰 제목 크기 */
   color: #333;
 }
 
 .board-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개의 카드 */
-  gap: 25px;
+  grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개 */
+  gap: 20px; /* 카드 간 간격 */
+  width: 100%; /* 전체 폭 */
 }
 
 .board-card.placeholder {
   visibility: hidden;
-  height: 200px; /* 실제 카드와 동일한 높이 설정 */
+  height: 250px; /* 카드 높이와 동일 */
 }
 
 .pagination {
