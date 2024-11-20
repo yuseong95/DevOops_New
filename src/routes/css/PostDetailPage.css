@@ -66,3 +66,23 @@
 .delete-button:hover {
   background-color: #e60000;
 }
+
+.post-actions {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  margin-top: 10px; /* 콘텐츠와의 간격 */
+  margin-bottom: 20px; /* 댓글과의 간격 */
+}
+.delete-button {
+  padding: 8px 16px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #ff4d4d;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.delete-button:hover {
+  background-color: #e63939;
+}

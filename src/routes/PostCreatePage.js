@@ -9,7 +9,8 @@ const PostCreatePage = ({ addPost }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [boardType, setBoardType] = useState("free");
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); // 취소 확인 모달
+  const [showTitleModal, setShowTitleModal] = useState(false); // 제목 비어 있음 모달
   const navigate = useNavigate();
 
   // 로그인된 사용자 정보 가져오기
@@ -21,6 +22,13 @@ const PostCreatePage = ({ addPost }) => {
       alert("로그인이 필요합니다.");
       return;
     }
+
+    if (title.trim() === "") {
+      // 제목이 비어 있는 경우
+      setShowTitleModal(true);
+      return;
+    }
+
     if (addPost) {
       const newPost = {
         title,
@@ -48,6 +56,7 @@ const PostCreatePage = ({ addPost }) => {
 
   const closeModal = () => {
     setShowModal(false);
+    setShowTitleModal(false); // 제목 모달 닫기
   };
 
   const modules = {
@@ -109,6 +118,7 @@ const PostCreatePage = ({ addPost }) => {
         </div>
       </form>
 
+      {/* 취소 확인 모달 */}
       {showModal && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -117,6 +127,16 @@ const PostCreatePage = ({ addPost }) => {
               <button onClick={closeModal}>취소</button>
               <button onClick={confirmCancel}>확인</button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* 제목 비어 있음 모달 */}
+      {showTitleModal && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <p>제목을 입력해야 글을 작성할 수 있습니다.</p>
+            <button onClick={closeModal}>확인</button>
           </div>
         </div>
       )}

@@ -7,14 +7,16 @@ const LikeSection = ({ loggedInUser, postId }) => {
   const [showModal, setShowModal] = useState(false); // 모달 표시 상태
   const [modalMessage, setModalMessage] = useState(""); // 모달 메시지
 
-  // 좋아요 카운트 복원 (LocalStorage에서 가져오기)
+  // 좋아요 카운트 및 상태 복원
   useEffect(() => {
     const storedLikes = localStorage.getItem(`likes_${postId}`);
+    const userLikedPostsKey = `likedPosts_${loggedInUser?.id}`;
     const storedLikedPosts =
-      JSON.parse(localStorage.getItem("likedPosts")) || [];
+      JSON.parse(localStorage.getItem(userLikedPostsKey)) || [];
+
     if (storedLikes) setPostLikes(Number(storedLikes));
     setLikedPosts(storedLikedPosts);
-  }, [postId]);
+  }, [postId, loggedInUser?.id]);
 
   // 좋아요 버튼 클릭 핸들러
   const handleLikeClick = () => {
@@ -24,6 +26,8 @@ const LikeSection = ({ loggedInUser, postId }) => {
       setShowModal(true);
       return;
     }
+
+    const userLikedPostsKey = `likedPosts_${loggedInUser.id}`;
 
     if (likedPosts.includes(postId)) {
       // 이미 좋아요를 누른 경우
@@ -35,10 +39,14 @@ const LikeSection = ({ loggedInUser, postId }) => {
     // 좋아요 추가
     const newLikes = postLikes + 1;
     setPostLikes(newLikes);
+
     setLikedPosts((prevLikedPosts) => {
       const updatedLikedPosts = [...prevLikedPosts, postId];
       // LocalStorage에 저장
-      localStorage.setItem("likedPosts", JSON.stringify(updatedLikedPosts));
+      localStorage.setItem(
+        userLikedPostsKey,
+        JSON.stringify(updatedLikedPosts)
+      );
       return updatedLikedPosts;
     });
 
