@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import timeAgo from "../utils/timeAgo";
 import LikeSection from "../components/LikeSection";
 import CommentSection from "../components/CommentSection";
+import dummyUsers from "../data/dummyUsers";
 import "./css/PostDetailPage.css";
 
 const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
@@ -12,19 +13,16 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
 
   const [comments, setComments] = useState([]);
 
+  const author = post
+    ? dummyUsers.find((user) => user.id === post.authorId)
+    : null;
+
   useEffect(() => {
-    // 로컬 스토리지에서 댓글 불러오기
     if (post) {
       const savedComments = localStorage.getItem(`comments-${post.id}`);
       if (savedComments) {
         try {
           const parsedComments = JSON.parse(savedComments);
-          console.log(
-            "Loaded Comments for Post ID",
-            post.id,
-            ":",
-            parsedComments
-          );
           setComments(Array.isArray(parsedComments) ? parsedComments : []);
         } catch (error) {
           console.error("Error parsing comments from localStorage:", error);
@@ -35,9 +33,7 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
   }, [post]);
 
   useEffect(() => {
-    // 댓글 저장: comments가 변경될 때만 로컬 스토리지에 저장
     if (post && comments.length > 0) {
-      console.log("Saving Comments for Post ID", post.id, ":", comments);
       localStorage.setItem(`comments-${post.id}`, JSON.stringify(comments));
     }
   }, [comments, post]);
@@ -55,15 +51,30 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
   return (
     <div className="post-detail-page">
       <h2>{post.title}</h2>
+
+      {author && (
+        <div className="author-info">
+          <img
+            src={author.profileImage}
+            alt={`${author.name}의 프로필 사진`}
+            className="author-profile-image"
+          />
+          <div className="author-details">
+            <span className="author-name">{author.name}</span>
+            <span className="author-date">
+              {timeAgo(new Date(post.createdAt))}
+            </span>
+          </div>
+        </div>
+      )}
+
+      <hr className="post-separator" />
+
       <div className="content-wrapper">
         <div
           className="content"
           dangerouslySetInnerHTML={{ __html: post.content }}
         ></div>
-      </div>
-      <div className="date">
-        작성일: {new Date(post.createdAt).toLocaleString()} (
-        {timeAgo(new Date(post.createdAt))})
       </div>
       {loggedInUser && loggedInUser.id === post.authorId && (
         <button className="delete-button" onClick={handleDelete}>
@@ -72,7 +83,7 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
       )}
       <LikeSection loggedInUser={loggedInUser} postId={post.id} />
       <CommentSection
-        postId={post.id} // 댓글 저장/불러오기용 ID 전달
+        postId={post.id}
         comments={comments}
         setComments={setComments}
         loggedInUser={loggedInUser}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import timeAgo from "../utils/timeAgo";
+import dummyUsers from "../data/dummyUsers";
 import "./css/CommentItem.css";
 
 const CommentItem = ({
@@ -9,10 +10,11 @@ const CommentItem = ({
   setReplyComment,
   loggedInUser,
 }) => {
-  const [showModal, setShowModal] = useState(false); // 모달 상태
-  const [modalMessage, setModalMessage] = useState(""); // 모달 메시지
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
-  // 좋아요 처리 핸들러
+  const author = dummyUsers.find((user) => user.name === comment.author);
+
   const handleLike = (commentId, isReply = false, parentCommentId = null) => {
     if (!loggedInUser) {
       setModalMessage("로그인이 필요합니다. 로그인 후 좋아요를 눌러주세요.");
@@ -23,7 +25,6 @@ const CommentItem = ({
     setComments((prevComments) =>
       prevComments.map((c) => {
         if (isReply && c.id === parentCommentId) {
-          // 대댓글 처리
           const targetReply = c.replies.find((reply) => reply.id === commentId);
           if (targetReply?.likedBy?.includes(loggedInUser.id)) {
             setModalMessage("이미 좋아요한 대댓글입니다.");
@@ -43,7 +44,6 @@ const CommentItem = ({
             ),
           };
         } else if (!isReply && c.id === commentId) {
-          // 댓글 처리
           if (c.likedBy?.includes(loggedInUser.id)) {
             setModalMessage("이미 좋아요한 댓글입니다.");
             setShowModal(true);
@@ -60,7 +60,6 @@ const CommentItem = ({
     );
   };
 
-  // 모달 닫기 핸들러
   const closeModal = () => {
     setShowModal(false);
   };
@@ -98,17 +97,24 @@ const CommentItem = ({
 
   return (
     <li className="comment-item">
-      <div className="comment-content" style={{ whiteSpace: "pre-wrap" }}>
-        {comment.content}
-      </div>
-      <div className="comment-footer">
-        <div className="comment-info">
+      <div className="comment-header">
+        <img
+          src={author?.profileImage}
+          alt={author?.name || "unknown"}
+          className="comment-profile-image"
+        />
+        <div className="comment-author-info">
           <span className="comment-author">{comment.author}</span>
           <span className="comment-dot"> • </span>
           <span className="comment-date">
             {timeAgo(new Date(comment.createdAt))}
           </span>
         </div>
+      </div>
+      <div className="comment-content" style={{ whiteSpace: "pre-wrap" }}>
+        {comment.content}
+      </div>
+      <div className="comment-footer">
         <div className="comment-actions">
           <button
             className="comment-like-button"
@@ -160,18 +166,28 @@ const CommentItem = ({
       )}
       {comment.replies.length > 0 && (
         <ul className="reply-list">
-          {comment.replies.map((reply) => (
-            <li key={reply.id} className="reply-item">
-              <div className="reply-content">{reply.content}</div>
-              <div className="reply-footer">
-                <div className="reply-info">
-                  <span className="reply-author">{reply.author}</span>
-                  <span className="reply-dot"> • </span>
-                  <span className="reply-date">
-                    {timeAgo(new Date(reply.createdAt))}
-                  </span>
+          {comment.replies.map((reply) => {
+            const replyAuthor = dummyUsers.find(
+              (user) => user.name === reply.author
+            );
+            return (
+              <li key={reply.id} className="reply-item">
+                <div className="reply-header">
+                  <img
+                    src={replyAuthor?.profileImage}
+                    alt={replyAuthor?.name || "unknown"}
+                    className="reply-profile-image"
+                  />
+                  <div className="reply-author-info">
+                    <span className="reply-author">{reply.author}</span>
+                    <span className="reply-dot"> • </span>
+                    <span className="reply-date">
+                      {timeAgo(new Date(reply.createdAt))}
+                    </span>
+                  </div>
                 </div>
-                <div className="reply-actions">
+                <div className="reply-content">{reply.content}</div>
+                <div className="reply-footer">
                   <button
                     className="reply-like-button"
                     onClick={() => handleLike(reply.id, true, comment.id)}
@@ -201,9 +217,9 @@ const CommentItem = ({
                     </button>
                   )}
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
       )}
       {showModal && (
