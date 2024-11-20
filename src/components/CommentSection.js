@@ -5,10 +5,12 @@ import "./css/CommentSection.css";
 
 const ITEMS_PER_PAGE = 10;
 
-const CommentSection = ({ postId, comments, setComments }) => {
+const CommentSection = ({ postId, comments, setComments, loggedInUser }) => {
   const [newComment, setNewComment] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [replyComment, setReplyComment] = useState({});
+  const [showModal, setShowModal] = useState(false); // 모달 표시 상태
+  const [modalMessage, setModalMessage] = useState(""); // 모달 메시지
 
   const handleCommentChange = (e) => {
     const input = e.target.value;
@@ -20,6 +22,11 @@ const CommentSection = ({ postId, comments, setComments }) => {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
+    if (!loggedInUser) {
+      setModalMessage("로그인이 필요합니다. 로그인 후 댓글을 작성해주세요.");
+      setShowModal(true); // 모달 표시
+      return;
+    }
     if (newComment.trim()) {
       const comment = {
         id: Date.now(),
@@ -27,6 +34,7 @@ const CommentSection = ({ postId, comments, setComments }) => {
         createdAt: new Date().toISOString(),
         likes: 0,
         replies: [],
+        author: loggedInUser.name, // 작성자 정보 추가
       };
       const updatedComments = [...comments, comment];
       setComments(updatedComments); // 상태 업데이트
@@ -58,6 +66,8 @@ const CommentSection = ({ postId, comments, setComments }) => {
   );
   const totalPages = Math.ceil(comments.length / ITEMS_PER_PAGE);
 
+  const closeModal = () => setShowModal(false);
+
   return (
     <div className="comment-section">
       <h3>댓글 {getTotalCommentCount()}개</h3>
@@ -83,6 +93,7 @@ const CommentSection = ({ postId, comments, setComments }) => {
             setComments={setComments}
             replyComment={replyComment}
             setReplyComment={setReplyComment}
+            loggedInUser={loggedInUser}
           />
         ))}
       </ul>
@@ -92,6 +103,16 @@ const CommentSection = ({ postId, comments, setComments }) => {
           totalPages={totalPages}
           onPageChange={handlePageChange}
         />
+      )}
+
+      {/* 로그인 요구 모달 */}
+      {showModal && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <p>{modalMessage}</p>
+            <button onClick={closeModal}>확인</button>
+          </div>
+        </div>
       )}
     </div>
   );

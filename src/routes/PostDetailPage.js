@@ -75,6 +75,7 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
         postId={post.id} // 댓글 저장/불러오기용 ID 전달
         comments={comments}
         setComments={setComments}
+        loggedInUser={loggedInUser}
       />
     </div>
   );

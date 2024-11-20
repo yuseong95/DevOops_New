@@ -7,21 +7,47 @@ const CommentItem = ({
   setComments,
   replyComment,
   setReplyComment,
+  loggedInUser,
 }) => {
-  // 대댓글 제출 핸들러
+  const handleDeleteComment = (commentId) => {
+    if (window.confirm("이 댓글을 삭제하시겠습니까?")) {
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment.id !== commentId)
+      );
+    }
+  };
+
+  const handleDeleteReply = (parentCommentId, replyId) => {
+    if (window.confirm("이 대댓글을 삭제하시겠습니까?")) {
+      setComments((prevComments) =>
+        prevComments.map((comment) =>
+          comment.id === parentCommentId
+            ? {
+                ...comment,
+                replies: comment.replies.filter(
+                  (reply) => reply.id !== replyId
+                ),
+              }
+            : comment
+        )
+      );
+    }
+  };
+
   const handleReplySubmit = (e, parentCommentId) => {
-    e.preventDefault(); // 기본 제출 방지
+    e.preventDefault();
     if (replyComment[parentCommentId]?.trim()) {
       const reply = {
         id: Date.now(),
         content: replyComment[parentCommentId],
         createdAt: new Date().toISOString(),
         likes: 0,
+        author: loggedInUser?.name,
       };
       setComments((prevComments) =>
         prevComments.map((comment) =>
           comment.id === parentCommentId
-            ? { ...comment, replies: [...comment.replies, reply] } // 대댓글 추가
+            ? { ...comment, replies: [...comment.replies, reply] }
             : comment
         )
       );
@@ -33,37 +59,37 @@ const CommentItem = ({
     }
   };
 
-  // 대댓글 작성 버튼 클릭 핸들러
-  const handleReplyButtonClick = (commentId) => {
-    setReplyComment((prev) => ({
-      ...prev,
-      [commentId]: prev[commentId] === undefined ? "" : undefined, // 입력창 토글
-    }));
-  };
-
   return (
     <li className="comment-item">
-      {/* 댓글 본문 */}
       <div className="comment-content" style={{ whiteSpace: "pre-wrap" }}>
         {comment.content}
       </div>
-      {/* 댓글 하단 (작성 시간, 좋아요, 대댓글 버튼) */}
       <div className="comment-footer">
-        <span className="comment-date">
-          {timeAgo(new Date(comment.createdAt))}
-        </span>
+        <div className="comment-info">
+          <span className="comment-author">{comment.author}</span>
+          <span className="comment-dot"> • </span>
+          <span className="comment-date">
+            {timeAgo(new Date(comment.createdAt))}
+          </span>
+        </div>
         <div className="comment-actions">
           <button className="comment-like-button">❤️ {comment.likes}</button>
+          {loggedInUser?.name === comment.author && (
+            <button
+              className="comment-delete-button"
+              onClick={() => handleDeleteComment(comment.id)}
+            >
+              삭제
+            </button>
+          )}
           <button
             className="reply-button"
-            onClick={() => handleReplyButtonClick(comment.id)}
+            onClick={() => setReplyComment({ [comment.id]: "" })}
           >
             대댓글 작성
           </button>
         </div>
       </div>
-
-      {/* 대댓글 입력 폼 */}
       {replyComment[comment.id] !== undefined && (
         <form
           onSubmit={(e) => handleReplySubmit(e, comment.id)}
@@ -87,18 +113,32 @@ const CommentItem = ({
           </button>
         </form>
       )}
-
-      {/* 대댓글 목록 */}
       {comment.replies.length > 0 && (
         <ul className="reply-list">
           {comment.replies.map((reply) => (
             <li key={reply.id} className="reply-item">
               <div className="reply-content">{reply.content}</div>
               <div className="reply-footer">
-                <span className="reply-date">
-                  {timeAgo(new Date(reply.createdAt))}
-                </span>
-                <button className="reply-like-button">❤️ {reply.likes}</button>
+                <div className="reply-info">
+                  <span className="reply-author">{reply.author}</span>
+                  <span className="reply-dot"> • </span>
+                  <span className="reply-date">
+                    {timeAgo(new Date(reply.createdAt))}
+                  </span>
+                </div>
+                <div className="reply-actions">
+                  <button className="reply-like-button">
+                    ❤️ {reply.likes}
+                  </button>
+                  {loggedInUser?.name === reply.author && (
+                    <button
+                      className="reply-delete-button"
+                      onClick={() => handleDeleteReply(comment.id, reply.id)}
+                    >
+                      삭제
+                    </button>
+                  )}
+                </div>
               </div>
             </li>
           ))}
