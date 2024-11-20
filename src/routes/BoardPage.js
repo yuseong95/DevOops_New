@@ -15,6 +15,7 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
   const initialPage = parseInt(query.get("page")) || 1;
 
   const [currentPage, setCurrentPage] = useState(initialPage);
+  const [showModal, setShowModal] = useState(false); // 모달 표시 상태
 
   const filteredPosts = posts
     .filter((post) => post.boardType === boardType) // 선택된 게시판 필터링
@@ -36,19 +37,18 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
 
   const handleWriteClick = () => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    console.log("로그인된 사용자:", loggedInUser);
 
     if (loggedInUser) {
       console.log("글쓰기 페이지로 이동");
       navigate("/board/create");
     } else {
-      alert("로그인이 필요합니다. 로그인 후 이용해주세요.");
+      // 모달 표시
+      setShowModal(true);
     }
   };
 
-  // 게시글 삭제 핸들러
-  const handleDelete = (postId) => {
-    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+  const closeModal = () => {
+    setShowModal(false); // 모달 닫기
   };
 
   const placeholders = Array(ITEMS_PER_PAGE - currentPosts.length).fill(null);
@@ -74,7 +74,6 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
               key={post.id}
               post={post}
               loggedInUser={JSON.parse(localStorage.getItem("loggedInUser"))}
-              onDelete={handleDelete}
             />
           ))}
           {placeholders.map((_, index) => (
@@ -91,6 +90,16 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
           onPageChange={handlePageChange}
         />
       </div>
+
+      {/* 로그인 필요 모달 */}
+      {showModal && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <p>로그인이 필요합니다. 로그인 후 글쓰기를 이용해주세요.</p>
+            <button onClick={closeModal}>확인</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
