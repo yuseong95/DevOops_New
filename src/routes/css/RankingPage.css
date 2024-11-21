@@ -1,14 +1,35 @@
+.ranking-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px; /* 좌우 공간 간격 */
+  margin: 20px;
+}
+
+.ranking-section {
+  flex: 1; /* 화면을 절반으로 나누기 위한 설정 */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #282c34;
+}
+
+.ranking-section h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
 .ranking-list {
   list-style-type: none;
   padding: 0;
 }
 
 .ranking-list li {
-  margin: 8px 0;
-  font-size: 1.2rem;
+  padding: 5px 0;
 }
 
-.ranking-list li.highlight {
-  color: gold;
+.highlight {
   font-weight: bold;
+  color: #dfe53f;
 }
