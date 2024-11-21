@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Results from '../components/Results';
 import UserTypings from '../components/UserTypings';
 import useEngine from '../hooks/useEngine';
+import TypingGameRanking from '../components/TypingGameRank';
 
 const Challenge = () => {
   const {
@@ -84,6 +85,10 @@ const Challenge = () => {
           타이핑시 챌린지가 시작됩니다.
         </div>
       )}
+
+      <br></br>
+      <br></br>
+      <TypingGameRanking />
       {/* Modal controlled by isModalOpen */}
       {isModalOpen && (
         <Results
