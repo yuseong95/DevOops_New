@@ -1,20 +1,35 @@
 import dummyUsers from "../data/dummyUsers";
-
 const initiState = {
   users: dummyUsers.map((user) => ({
     ...user,
     errorGameScore: -1,
+    typingGameScore: -1,
   })),
 };
 
 const userReducer = (state = initiState, action) => {
   switch (action.type) {
-    case "UPDATE_ERRORGAME_SCORE": // 오류찾기 점수 업데이트
+    case "UPDATE_ERRORGAME_SCORE":
       return {
         ...state,
         users: state.users.map((user) =>
           user.id === action.payload.userId
-            ? { ...user, errorGameScore: action.payload.score }
+            ? {
+                ...user,
+                typingGameScore: action.payload.typingGameScore,
+              }
+            : user
+        ),
+      };
+    case "UPDATE_Typing_Game_SCORE":
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.userId
+            ? {
+                ...user,
+                typingGameScore: action.payload.typingGameScore,
+              }
             : user
         ),
       };
@@ -24,6 +39,7 @@ const userReducer = (state = initiState, action) => {
         users: state.users.map((user) => ({
           ...user,
           errorGameScore: -1,
+          typingGameScore: -1,
         })),
       };
     case "SYNC_USERS":

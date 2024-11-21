@@ -2,7 +2,7 @@ import React from "react";
 import "../css/ErrorGameResult.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { updateScore } from "../../redux/userActions";
+import { updateErrorGameScore } from "../../redux/userActions";
 
 const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const ErrorGameResult = ({ count, onShowExplanation, runningTime }) => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser")); // 현재 로그인된 사용자 정보
 
     if (loggedInUser) {
-      dispatch(updateScore(loggedInUser.id, finalScore)); // Redux 액션 호출
+      dispatch(updateErrorGameScore(loggedInUser.id, finalScore)); // Redux 액션 호출
       //console.log(finalScore);
     } else {
       console.error("로그인된 사용자 정보를 찾을 수 없습니다.");

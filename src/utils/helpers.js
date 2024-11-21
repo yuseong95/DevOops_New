@@ -19,13 +19,14 @@ export const countErrors = ({ actual, expected }) => {
 export const calcutateScore = ({ errors, total }) => {
   if (total > 0) {
     const corrects = total - errors;
-    if (total - errors < 0) return 0;
-    return (
-      total * (corrects / total) * (corrects / total) * (corrects / total) * 50
-    );
+    if (corrects < 0) return 0; // 오타 수정
+    const score =
+      total * (corrects / total) * (corrects / total) * (corrects / total) * 50;
+    return parseFloat(score.toFixed(2)); // 소수점 2자리로 반올림
   }
   return 0;
 };
+
 export const calculateAccuracyPercentage = ({ errors, total }) => {
   if (total > 0) {
     const corrects = total - errors;
