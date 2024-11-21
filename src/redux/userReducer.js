@@ -16,7 +16,7 @@ const userReducer = (state = initiState, action) => {
           user.id === action.payload.userId
             ? {
                 ...user,
-                typingGameScore: action.payload.typingGameScore,
+                errorGameScore: action.payload.score,
               }
             : user
         ),
