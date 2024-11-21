@@ -14,10 +14,11 @@ import ErrorGame from "./routes/ErrorGame";
 import RankingPage from "./routes/RankingPage";
 import Promotion from "./routes/Promotion";
 
+
 function App() {
   return (
     <UserProvider>
-      {" "}
+      {' '}
       {/* UserProvider로 App 전체를 감싸 context가 적용 */}
       <Header />
       <Routes>

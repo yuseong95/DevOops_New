@@ -4,7 +4,8 @@ import { IoCloseCircle } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { updateTypingGameScore } from '../redux/userActions'; // Redux 액션 가져오기
-
+import { useNavigate } from 'react-router-dom';
+import { PiRankingBold } from 'react-icons/pi';
 const Results = ({
   state,
   errors,
@@ -16,7 +17,7 @@ const Results = ({
 }) => {
   const dispatch = useDispatch(); // Redux dispatch 가져오기
   const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')); // 현재 로그인된 사용자 정보
-
+  const navigate = useNavigate();
   // 상태가 'finish'인 경우 점수 저장
   useEffect(() => {
     if (state === 'finish' && loggedInUser.id) {
@@ -58,13 +59,19 @@ const Results = ({
             Score: {formatScore({ score: calScore })}
           </li>
         </ul>
-
         <div className="flex justify-center mt-6">
-          <IoCloseCircle
-            onClick={onClose}
-            className="text-red-500 hover:text-red-700 cursor-pointer"
-            size={50}
-          />
+          <div className="flex items-center space-x-4">
+            <PiRankingBold
+              onClick={() => navigate('/ranking')}
+              className="text-yellow-400 hover:text-yellow-500 cursor-pointer"
+              size={50}
+            />
+            <IoCloseCircle
+              onClick={onClose}
+              className="text-red-500 hover:text-red-700 cursor-pointer"
+              size={50}
+            />
+          </div>
         </div>
       </motion.div>
     </div>
