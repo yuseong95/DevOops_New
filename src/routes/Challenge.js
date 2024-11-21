@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GeneratedWords from '../components/GeneratedWords';
 import RestartButton from '../components/RestartButton';
+import { useNavigate } from 'react-router-dom';
 import Results from '../components/Results';
 import UserTypings from '../components/UserTypings';
 import useEngine from '../hooks/useEngine';
@@ -21,7 +22,7 @@ const Challenge = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showToast, setShowToast] = useState(true); // Control toast visibility
-
+  const navigate = useNavigate();
   useEffect(() => {
     // Hide the toast after 3 seconds
     const timer = setTimeout(() => {
@@ -42,6 +43,16 @@ const Challenge = () => {
     setIsModalOpen(false); // Close the modal
   };
 
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
+    // 비로그인 상태라면 로그인 페이지로 이동
+    if (!loggedInUser) {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+      return;
+    }
+  });
   return (
     <div className="flex flex-col items-center justify-center min-h-[35vh] ">
       <br />
