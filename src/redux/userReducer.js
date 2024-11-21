@@ -9,7 +9,7 @@ const initiState = {
 
 const userReducer = (state = initiState, action) => {
   switch (action.type) {
-    case "UPDATE_SCORE":
+    case "UPDATE_ERRORGAME_SCORE": // 오류찾기 점수 업데이트
       return {
         ...state,
         users: state.users.map((user) =>

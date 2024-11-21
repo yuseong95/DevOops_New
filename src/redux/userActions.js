@@ -1,10 +1,10 @@
-export const UPDATE_SCORE = "UPDATE_SCORE";
+export const UPDATE_ERRORGAME_SCORE = "UPDATE_ERRORGAME_SCORE";
 export const RESET_SCORES = "RESET_SCORES";
 export const SYNC_USERS = "SYNC_USERS";
 
-// 점수 업데이트
-export const updateScore = (userId, score) => ({
-  type: UPDATE_SCORE,
+// 오류찾기 점수 업데이트
+export const updateErrorGameScore = (userId, score) => ({
+  type: UPDATE_ERRORGAME_SCORE,
   payload: { userId, score },
 });
 
