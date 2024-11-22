@@ -104,3 +104,21 @@
 .modal button:hover {
   background-color: #0000cc;
 }
+
+.board-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.board-title-container h2 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #333;
+}
+
+.board-subtitle {
+  margin: 5px 0 0;
+  font-size: 1.1em;
+  color: #555;
+}

@@ -84,7 +84,14 @@ const BoardPage = ({ posts, comments, likes, boardType, setPosts }) => {
     <div className="board-page">
       <div className="board-content-wrapper">
         <div className="board-header">
-          <h2>{boardType === "free" ? "자유 게시판" : "팀원 모집 게시판"}</h2>
+          <div className="board-title-container">
+            <h2>{boardType === "free" ? "자유 게시판" : "팀원 모집 게시판"}</h2>
+            <p className="board-subtitle">
+              {boardType === "free"
+                ? "DevOops에서 하고 싶은 이야기를 마음껏 해봐요!"
+                : "DevOops에서 함께 할 팀원을 구해보세요!"}
+            </p>
+          </div>
           <SubmitButton
             label="글쓰기"
             backgroundColor="#3333ff"
