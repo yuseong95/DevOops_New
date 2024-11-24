@@ -2,6 +2,7 @@ export const UPDATE_ERRORGAME_SCORE = "UPDATE_ERRORGAME_SCORE";
 export const UPDATE_Typing_Game_SCORE = "UPDATE_Typing_Game_SCORE";
 export const RESET_SCORES = "RESET_SCORES";
 export const SYNC_USERS = "SYNC_USERS";
+export const UPDATE_BADGES = "UPDATE_BADGES";
 
 // 오류찾기 점수 업데이트
 export const updateErrorGameScore = (userId, score) => ({
@@ -24,4 +25,15 @@ export const resetScores = () => ({
 export const syncUsers = (users) => ({
   type: SYNC_USERS,
   payload: users,
+});
+
+// 랭킹별 뱃지 업데이트
+export const updateBadges = (badgePayload) => ({
+  type: UPDATE_BADGES,
+  payload: badgePayload,
+});
+
+// 모든 뱃지 초기화
+export const resetBadges = () => ({
+  type: "RESET_BADGES",
 });

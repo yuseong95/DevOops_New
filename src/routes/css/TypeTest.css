@@ -6,15 +6,16 @@
   align-items: center;
   height: 100vh; /* 화면 전체 높이 */
   background-image: url("../../images/background-test.png");
-  background-size: cover; /* 이미지를 상자 크기에 맞게 채움 */
-  background-position: center; /* 이미지를 중앙에 위치 */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 /* 중앙 박스 */
 .center-box {
-  margin-top: 120px;
-  width: 1200px;
-  height: 800px;
+  margin-top: 6%;
+  width: 65%;
+  height: 80%;
   background-color: rgba(0, 0, 0, 0.5);
   border: 3px solid rgb(255, 215, 0);
   padding: 20px 40px;

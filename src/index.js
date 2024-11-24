@@ -8,11 +8,13 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { resetBadges } from "./redux/userActions";
 import { initializeState } from "./utils/initializeState";
 import { resetScoresMidnight } from "./utils/resetScoresMidnight";
 
 initializeState(); // 시작 시 Redux 동기화
 resetScoresMidnight(); // 자정에 점수 초기화
+//store.dispatch(resetBadges()); // 뱃지 초기화 -> 무한루프 걸려서 만들어둠
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

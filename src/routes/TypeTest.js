@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./css/Promotion.css"; // CSS 파일 분리
+import "./css/TypeTest.css"; // CSS 파일 분리
 
-const Promotion = () => {
+const TypeTest = () => {
   const [isStart, setIsStart] = useState(true); // start-box 표시
 
   const handleStartClick = () => {
@@ -33,4 +33,4 @@ const Promotion = () => {
   );
 };
 
-export default Promotion;
+export default TypeTest;
