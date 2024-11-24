@@ -1,3 +1,4 @@
+// BoardCard.js
 import React from "react";
 import { Link } from "react-router-dom";
 import "./css/BoardCard.css";
@@ -6,12 +7,11 @@ import timeAgo from "../utils/timeAgo";
 const stripImagesFromHTML = (html) => {
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html;
-
   const images = tempDiv.querySelectorAll("img");
   images.forEach((img) => img.remove());
-
   return tempDiv.textContent || tempDiv.innerText || "";
 };
+
 const BoardCard = ({ post }) => {
   const cleanContent = stripImagesFromHTML(post.content);
 
@@ -33,8 +33,8 @@ const BoardCard = ({ post }) => {
               <span>{timeAgo(new Date(post.createdAt))}</span>
             </div>
             <div className="card-right">
-              <span className="comment-count">💬 {post.commentCount}</span>
-              <span className="like-count">❤️ {post.likeCount}</span>
+              <span className="comment-count">💬 {post.commentCount || 0}</span>
+              <span className="like-count">❤️ {post.likeCount || 0}</span>
             </div>
           </div>
         </div>

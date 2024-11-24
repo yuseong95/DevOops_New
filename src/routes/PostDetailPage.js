@@ -1,3 +1,4 @@
+// PostDetailPage.js
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import timeAgo from "../utils/timeAgo";
@@ -9,21 +10,19 @@ import "./css/PostDetailPage.css";
 const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const post = posts.find((p) => p.id === Number(id) || String(p.id) === id);
+  const post = posts.find((p) => p.id === Number(id));
 
   const [comments, setComments] = useState([]);
 
-  const author = post
-    ? dummyUsers.find((user) => user.id === post.authorId)
-    : null;
+  // 작성자 정보 매핑
+  const author = post && dummyUsers.find((user) => user.id === post.authorId);
 
   useEffect(() => {
     if (post) {
       const savedComments = localStorage.getItem(`comments-${post.id}`);
       if (savedComments) {
         try {
-          const parsedComments = JSON.parse(savedComments);
-          setComments(Array.isArray(parsedComments) ? parsedComments : []);
+          setComments(JSON.parse(savedComments));
         } catch (error) {
           console.error("Error parsing comments from localStorage:", error);
           setComments([]);
@@ -76,11 +75,13 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
           dangerouslySetInnerHTML={{ __html: post.content }}
         ></div>
       </div>
-      {loggedInUser && loggedInUser.id === post.authorId && (
+
+      {loggedInUser?.id === post.authorId && (
         <button className="delete-button" onClick={handleDelete}>
           삭제
         </button>
       )}
+
       <LikeSection
         loggedInUser={loggedInUser}
         postId={post.id}

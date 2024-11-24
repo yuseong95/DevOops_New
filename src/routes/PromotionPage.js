@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PromotionCard from "../components/PromotionCard";
 import CodeChallengeEvent from "../images/CodeChallengEvent.png";
 import FindError from "../images/FindError.png";
+import wrtn from "../images/wrtn.png";
 import "./css/PromotionPage.css";
 
 const dummyPromotions = [
@@ -32,20 +33,19 @@ const dummyPromotions = [
   {
     id: 3,
     type: "sponsor", // 스폰서 광고
-    title: "클라우드 백엔드 데브코스",
-    subtitle: "AWS와 함께하는 백엔드 마스터",
-    thumbnail:
-      "https://grepp-programmers.s3.amazonaws.com/production/file_resource/7527/Dev_Thumnail_Web_Full_Stack_4th.png",
-    description: "AWS와 함께 클라우드 기반의 백엔드 기술을 배우는 최고의 기회!",
+    title: "당신의 첫 AI 에이전트 뤼튼",
+    subtitle: "AI 검색부터 나만의 AI 캐릭터까지,",
+    thumbnail: wrtn,
+    description: "AI의 끝없는 가능성을 탐험해 보세요.",
     status: "스폰서 광고",
     daysLeft: null, // 기한 없음
     tag: "스폰서",
-    price: "유료",
+    price: "무료",
   },
 ];
 
 const PromotionPage = () => {
-  const [promotions, setPromotions] = useState(dummyPromotions);
+  const [promotions] = useState(dummyPromotions);
 
   return (
     <div className="promotion-page">

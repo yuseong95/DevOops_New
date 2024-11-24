@@ -42,6 +42,7 @@ const Home = () => {
             <h2>오늘의 챌린지</h2>
           </div>
         </Link>
+        y
         <Link to="/findError" className="card-link">
           <div className="card">
             <img src={sampleImage} alt="오류 찾기" className="card-image" />
@@ -56,7 +57,7 @@ const Home = () => {
             <h2>게시판</h2>
           </div>
         </Link>
-        <Link to="/recruiting" className="card-link">
+        <Link to="/board/team" className="card-link">
           <div className="card">
             <img src={sampleImage} alt="팀원 모집" className="card-image" />
             <h2>팀원 모집</h2>
