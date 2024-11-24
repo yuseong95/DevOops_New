@@ -5,7 +5,7 @@ import { resetScores } from "../redux/userActions";
 
 export const resetScoresMidnight = () => {
   const now = new Date();
-  const midnight = new Date().setHours(16, 27, 0, 0);
+  const midnight = new Date().setHours(24, 0, 0, 0);
 
   const remainTime = midnight - now; // 자정까지 남은 시간
 

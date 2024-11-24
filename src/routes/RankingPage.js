@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "./css/RankingPage.css"; // 스타일링 파일
-import { getSortedUsers, getUserRankAndScore } from "../utils/rankingBadge";
+import { getSortedUsers, getUserRankAndScore } from "../utils/sortRanking";
 
 const RankingPage = () => {
   const users = useSelector((state) => state.users);
@@ -11,11 +11,11 @@ const RankingPage = () => {
   const sortedErrorGameUsers = getSortedUsers(users, "errorGameScore");
   const sortedTypingGameUsers = getSortedUsers(users, "typingGameScore");
 
-  // 현재 로그인한 사용자의 랭킹과 점수 찾기 (오류찾기)
+  // 현재 로그인한 사용자의 랭킹과 점수 찾기
   const { rank: currentErrorGameRank, score: currentErrorGameScore } =
-    getUserRankAndScore(sortedErrorGameUsers, currentUser?.id);
+    getUserRankAndScore(sortedErrorGameUsers, currentUser?.id); // 오류찾기
   const { rank: currentTypingGameRank, score: currentTypingGameScore } =
-    getUserRankAndScore(sortedTypingGameUsers, currentUser?.id);
+    getUserRankAndScore(sortedTypingGameUsers, currentUser?.id); // 타이핑
 
   return (
     <div className="ranking-page">
