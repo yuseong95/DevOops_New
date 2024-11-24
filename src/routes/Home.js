@@ -42,7 +42,6 @@ const Home = () => {
             <h2>오늘의 챌린지</h2>
           </div>
         </Link>
-        y
         <Link to="/findError" className="card-link">
           <div className="card">
             <img src={sampleImage} alt="오류 찾기" className="card-image" />
