@@ -13,6 +13,7 @@ import BoardRoutes from "./routes/BoardRoutes"; // 게시판 관련 경로
 import ErrorGame from "./routes/ErrorGame";
 import RankingPage from "./routes/RankingPage";
 import TypeTest from "./routes/TypeTest";
+import PromotionPage from "./routes/PromotionPage";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         <Route path="/findError" element={<ErrorGame />} />
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/typetest" element={<TypeTest />} />
+        <Route path="/promotion" element={<PromotionPage />} />
+
       </Routes>
     </UserProvider>
   );

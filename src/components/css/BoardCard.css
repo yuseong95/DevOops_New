@@ -1,54 +1,85 @@
-/* src/components/css/BoardCard.css */
-
 .board-card-link {
   text-decoration: none;
   color: inherit;
 }
 
 .board-card-wrapper {
-  width: 280px; /* 카드의 고정 너비 */
-  min-height: 250px; /* 최소 높이 설정 */
-  overflow: visible; /* 내용이 넘치지 않도록 설정 */
+  width: 100%; /* 부모 컨테이너에 맞춤 */
+  overflow: hidden; /* 내용 넘침 방지 */
 }
 
 .board-card {
-  background-color: #f5f5ff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s ease;
-  width: 240px;
-  height: 190px;
+  background-color: #ffffff;
+  border: 1px solid #ddd; /* 기본 테두리 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+  height: 250px; /* 카드 높이 조정 */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: hidden;
+  transform: scale(0.9); /* 기본 크기를 90%로 설정 */
 }
 
 .board-card:hover {
-  transform: scale(1.05);
-  border: 2px solid #3333ff;
+  transform: scale(1); /* hover 시 원래 크기 */
+  border: 2px solid #3333ff; /* hover 시 보라색 테두리 */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* hover 시 그림자 강조 */
+  z-index: 2; /* hover 시 다른 카드 위로 올라옴 */
 }
 
 .board-card h3 {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.board-card .card-footer {
+  font-size: 1.5em; /* 제목 크기 증가 */
+  margin-bottom: 15px;
   color: #333;
 }
 
 .board-card p {
+  font-size: 0.95em;
+  color: #555;
   display: -webkit-box;
-  display: box; /* 표준 속성 추가 */
-  -webkit-line-clamp: 3; /* 원하는 줄 수 */
-  line-clamp: 3; /* 표준 속성 추가 */
+  display: flex; /* 표준 속성 추가 */
+  -webkit-line-clamp: 3; /* 최대 3줄 표시 */
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   box-orient: vertical; /* 표준 속성 추가 */
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #333;
+}
+
+.board-card .card-footer {
+  font-size: 0.9em;
+  color: #777;
+}
+
+.board-card-profile {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between; /* 왼쪽, 오른쪽 요소 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  font-size: 0.9em;
+  color: #777;
+  margin-top: 10px;
+}
+
+.card-left {
+  display: flex;
+  align-items: center; /* 프로필과 텍스트 세로 정렬 */
+}
+
+.card-right {
+  display: flex;
+  gap: 10px; /* 댓글 수와 좋아요 수 간 간격 */
+}
+
+.card-dot {
+  margin: 0 8px; /* 점 양옆 간격 */
 }

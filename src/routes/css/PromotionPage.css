@@ -1,0 +1,94 @@
+.promotion-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.promotion-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.promotion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 카드 간격 */
+}
+
+.promotion-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.promotion-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 썸네일 영역 */
+.card-thumbnail {
+  flex: 1; /* 4분의 1 너비를 차지 */
+  max-width: 25%; /* 카드 전체의 25% */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-thumbnail img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* 정보 영역 */
+.card-info {
+  flex: 3; /* 나머지 75%를 차지 */
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1.5em;
+  margin: 0;
+  color: #333;
+}
+
+.card-subtitle {
+  font-size: 1.2em;
+  color: #555;
+  margin: 5px 0;
+}
+
+.card-description {
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.card-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-badge {
+  background: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.days-left {
+  font-size: 0.9em;
+  color: #888;
+}

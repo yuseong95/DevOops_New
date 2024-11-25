@@ -1,4 +1,6 @@
-.comment-item {
+/* 댓글 및 대댓글 공통 스타일 */
+.comment-item,
+.reply-item {
   padding: 10px;
   border-bottom: 1px solid #eee;
   display: flex;
@@ -6,53 +8,101 @@
   gap: 5px;
 }
 
-.comment-footer {
+/* 댓글 작성자 및 작성 시간 */
+.comment-header,
+.reply-header {
   display: flex;
-  justify-content: space-between; /* 좌우 정렬 */
   align-items: center;
+  margin-bottom: 5px;
 }
 
-.comment-date {
+.comment-profile-image,
+.reply-profile-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.comment-author,
+.reply-author {
+  font-weight: bold;
+  color: #333;
+}
+
+.comment-date,
+.reply-date {
   font-size: 0.85em;
   color: #888;
 }
 
-.comment-actions {
-  display: flex;
-  gap: 10px; /* 버튼 간격 */
+/* 댓글 내용 */
+.comment-content,
+.reply-content {
+  margin: 5px 0;
+  color: #000;
 }
 
-.comment-like-button {
+.reply-footer {
+  display: flex;
+  justify-content: flex-end; /* 모든 요소를 오른쪽으로 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  gap: 10px; /* 버튼 간 간격 */
+}
+
+.comment-actions,
+.reply-actions {
+  display: flex;
+  gap: 10px; /* 버튼 간 간격 */
+  justify-content: flex-end; /* 버튼을 오른쪽 정렬 */
+}
+
+/* 댓글 및 대댓글 좋아요 버튼 */
+.comment-like-button,
+.reply-like-button {
   background: none;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: none;
   color: #ff4d4d;
   cursor: pointer;
-  font-size: 0.9em;
-  padding: 5px 10px;
-  transition: color 0.3s, border-color 0.3s;
+  font-size: 0.85em;
+  padding: 5px;
 }
 
-.comment-like-button:hover {
+.comment-like-button:hover,
+.reply-like-button:hover {
   color: #ff3333;
-  border-color: #ff3333;
 }
 
+/* 댓글 삭제 버튼 스타일 */
+.comment-delete-button,
+.reply-delete-button {
+  background-color: transparent;
+  color: #ff4d4d;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85em;
+}
+
+.comment-delete-button:hover,
+.reply-delete-button:hover {
+  color: #ff3333;
+}
+
+/* 대댓글 작성 버튼 */
 .reply-button {
   background-color: transparent;
   border: none;
   color: #007bff;
   cursor: pointer;
-  font-size: 0.9em;
-  padding: 5px;
-  border-radius: 6px;
-  transition: color 0.3s;
+  font-size: 0.85em;
 }
 
 .reply-button:hover {
   color: #0056b3;
 }
 
+/* 대댓글 입력 폼 */
 .reply-form {
   display: flex;
   gap: 10px;
@@ -87,6 +137,7 @@
   background-color: #0056b3;
 }
 
+/* 대댓글 리스트 */
 .reply-list {
   list-style: none;
   padding-left: 20px;
@@ -97,11 +148,4 @@
   border-left: 2px solid #ddd;
   margin-top: 5px;
   padding-left: 10px;
-}
-
-.reply-footer {
-  font-size: 0.8em;
-  color: #888;
-  display: flex;
-  justify-content: space-between;
 }
