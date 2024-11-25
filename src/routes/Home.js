@@ -69,7 +69,7 @@ const Home = () => {
             <h2>게시판</h2>
           </div>
         </Link>
-        <Link to="/recruiting" className="card-link">
+        <Link to="/board/team" className="card-link">
           <div className="card">
             <img src={team} alt="팀원 모집" className="card-image" />
             <h2>팀원 모집</h2>
