@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../context/UserContext";
+import { useSelector } from "react-redux";
 import "./css/Header.css";
 
 const Header = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const { user, logoutUser } = useUser();
   const navigate = useNavigate();
 
+  // Redux에서 로그인된 사용자 가져오기
+  const loggedInUser = useSelector((state) =>
+    JSON.parse(localStorage.getItem("loggedInUser"))
+  );
+
   const handleLogout = () => {
-    logoutUser();
+    localStorage.removeItem("loggedInUser"); // 로컬스토리지에서 삭제
     navigate("/login");
   };
 
@@ -48,10 +52,14 @@ const Header = () => {
         <Link to="/promotion">홍보</Link>
       </nav>
       <div className="header-user">
-        {user ? (
+        {loggedInUser ? (
           <div className="header-profile">
-            <img src={user.profileImage} alt="Profile" className="header-profile-image" />
-            <span>{user.name}님</span>
+            <img
+              src={loggedInUser.profileImage}
+              alt="Profile"
+              className="header-profile-image"
+            />
+            <span>{loggedInUser.name}님</span>
             <button onClick={handleLogout}>로그아웃</button>
           </div>
         ) : (
