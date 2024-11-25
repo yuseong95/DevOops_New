@@ -15,7 +15,7 @@ import ErrorGameTop from "../components/errorGame/ErrorGameTop";
 import ErrorGameQuiz from "../components/errorGame/ErrorGameQuiz";
 import ErrorGameInput from "../components/errorGame/ErrorGameInput";
 import ErrorGameExplanation from "../components/errorGame/ErrorGameExplanation";
-//import { syncWithDummyUsers } from "../redux/store";
+import ErrorGameRank from "../components/ErrorGameRank";
 
 const ErrorGame = () => {
   const [state, dispatchLocal] = useReducer(reducer, initState);
@@ -165,6 +165,8 @@ const ErrorGame = () => {
           runningTime={time}
         />
       )}
+
+      <ErrorGameRank />
     </div>
   );
 };

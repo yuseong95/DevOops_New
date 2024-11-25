@@ -1,59 +1,61 @@
 /* src/components/css/TypingGameRank.css */
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Tourney:ital,wght@0,100..900;1,100..900&display=swap");
 
 .typing-ranking {
   padding: 20px;
-  background-color: #282c34; /* 배경색 변경 */
+  background-color: #282c34;
   border-radius: 8px;
   width: 100%;
-  max-width: 1200px; /* 가로 폭 확장 */
+  max-width: 1200px;
   margin: 20px 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
-  font-family: 'Roboto', sans-serif; /* 글씨체 변경 */
-  color: #ffffff; /* 기본 텍스트 색상 흰색 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  font-family: "Roboto", sans-serif;
+  color: #ffffff;
 }
 
 .ranking-title {
-  margin-bottom: 20px; /* 헤더와 내용 간격 확대 */
-  color: #f1c40f; /* 헤더 텍스트 색상 변경 */
+  font-family: "Tourney", sans-serif;
+  margin-bottom: 20px; /* 헤더와 내용 간격  */
+  color: #f1c40f;
   text-align: center;
-  font-size: 3rem; /* 폰트 크기 확대 */
+  font-size: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .ranking-title svg {
-  width: 3rem; /* PiRankingBold 크기 조정 */
+  width: 3rem; /* PiRankingBold 크기 */
   height: 3rem;
 }
 
 .current-user-info {
   font-weight: bold;
-  margin-bottom: 20px; /* 내용과 리스트 간격 확대 */
+  margin-bottom: 20px; /* 내용과 리스트 간격 */
   text-align: center;
-  color: #f1c40f; /* text-yellow-500에 해당하는 색상 */
+  color: #f1c40f;
 }
 
 .ranking-list {
   list-style: none;
   padding: 0;
-  margin: 0 auto; /* 리스트를 중앙에 정렬 */
-  width: 90%; /* 리스트 폭 조정 */
+  margin: 0 auto;
+  width: 90%;
 }
 
 .ranking-list li {
-  padding: 12px 20px; /* 패딩 확대 */
-  border-bottom: 1px solid #3a3f47; /* 구분선 색상 변경 */
+  padding: 12px 20px;
+  border-bottom: 1px solid #3a3f47;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #ffffff; /* 텍스트 색상 변경 (흰색) */
+  color: #ffffff;
   font-size: 1.2rem;
 }
 
 .ranking-list li.highlight {
-  background-color: #f1c40f; /* 하이라이트 배경색 변경 */
-  color: #282c34; /* 하이라이트 텍스트 색상 변경 */
+  background-color: #f1c40f; /* 하이라이트 배경색 */
+  color: #282c34; /* 하이라이트 텍스트색 */
   border-radius: 4px;
 }
 
@@ -96,7 +98,7 @@
   }
 
   .ranking-title {
-    font-size: 2.5rem; /* 작은 화면에서 폰트 크기 조정 */
+    font-size: 2.5rem; /* 작은 화면에서 폰트 크기 */
   }
 
   .ranking-title svg {

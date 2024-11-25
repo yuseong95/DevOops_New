@@ -36,7 +36,7 @@ const TypeTest = () => {
   };
 
   return (
-    <div className="promotion-container">
+    <div className="typetest-container">
       {/* 중앙 박스 */}
       <div className="center-box">
         {isStart ? (
