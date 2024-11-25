@@ -1,5 +1,3 @@
-// src/components/CommentItem.js
-
 import React from "react";
 import timeAgo from "../utils/timeAgo";
 import "./css/CommentItem.css";

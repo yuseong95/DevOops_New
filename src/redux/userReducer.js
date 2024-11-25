@@ -1,4 +1,5 @@
-import dummyUsers from "../data/dummyUsers";
+import dummyUsers from '../data/dummyUsers';
+
 const initiState = {
   users: dummyUsers.map((user) => ({
     ...user,
@@ -9,7 +10,19 @@ const initiState = {
 
 const userReducer = (state = initiState, action) => {
   switch (action.type) {
-    case "UPDATE_ERRORGAME_SCORE":
+    case 'UPDATE_SCORE':
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.userId
+            ? {
+                ...user,
+                errorGameScore: action.payload.score,
+              }
+            : user
+        ),
+      };
+    case 'UPDATE_Typing_Game_SCORE':
       return {
         ...state,
         users: state.users.map((user) =>
@@ -21,19 +34,7 @@ const userReducer = (state = initiState, action) => {
             : user
         ),
       };
-    case "UPDATE_Typing_Game_SCORE":
-      return {
-        ...state,
-        users: state.users.map((user) =>
-          user.id === action.payload.userId
-            ? {
-                ...user,
-                typingGameScore: action.payload.typingGameScore,
-              }
-            : user
-        ),
-      };
-    case "RESET_SCORES":
+    case 'RESET_SCORES':
       return {
         ...state,
         users: state.users.map((user) => ({
@@ -42,7 +43,7 @@ const userReducer = (state = initiState, action) => {
           typingGameScore: -1,
         })),
       };
-    case "SYNC_USERS":
+    case 'SYNC_USERS':
       return {
         ...state,
         users: action.payload,
