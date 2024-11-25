@@ -1,5 +1,5 @@
 .post-detail-page {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
@@ -11,12 +11,14 @@
   color: #333;
 }
 
+/* 제목 크기 조정 및 밑줄 제거 */
 .post-detail-page h2 {
-  color: #333;
-  font-size: 2em;
-  margin-bottom: 15px;
+  font-size: 28px; /* 제목 크기 키움 */
+  font-weight: bold;
+  color: #333; /* 제목 색상 */
+  border-bottom: none; /* 밑줄 제거 */
+  margin-bottom: 10px; /* 제목과 작성자 간 간격 */
 }
-
 .content-wrapper {
   margin-bottom: 20px;
 }
@@ -65,4 +67,60 @@
 
 .delete-button:hover {
   background-color: #e60000;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  margin-top: 10px; /* 콘텐츠와의 간격 */
+  margin-bottom: 20px; /* 댓글과의 간격 */
+}
+.delete-button {
+  padding: 8px 16px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #ff4d4d;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.delete-button:hover {
+  background-color: #e63939;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* 제목과 작성자 간 간격 */
+}
+
+.author-profile-image {
+  width: 40px; /* 프로필 사진 크기 */
+  height: 40px;
+  border-radius: 50%; /* 동그란 모양 */
+  margin-right: 10px;
+  object-fit: cover; /* 이미지를 컨테이너에 맞춤 */
+}
+
+.author-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: black; /* 이름 색상 변경 */
+}
+
+.author-date {
+  color: gray;
+  font-size: 14px;
+}
+
+.post-separator {
+  margin: 15px 0; /* 위아래 간격 */
+  border: none;
+  border-top: 1px solid #ddd; /* 밑줄 스타일 */
 }

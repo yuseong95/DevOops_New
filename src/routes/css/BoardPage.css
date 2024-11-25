@@ -1,5 +1,3 @@
-/* src/routes/css/BoardPage.css */
-
 .board-content-wrapper {
   max-width: 1300px;
   margin: 0 auto;
@@ -11,6 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 20px; /* 하단 간격 추가 */
 }
 
 .board-header {
@@ -22,19 +21,20 @@
 
 .board-header h2 {
   margin: 0;
-  font-size: 1.5em;
+  font-size: 1.8em; /* 큰 제목 크기 */
   color: #333;
 }
 
 .board-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개의 카드 */
-  gap: 25px;
+  grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개 */
+  gap: 20px; /* 카드 간 간격 */
+  width: 100%; /* 전체 폭 */
 }
 
 .board-card.placeholder {
   visibility: hidden;
-  height: 200px; /* 실제 카드와 동일한 높이 설정 */
+  height: 250px; /* 카드 높이와 동일 */
 }
 
 .pagination {
@@ -63,4 +63,62 @@
 .pagination span {
   font-size: 1em;
   color: #333;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  color: #000;
+}
+
+.modal p {
+  color: #000; /* p 태그 내부의 텍스트 색상 */
+}
+
+.modal button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #3333ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #0000cc;
+}
+
+.board-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.board-title-container h2 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #333;
+}
+
+.board-subtitle {
+  margin: 5px 0 0;
+  font-size: 1.1em;
+  color: #555;
 }
