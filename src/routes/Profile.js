@@ -27,7 +27,9 @@ const Profile = () => {
       <div className="profile-header">
         <img src={user.profileImage} alt="Profile" className="profile-image" />
         <h1 className="profile-id">{user.id}</h1>
-        <button onClick={() => navigate('/profile/edit')}>정보 수정</button>
+        <button className="edit-button" onClick={() => navigate('/profile/edit')}>
+        정보 수정
+      </button>
       </div>
 
       <div className="info-sections">

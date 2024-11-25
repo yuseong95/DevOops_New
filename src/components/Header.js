@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../context/UserContext";
+import { useSelector } from "react-redux";
 import "./css/Header.css";
 
 const Header = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const { user, logoutUser } = useUser();
   const navigate = useNavigate();
 
+  // Redux에서 로그인된 사용자 가져오기
+  const loggedInUser = useSelector((state) =>
+    JSON.parse(localStorage.getItem("loggedInUser"))
+  );
+
   const handleLogout = () => {
-    logoutUser();
+    localStorage.removeItem("loggedInUser"); // 로컬스토리지에서 삭제
     navigate("/login");
+  };
+
+  const handleProfileClick = () => {
+    navigate("/profile"); // /profile로 이동
   };
 
   // 마우스가 드롭다운 영역에 들어가고 나갈 때
@@ -48,11 +56,24 @@ const Header = () => {
         <Link to="/promotion">홍보</Link>
       </nav>
       <div className="header-user">
-        {user ? (
+        {loggedInUser ? (
           <div className="header-profile">
-            <img src={user.profileImage} alt="Profile" className="header-profile-image" />
-            <span>{user.name}님</span>
-            <button onClick={handleLogout}>로그아웃</button>
+            <img
+              src={loggedInUser.profileImage}
+              alt="Profile"
+              className="header-profile-image"
+              onClick={handleProfileClick} // 클릭 시 /profile로 이동
+              style={{ cursor: "pointer" }} // 클릭 가능한 UI로 스타일 추가
+            />
+            <span
+              onClick={handleProfileClick} // 클릭 시 /profile로 이동
+              style={{ cursor: "pointer" }} // 클릭 가능한 UI로 스타일 추가
+            >
+              {loggedInUser.name}님
+            </span>
+            <button className="logout-button" onClick={handleLogout}>
+              로그아웃
+            </button>
           </div>
         ) : (
           <Link to="/login">로그인</Link>

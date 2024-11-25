@@ -10,6 +10,7 @@
   width: 100%;
   max-width: 800px;
   margin: 0 auto 20px;
+
 }
 
 .card-link {
@@ -62,6 +63,9 @@
 .card h2 {
   margin: 10px 0 5px;
   font-size: 18px;
+}
+.card:hover {
+  transform: scale(1.05); /* 호버 시 확대 효과 */
 }
 
 .card p {
