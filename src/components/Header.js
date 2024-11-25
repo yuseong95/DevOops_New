@@ -17,6 +17,10 @@ const Header = () => {
     navigate("/login");
   };
 
+  const handleProfileClick = () => {
+    navigate("/profile"); // /profile로 이동
+  };
+
   // 마우스가 드롭다운 영역에 들어가고 나갈 때
   const handleMouseEnter = () => setIsDropdownVisible(true);
   const handleMouseLeave = () => setIsDropdownVisible(false);
@@ -58,9 +62,18 @@ const Header = () => {
               src={loggedInUser.profileImage}
               alt="Profile"
               className="header-profile-image"
+              onClick={handleProfileClick} // 클릭 시 /profile로 이동
+              style={{ cursor: "pointer" }} // 클릭 가능한 UI로 스타일 추가
             />
-            <span>{loggedInUser.name}님</span>
-            <button onClick={handleLogout}>로그아웃</button>
+            <span
+              onClick={handleProfileClick} // 클릭 시 /profile로 이동
+              style={{ cursor: "pointer" }} // 클릭 가능한 UI로 스타일 추가
+            >
+              {loggedInUser.name}님
+            </span>
+            <button className="logout-button" onClick={handleLogout}>
+              로그아웃
+            </button>
           </div>
         ) : (
           <Link to="/login">로그인</Link>
