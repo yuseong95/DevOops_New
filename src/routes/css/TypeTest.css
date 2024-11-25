@@ -1,0 +1,105 @@
+/* 전체 컨테이너 */
+.promotion-container {
+  font-family: "D2coding", "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* 화면 전체 높이 */
+  background-image: url("../../images/background-test.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* 중앙 박스 */
+.center-box {
+  margin-top: 6%;
+  width: 65%;
+  height: 80%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 3px solid rgb(255, 215, 0);
+  padding: 20px 40px;
+  text-align: center;
+  color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 나는 어떤 유형의 개발자일까? 어울리는 언어 추천까지! */
+.start-title {
+  font-size: 24px;
+  margin-top: 100px;
+  margin-bottom: 180px;
+}
+
+/* START 버튼 */
+.test-start-button {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px 20px;
+  background-color: rgba(45, 45, 45, 0.8);
+  color: white;
+  border: solid 1px white;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* 질문 */
+.test-title {
+  font-size: 22px;
+}
+
+/* 선택지 A B */
+.options-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 선택지 A */
+.option-button-A {
+  width: 70%;
+  display: inline-block;
+  padding: 10px 20px; /* 버튼 내부 여백 */
+  font-size: 17px; /* 텍스트 크기 */
+  color: #a42f6a; /* 텍스트 색상 */
+  background-color: #ececec; /* 버튼 배경 색상 */
+  border: 2px solid #a42f6a; /* 버튼 테두리 색상 */
+  border-radius: 50px; /* 버튼 테두리 둥글게 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  font-weight: bold; /* 텍스트 굵기 */
+  cursor: pointer; /* 커서 모양 변경 */
+  transition: all 0.3s ease; /* 부드러운 전환 효과 */
+
+  &:hover {
+    background-color: #a42f6a; /* 호버 시 배경 색상 */
+    color: #ececec; /* 호버 시 텍스트 색상 */
+  }
+}
+
+/* 선택지 B */
+.option-button-B {
+  width: 70%;
+  display: inline-block;
+  padding: 10px 20px; /* 버튼 내부 여백 */
+  font-size: 17px; /* 텍스트 크기 */
+  color: #015907; /* 텍스트 색상 */
+  background-color: #ececec; /* 버튼 배경 색상 */
+  border: 2px solid #015907; /* 버튼 테두리 색상 */
+  border-radius: 50px; /* 버튼 테두리 둥글게 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  font-weight: bold; /* 텍스트 굵기 */
+  cursor: pointer; /* 커서 모양 변경 */
+  transition: all 0.3s ease; /* 부드러운 전환 효과 */
+
+  &:hover {
+    background-color: #015907; /* 호버 시 배경 색상 */
+    color: #ececec; /* 호버 시 텍스트 색상 */
+  }
+}
