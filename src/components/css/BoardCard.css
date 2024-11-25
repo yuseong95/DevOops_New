@@ -43,7 +43,7 @@
 
 .board-card p {
   display: -webkit-box;
-  display: box; /* 표준 속성 추가 */
+  display: flex; /* 표준 속성 추가 */
   -webkit-line-clamp: 3; /* 원하는 줄 수 */
   line-clamp: 3; /* 표준 속성 추가 */
   -webkit-box-orient: vertical;

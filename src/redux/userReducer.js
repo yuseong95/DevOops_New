@@ -1,3 +1,4 @@
+//redux/userReducer.js
 import dummyUsers from "../data/dummyUsers";
 
 const initiState = {
@@ -31,6 +32,15 @@ const userReducer = (state = initiState, action) => {
         ...state,
         users: action.payload,
       };
+      case "UPDATE_USER_INFO":
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.id
+            ? { ...user, ...action.payload.data } // 해당 사용자의 정보를 업데이트
+            : user
+        ),
+      };    
     default:
       return state;
   }

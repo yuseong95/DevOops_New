@@ -1,12 +1,19 @@
-// src/routes/ProfileEdit.js
-
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { updateUserInfo } from '../redux/userActions';
 import './css/ProfileEdit.css';
 
 const ProfileEdit = () => {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState({
+  const dispatch = useDispatch();
+  
+  // 리덕스에서 현재 로그인한 사용자 가져오기
+  const loggedInUser = useSelector((state) =>
+    state.users.find((user) => user.id === JSON.parse(localStorage.getItem('loggedInUser')).id)
+  );
+
+  const [userInfo, setUserInfo] = useState(loggedInUser || {
     id: '',
     email: '',
     password: '',
@@ -15,13 +22,10 @@ const ProfileEdit = () => {
   });
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (storedUser) {
-      setUserInfo(storedUser);
-    } else {
+    if (!loggedInUser) {
       navigate('/login');
     }
-  }, [navigate]);
+  }, [loggedInUser, navigate]);
 
   const handleChange = (field, value) => {
     setUserInfo((prev) => ({
@@ -42,7 +46,16 @@ const ProfileEdit = () => {
       return;
     }
 
+
+    // 디스패치 전에 콘솔 로그로 데이터 확인
+    console.log("Dispatching updateUserInfo with:", userInfo);  
+
+    // 리덕스 상태 업데이트
+    dispatch(updateUserInfo(userInfo.id, userInfo));
+
+    // 로컬 스토리지 업데이트
     localStorage.setItem('loggedInUser', JSON.stringify(userInfo));
+
     alert('회원 정보가 저장되었습니다.');
     navigate('/profile');
   };
