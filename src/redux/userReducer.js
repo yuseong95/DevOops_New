@@ -22,7 +22,7 @@ const userReducer = (state = initiState, action) => {
             : user
         ),
       };
-    case "UPDATE_Typing_Game_SCORE": // 타이핑게임 점수 업데이트
+    case 'UPDATE_Typing_Game_SCORE':
       return {
         ...state,
         users: state.users.map((user) =>

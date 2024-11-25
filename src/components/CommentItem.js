@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import timeAgo from "../utils/timeAgo";
 import dummyUsers from "../data/dummyUsers";
 import "./css/CommentItem.css";
