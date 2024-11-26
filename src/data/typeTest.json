@@ -62,7 +62,7 @@
       "options": {
         "A": {
           "text": "바로 실행에 옮기며 실험해본다.",
-          "scores": [3, 5, 8]
+          "scores": [3, 8]
         },
         "B": {
           "text": "메모를 해두고 나중에 검토한다.",
@@ -214,7 +214,7 @@
       "imageURL": "images/typeTest/type7.png"
     },
     "8": {
-      "name": "개척자(트렌드 세터)",
+      "name": "트렌드 세터",
       "description": "최신 기술을 탐구하며 트렌드를 선도하는 유형입니다.",
       "recommended_languages": ["Go", "Kotlin"],
       "imageURL": "images/typeTest/type8.png"

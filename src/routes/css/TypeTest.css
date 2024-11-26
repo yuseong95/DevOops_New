@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap");
+
 /* 전체 컨테이너 */
 .typetest-container {
   font-family: "D2coding", "Roboto", sans-serif;
@@ -51,11 +53,12 @@
   }
 }
 
+/* 테스트 부분 */
 .text-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%; /* (필요시 추가) */
+  width: 100%;
 }
 
 /* 질문 */
@@ -112,4 +115,33 @@
     background-color: #015907; /* 호버 시 배경 색상 */
     color: #ececec; /* 호버 시 텍스트 색상 */
   }
+}
+
+/* 결과 부분 */
+.result-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+}
+
+/* 질문 */
+.result-title {
+  font-size: 25px;
+}
+
+.result-image {
+  border-radius: 10px;
+}
+
+.result-name {
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 30px;
+  color: rgb(237, 195, 137);
+}
+
+.result-description {
+  font-size: 20px;
 }
