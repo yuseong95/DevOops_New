@@ -10,7 +10,7 @@ const initialState = {
   result: null, // 최종 결과
 };
 
-// 리듀서 함수 정의
+// 리듀서함수
 const reducer = (state, action) => {
   switch (action.type) {
     case "START_TEST": // 테스트 시작
@@ -58,7 +58,6 @@ const calculateResult = (updatedScores) => {
 };
 
 const TypeTest = () => {
-  // useReducer를 이용해 상태 관리
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
@@ -97,6 +96,10 @@ const TypeTest = () => {
         ) : (
           // 질문 화면
           <div className="test-box">
+            <div className="question-counter">
+              {/* 현재 문제 번호 표시 */}
+              {state.questionIndex + 1} / {data.questions.length}
+            </div>
             <p className="test-title">
               {data.questions[state.questionIndex].question} {/* 질문 출력 */}
             </p>
