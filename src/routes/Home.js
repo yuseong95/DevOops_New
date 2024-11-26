@@ -45,13 +45,21 @@ const Home = () => {
           >
             <img src={test} alt="Slide 2" />
           </div>
-          <div className="slider-item">
+          <div
+            className="slider-item"
+            onClick={() =>
+              window.open("https://softeerbootcamp.hyundaimotorgroup.com/")
+            }
+          >
             <img src={hyndai} alt="Slide 3" />
           </div>
           <div className="slider-item">
             <img src={hyndai2} alt="Slide 4" />
           </div>
-          <div className="slider-item">
+          <div
+            className="slider-item"
+            onClick={() => window.open("https://boostcamp.connect.or.kr/")}
+          >
             <img src={toss} alt="Slide 5" />
           </div>
         </Slider>
@@ -61,13 +69,13 @@ const Home = () => {
         <Link to="/challenge" className="card-link">
           <div className="card">
             <img src={challenge} alt="Typing Game" className="card-image" />
-            <h2>오늘의 챌린지</h2>
+            <h2>타이핑 챌린지</h2>
           </div>
         </Link>
         <Link to="/findError" className="card-link">
           <div className="card">
             <img src={error2} alt="오류 찾기" className="card-image" />
-            <h2>오류 찾기</h2>
+            <h2>오류찾기 챌린지</h2>
           </div>
         </Link>
         <Link to="/board/free" className="card-link">

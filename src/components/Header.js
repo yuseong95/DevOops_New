@@ -32,9 +32,26 @@ const Header = () => {
       </div>
       <nav className="header-nav">
         <Link to="/ranking">랭킹</Link>
-        <Link to="/challenge">일일챌린지</Link>
 
         {/* 드롭다운 메뉴 전체를 감싸는 div에 이벤트 추가 */}
+        <div
+          className="dropdown"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <span className="dropdown-link">일일챌린지</span>
+          {isDropdownVisible && (
+            <div className="dropdown-content">
+              <Link to="/challenge" onClick={() => setIsDropdownVisible(false)}>
+                타이핑 챌린지
+              </Link>
+              <Link to="/findError" onClick={() => setIsDropdownVisible(false)}>
+                오류찾기 챌린지
+              </Link>
+            </div>
+          )}
+        </div>
+
         <div
           className="dropdown"
           onMouseEnter={handleMouseEnter}
@@ -43,10 +60,16 @@ const Header = () => {
           <span className="dropdown-link">게시판</span>
           {isDropdownVisible && (
             <div className="dropdown-content">
-              <Link to="/board/free" onClick={() => setIsDropdownVisible(false)}>
+              <Link
+                to="/board/free"
+                onClick={() => setIsDropdownVisible(false)}
+              >
                 자유 게시판
               </Link>
-              <Link to="/board/team" onClick={() => setIsDropdownVisible(false)}>
+              <Link
+                to="/board/team"
+                onClick={() => setIsDropdownVisible(false)}
+              >
                 팀원 모집 게시판
               </Link>
             </div>
