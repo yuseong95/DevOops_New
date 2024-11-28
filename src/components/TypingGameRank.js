@@ -13,7 +13,11 @@ const TypingGameRank = () => {
 
   // 현재 로그인한 사용자의 랭킹과 점수 찾기 (타이핑 챌린지)
   const { rank: currentTypingGameRank, score: currentTypingGameScore } =
-    getUserRankAndScore(sortedTypingGameUsers, currentUser?.id);
+    getUserRankAndScore(
+      sortedTypingGameUsers,
+      currentUser?.id,
+      "typingGameScore"
+    );
 
   return (
     <div className="typing-ranking">

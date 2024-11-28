@@ -13,7 +13,11 @@ const TypingGameRank = () => {
 
   // 현재 로그인한 사용자의 랭킹과 점수 찾기 (오류찾기 챌린지)
   const { rank: currentErrorGameRank, score: currentErrorGameScore } =
-    getUserRankAndScore(sortedErrorGameUsers, currentUser?.id);
+    getUserRankAndScore(
+      sortedErrorGameUsers,
+      currentUser?.id,
+      "errorGameScore"
+    );
 
   return (
     <div className="typing-ranking">
@@ -34,7 +38,7 @@ const TypingGameRank = () => {
             <span className="rank">{index + 1}</span>
             <span className="name">{user.name}</span>
             <span className="score">
-              {user.typingGameScore === -1 ? "-" : user.typingGameScore} 점
+              {user.errorGameScore === -1 ? "-" : user.errorGameScore} 점
             </span>
           </li>
         ))}
