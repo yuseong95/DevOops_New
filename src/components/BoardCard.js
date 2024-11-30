@@ -1,4 +1,3 @@
-// BoardCard.js
 import React from "react";
 import { Link } from "react-router-dom";
 import "./css/BoardCard.css";
@@ -6,14 +5,14 @@ import timeAgo from "../utils/timeAgo";
 
 const stripImagesFromHTML = (html) => {
   const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = html;
-  const images = tempDiv.querySelectorAll("img");
-  images.forEach((img) => img.remove());
-  return tempDiv.textContent || tempDiv.innerText || "";
+  tempDiv.innerHTML = html; // HTML 문자열을 div의 innerHTML로 설정
+  const images = tempDiv.querySelectorAll("img"); // 모든 img 태그를 선택
+  images.forEach((img) => img.remove()); // img 태그 제거
+  return tempDiv.textContent || tempDiv.innerText || ""; // 텍스트만 반환
 };
 
 const BoardCard = ({ post }) => {
-  const cleanContent = stripImagesFromHTML(post.content);
+  const cleanContent = stripImagesFromHTML(post.content); // 게시글 내용에서 이미지 제거
 
   return (
     <div className="board-card-wrapper">

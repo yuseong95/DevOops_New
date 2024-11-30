@@ -1,4 +1,3 @@
-// PostDetailPage.js
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import timeAgo from "../utils/timeAgo";
@@ -13,6 +12,7 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
   const post = posts.find((p) => p.id === Number(id));
 
   const [comments, setComments] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // 삭제 모달 표시 상태
 
   // 작성자 정보 매핑
   const author = post && dummyUsers.find((user) => user.id === post.authorId);
@@ -39,12 +39,12 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
 
   if (!post) return <div>게시글을 찾을 수 없습니다.</div>;
 
-  const handleDelete = () => {
-    if (window.confirm("정말로 이 게시글을 삭제하시겠습니까?")) {
-      setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id));
-      localStorage.removeItem(`comments-${post.id}`);
-      navigate(`/board/${post.boardType}`);
-    }
+  // 게시글 삭제 처리
+  const confirmDelete = () => {
+    setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id));
+    localStorage.removeItem(`comments-${post.id}`);
+    navigate(`/board/${post.boardType}`);
+    setShowDeleteModal(false);
   };
 
   return (
@@ -76,23 +76,58 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
         ></div>
       </div>
 
+      {/* 게시글 삭제 버튼 */}
       {loggedInUser?.id === post.authorId && (
-        <button className="delete-button" onClick={handleDelete}>
+        <button
+          className="delete-button"
+          onClick={() => setShowDeleteModal(true)}
+        >
           삭제
         </button>
       )}
 
+      {/* 좋아요 섹션 */}
       <LikeSection
         loggedInUser={loggedInUser}
         postId={post.id}
         setPosts={setPosts}
       />
+      {/* 댓글 섹션 */}
       <CommentSection
         postId={post.id}
         comments={comments}
         setComments={setComments}
         loggedInUser={loggedInUser}
       />
+
+      {/* 삭제 모달 */}
+      {showDeleteModal && (
+        <div
+          className="modal-overlay"
+          onClick={() => setShowDeleteModal(false)}
+        >
+          <div
+            className="modal"
+            onClick={(e) => e.stopPropagation()} // 모달 외부 클릭 방지
+          >
+            <p>정말로 이 게시글을 삭제하시겠습니까?</p>
+            <div className="modal-buttons">
+              <button
+                className="cancel-button"
+                onClick={() => setShowDeleteModal(false)} // 모달 닫기
+              >
+                취소
+              </button>
+              <button
+                className="confirm-button"
+                onClick={confirmDelete} // 삭제 확정
+              >
+                삭제
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
