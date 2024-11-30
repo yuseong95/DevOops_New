@@ -2,7 +2,7 @@
   max-width: 1300px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f7f7f7;
+  background-color: #202231;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   min-height: 1000px; /* 고정된 최소 높이 설정 */
@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 20px; /* 하단 간격 추가 */
+  font-family: "D2coding", sans-serif;
 }
 
 .board-header {
@@ -17,11 +18,11 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .board-header h2 {
   margin: 0;
-  font-size: 1.8em; /* 큰 제목 크기 */
   color: #333;
 }
 
@@ -46,23 +47,16 @@
 }
 
 .pagination button {
-  padding: 8px 12px;
   font-size: 1em;
   color: #fff;
-  background-color: #007bff;
-  border: none;
+  border: solid 3px #8216a0;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .pagination button:disabled {
-  background-color: #ddd;
+  background-color: #000000;
   cursor: not-allowed;
-}
-
-.pagination span {
-  font-size: 1em;
-  color: #333;
 }
 
 .modal-overlay {
@@ -114,11 +108,11 @@
 .board-title-container h2 {
   margin: 0;
   font-size: 1.8em;
-  color: #333;
+  color: #fff;
 }
 
 .board-subtitle {
   margin: 5px 0 0;
   font-size: 1.1em;
-  color: #555;
+  color: #fff;
 }

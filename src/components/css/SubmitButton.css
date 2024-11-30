@@ -1,14 +1,13 @@
 /* src/components/css/SubmitButton.css */
 .submit-button {
-  background-color: #3333ff;
   color: white;
   padding: 10px 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px !important;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #5555ff;
+  background-color: #210b9b !important;
 }

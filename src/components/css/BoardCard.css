@@ -9,8 +9,8 @@
 }
 
 .board-card {
-  background-color: #ffffff;
-  border: 1px solid #ddd; /* 기본 테두리 */
+  background-color: #ededed;
+  border: 1px solid #ededed; /* 기본 테두리 */
   border-radius: 10px; /* 모서리 둥글게 */
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -23,20 +23,21 @@
 }
 
 .board-card:hover {
-  transform: scale(1); /* hover 시 원래 크기 */
-  border: 2px solid #3333ff; /* hover 시 보라색 테두리 */
+  transform: scale(1);
+  border: 2px solid #8216a0; /* hover 시 보라색 테두리 */
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* hover 시 그림자 강조 */
   z-index: 2; /* hover 시 다른 카드 위로 올라옴 */
 }
 
 .board-card h3 {
-  font-size: 1.5em; /* 제목 크기 증가 */
-  margin-bottom: 15px;
+  font-size: 1.4em; /* 제목 크기 증가 */
+  font-weight: bold;
+  margin-bottom: 10px;
   color: #333;
 }
 
 .board-card p {
-  font-size: 0.95em;
+  font-size: 0.9em;
   color: #555;
   display: -webkit-box;
   display: flex; /* 표준 속성 추가 */

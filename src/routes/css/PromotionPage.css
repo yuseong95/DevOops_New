@@ -2,11 +2,13 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
+  font-family: "D2coding", sans-serif;
 }
 
 .promotion-header {
   text-align: center;
   margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .promotion-container {
@@ -81,7 +83,7 @@
 }
 
 .status-badge {
-  background: #007bff;
+  background: #8216a0 !important;
   color: #fff;
   padding: 5px 10px;
   border-radius: 5px;

@@ -1,74 +1,74 @@
 /* ProfileEdit.css */
 
 .profile-edit-container {
-    width: 60%;
-    margin: auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    color: #ccc; /* 기본 텍스트 색상 */
-  }
-  
-  h2 {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-  }
-  
-  .profile-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .profile-header {
-    text-align: center;
-  }
-  
-  .profile-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-  }
-  
-  .info-section {
-    margin-top: 20px;
-    padding: 10px 0;
-  }
-  
-  .info-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-top: 1px solid #f0f0f0;
-  }
-  
-  .info-item label {
-    flex: 1;
-    font-weight: bold;
-  }
-  
-  .info-item input {
-    flex: 2;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .save-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px; /* 글자 크기 */
-    font-weight: bold; /* 글자 굵기 */
-  }
-  
-  .save-button:hover {
-    background-color: #45a049;
-  }
-  
+  width: 60%;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #ccc; /* 기본 텍스트 색상 */
+  margin-bottom: 70px;
+}
+
+h2 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.profile-header {
+  text-align: center;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.info-section {
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.info-item label {
+  flex: 1;
+  font-weight: bold;
+}
+
+.info-item input {
+  flex: 2;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.save-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; /* 글자 크기 */
+  font-weight: bold; /* 글자 굵기 */
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}

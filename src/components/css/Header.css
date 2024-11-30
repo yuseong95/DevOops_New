@@ -1,10 +1,16 @@
+@font-face {
+  font-family: "bitbit";
+  src: url("//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff"),
+    url("//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2");
+}
+
 .header {
   display: flex;
   align-items: center;
   padding: 10px 20px;
   background-color: #202231;
   color: #ffffff;
-  font-family: Arial, sans-serif;
+  font-family: "bitbit", sans-serif;
 }
 
 .header-logo a {
@@ -23,19 +29,17 @@
 .header-nav a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 18px;
 }
-
 
 .header a:hover {
   color: #cccccc;
 }
 
 .header-user a {
-
   color: #ffffff;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .header-user a:hover {
@@ -63,7 +67,7 @@
 }
 
 .header-profile span {
-  font-size: 16px;
+  font-size: 18px;
   color: #ffffff;
 }
 
@@ -71,17 +75,17 @@
   background: none;
   color: #ffffff;
   border: none;
-  font-size: 14px;
+  font-size: 18px;
   cursor: pointer;
   padding: 0 5px;
   text-decoration: underline;
 }
 
-
 /* 드롭다운 기본 스타일 */
 .dropdown {
   position: relative;
   display: inline-block;
+  font-size: 18px;
 }
 
 .dropdown-content {
@@ -110,7 +114,6 @@
 
 .header-profile button:hover {
   color: #cccccc;
-
 }
 .logout-button {
   padding: 10px 20px;

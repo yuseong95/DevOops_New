@@ -94,10 +94,10 @@ const BoardPage = ({ posts, comments, likes, boardType, setPosts }) => {
           </div>
           <SubmitButton
             label="글쓰기"
-            backgroundColor="#3333ff"
+            backgroundColor="#8216a0"
             color="#fff"
-            fontSize="1.2em"
-            padding="12px 24px"
+            fontSize="1em"
+            padding="11px 20px"
             onClick={handleWriteClick}
           />
         </div>
