@@ -1,70 +1,171 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# DevOops
 
-## Available Scripts
+## 🔅 소개
+개발하다 보면 철자를 잘못 입력해 웁스!(Oops)하는 상황이 생기는데 이를 방지해서 ... 등등등 
 
-In the project directory, you can run:
+---
+<!-- 
+## 🧾 목차 
+- [소개](#소개)
+- [페이지 구성](#페이지구성)
+- [설치](#설치)
+- [프로젝트 실행](#사용-방법)
 
-### `npm start`
+--- -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 💻 페이지구성 
+  <details>
+    <summary> 메인화면</summary>
+    이 기능은 사용자 친화적인 인터페이스를 제공하며 다음과 같은 옵션을 포함합니다:
+    - 탐색 메뉴
+    - 알림 센터
+    - 최근 업데이트
+  </details>
 
-### `npm test`
+  <details>
+    <summary>로그인/회원정보</summary>
+    - 로그인
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    - 회원정보
 
-### `npm run build`
+  </details>
+  <details>
+    <summary>개발자 유형찾기</summary>
+    - 로그인
+    - 회원정보
+    
+  </details>
+  
+  <details>
+    <summary>타이핑 캘린지</summary>
+    - 로그인
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    - 회원정보
+    
+  </details>
+  <details>
+    <summary>오류찾기 챌린지</summary>
+    - 로그인
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    - 회원정보
+    
+  </details>
+  <details>
+    <summary>로그인/회원정보</summary>
+    - 로그인
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    - 회원정보
+  </details>
+  <details>
+    <summary>자유/팀원모집게시판</summary>
+    - 로그인
+    - 회원정보
+    
+  </details>
+   <details>
+    <summary>홍보 게시판</summary>
+    - 로그인
+    - 회원정보
+    
+  </details>
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🛠️ 설치 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   <details>
+    <summary>🚨🚨 Install 모아보기 🚨🚨</summary>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    npm install react-router-dom
+    npm install react-slick slick-carousel
+    npm install react-icons
+    npm install react-syntax-highlighter
+    npm install bootstrap
+    npm install -D tailwindcss
+    npx tailwindcss init     
+    npm install framer-motion
+    npm install @faker-js/faker
+    npm install classnames
+    npm install --save prismjs
+    npm install react-quill
+    npm install redux
+    npm install react-redux
+    npm install @reduxjs/toolkit react-redux
+    
+  </details>
+<br><br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. 저장소를 클론:
+   ```bash
+   git clone https://github.com/username/repository.git
+   ```
+2. 필요한 종속성을 설치:
+   ```bash
+   npm install
+   ```
+3. React Router DOM
+    ```bash
+    npm install react-router-dom
+    ```
 
-## Learn More
+4. React Slick 및 Slick Carousel
+    ```bash
+    npm install react-slick slick-carousel
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. React Icons 및 추가 라이브러리
+    ```bash
+    npm install react-icons
+    npm install react-syntax-highlighter
+    npm install bootstrap
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+6. TailwindCSS 설치 및 초기화
+    ```bash
+    npm install -D tailwindcss
+    npx tailwindcss init
+    ```
 
-### Code Splitting
+7.  Framer Motion
+    ```bash
+    npm install framer-motion
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+8. Faker.js
+    ```bash
+    npm install @faker-js/faker
+    ```
 
-### Analyzing the Bundle Size
+9.  Classnames (조건부 CSS)
+    ```bash
+    npm install classnames
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+10. PrismJS (코드 하이라이팅)
+    ```bash
+    npm install --save prismjs
+    ``` 
 
-### Making a Progressive Web App
+11.  React Quill (글쓰기 옵션)
+     ```
+     npm install react-quill
+     ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+12. Redux 설치 (계정별 점수 관리)
+    ```bash
+    npm install redux
+    npm install react-redux
+    npm install @reduxjs/toolkit
+    ```
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+##  📌 프로젝트실행 
+``` 
+npm start
+```
+### 로그인 데이터
+| 아이디    | 비번  |
+| ------------- | ----------- |
+| ckals413  | 1234  |

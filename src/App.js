@@ -35,6 +35,7 @@ function App() {
         <Route path="/promotion" element={<PromotionPage />} />
       </Routes>
       <Footer />
+
     </UserProvider>
   );
 }
