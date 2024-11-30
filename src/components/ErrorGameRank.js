@@ -8,29 +8,29 @@ const TypingGameRank = () => {
   const users = useSelector((state) => state.users);
   const currentUser = JSON.parse(localStorage.getItem("loggedInUser")); // 현재 로그인한 사용자 가져오기
 
-  // 타이핑 챌린지 점수 순으로 정렬
-  const sortedTypingGameUsers = getSortedUsers(users, "typingGameScore");
+  // 오류찾기 점수 순으로 정렬
+  const sortedErrorGameUsers = getSortedUsers(users, "errorGameScore");
 
-  // 현재 로그인한 사용자의 랭킹과 점수 찾기 (타이핑 챌린지)
-  const { rank: currentTypingGameRank, score: currentTypingGameScore } =
+  // 현재 로그인한 사용자의 랭킹과 점수 찾기 (오류찾기 챌린지)
+  const { rank: currentErrorGameRank, score: currentErrorGameScore } =
     getUserRankAndScore(
-      sortedTypingGameUsers,
+      sortedErrorGameUsers,
       currentUser?.id,
-      "typingGameScore"
+      "errorGameScore"
     );
 
   return (
     <div className="typing-ranking">
       <h2 className="ranking-title">
-        Typing &nbsp; <PiRankingBold /> &nbsp; Ranking
+        Error &nbsp; <PiRankingBold /> &nbsp; Ranking
       </h2>
-      {currentUser && currentTypingGameScore !== null && (
+      {currentUser && currentErrorGameScore !== null && (
         <p className="current-user-info">
-          My: {currentTypingGameScore}점 (현재 {currentTypingGameRank}위)
+          My: {currentErrorGameScore}점 (현재 {currentErrorGameRank}위)
         </p>
       )}
       <ul className="ranking-list">
-        {sortedTypingGameUsers.map((user, index) => (
+        {sortedErrorGameUsers.map((user, index) => (
           <li
             key={user.id}
             className={user.id === currentUser?.id ? "highlight" : ""}
@@ -38,7 +38,7 @@ const TypingGameRank = () => {
             <span className="rank">{index + 1}</span>
             <span className="name">{user.name}</span>
             <span className="score">
-              {user.typingGameScore === -1 ? "-" : user.typingGameScore} 점
+              {user.errorGameScore === -1 ? "-" : user.errorGameScore} 점
             </span>
           </li>
         ))}

@@ -34,11 +34,6 @@ export const updateBadges = (badgePayload) => ({
   payload: badgePayload,
 });
 
-// 모든 뱃지 초기화
-export const resetBadges = () => ({
-  type: "RESET_BADGES",
-});
-
 //회원 정보를 수정
 export const updateUserInfo = (id, data) => ({
   type: "UPDATE_USER_INFO",
