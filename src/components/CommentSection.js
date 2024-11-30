@@ -34,13 +34,12 @@ const CommentSection = ({ postId, comments, setComments, loggedInUser }) => {
         createdAt: new Date().toISOString(),
         likes: 0,
         replies: [],
-        author: loggedInUser.name, // 작성자 정보 추가
+        author: loggedInUser.name,
       };
       const updatedComments = [...comments, comment];
-      setComments(updatedComments); // 상태 업데이트
+      setComments(updatedComments);
       setNewComment("");
 
-      // 로컬 스토리지에 즉시 저장
       localStorage.setItem(
         `comments-${postId}`,
         JSON.stringify(updatedComments)
