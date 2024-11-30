@@ -6,7 +6,7 @@ import "../../routes/css/ErrorGame.css";
 const ErrorGameTop = ({ showQuiz, resultCount, handleTimer }) => {
   return (
     <div className="top">
-      <div className="title">
+      <div className="top-title">
         오류/오타가 있는 라인의 숫자를 입력하세요. (10분 초과시 0점)
       </div>
       <div className="timer">
