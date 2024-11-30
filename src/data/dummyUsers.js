@@ -3,7 +3,7 @@
 const dummyUsers = [
   {
     id: "ckals413",
-    password: "1234",
+    password: "123456",
     name: "임차민",
     email: "ckals413@naver.com",
     skills: ["Kotlin", "C", "React"],
@@ -15,8 +15,8 @@ const dummyUsers = [
     typingGameScore: -1,
   },
   {
-    id: "f",
-    password: "f",
+    id: "jjang9",
+    password: "987654",
     name: "짱구",
     email: "sinJJang@naver.com",
     skills: ["JavaScript", "React", "Node.js"],
@@ -28,8 +28,8 @@ const dummyUsers = [
     typingGameScore: -1,
   },
   {
-    id: "d",
-    password: "d",
+    id: "dong",
+    password: "qwerty",
     name: "김동혁",
     email: "testuser3@gmail.com",
     skills: ["Python", "Django", "MachineLearning"],
@@ -41,8 +41,8 @@ const dummyUsers = [
     typingGameScore: -1,
   },
   {
-    id: "suki186",
-    password: "1234",
+    id: "suki",
+    password: "zxcvbn",
     name: "김서희",
     email: "suki186@naver.com",
     skills: ["Kotlin", "C", "React"],
@@ -54,8 +54,8 @@ const dummyUsers = [
     typingGameScore: -1,
   },
   {
-    id: "g",
-    password: "g",
+    id: "nanana",
+    password: "poiuyt",
     name: "나유성",
     email: "g@naver.com",
     skills: ["Kotlin", "C", "React"],
