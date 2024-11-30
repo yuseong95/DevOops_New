@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"; // useNavigate import 추가
 import "./css/Home.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import sampleImage from "../images/sample.png";
 import devOops from "../images/devOops.jpg";
 import hyndai from "../images/hyndai.jpg";
 import hyndai2 from "../images/hyndai2.png";
@@ -13,7 +12,7 @@ import test from "../images/developerTest.jpg";
 
 import error2 from "../images/error2.jpg";
 import team from "../images/team.jpg";
-import challenge from "../images/challenge.jpg";
+import challenge from "../images/typing.png";
 import post from "../images/post.jpg";
 
 import { Link } from "react-router-dom";

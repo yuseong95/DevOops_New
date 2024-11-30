@@ -122,7 +122,11 @@ const PostCreatePage = ({ addPost }) => {
       {showModal && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <p>글 작성을 취소하시겠습니까? 작성 중인 내용은 사라집니다.</p>
+            <p>
+              글 작성을 취소하시겠습니까?
+              <br />
+              작성 중인 내용은 사라집니다.
+            </p>
             <div className="modal-buttons">
               <button onClick={closeModal}>취소</button>
               <button onClick={confirmCancel}>확인</button>

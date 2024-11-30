@@ -27,7 +27,7 @@ const Footer = () => {
           © {new Date().getFullYear()} DevOops. All Rights Reserved.
         </p>
         <div className="footer-credits">
-          <span> 김동혁, 김서희, 나유성, 임차민</span>
+          <span> 5조_포크 / 김동혁, 김서희, 나유성, 임차민</span>
         </div>
       </div>
     </footer>
