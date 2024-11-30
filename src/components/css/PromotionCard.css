@@ -67,6 +67,7 @@
 
 .status-badge {
   font-weight: bold;
+  border-radius: 50px !important;
   background-color: #8216a0 !important;
 }
 

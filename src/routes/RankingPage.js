@@ -11,6 +11,8 @@ const RankingPage = () => {
         <TypingGameRank />
       </div>
 
+      <div className="place-holder"></div>
+
       {/* 오류찾기 랭킹 */}
       <div className="ranking-section">
         <ErrorGameRank />
