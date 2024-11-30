@@ -32,6 +32,7 @@ const CommentItem = ({
             setShowModal(true);
             return c;
           }
+          // 대댓글 좋아요 수 증가 및 likedBy 배열에 사용자 추가
           return {
             ...c,
             replies: c.replies.map((reply) =>
@@ -50,6 +51,7 @@ const CommentItem = ({
             setShowModal(true);
             return c;
           }
+          // 댓글 좋아요 수 증가 및 likedBy 배열에 사용자 추가
           return {
             ...c,
             likes: c.likes + 1,

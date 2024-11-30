@@ -14,12 +14,12 @@ import ErrorGame from "./routes/ErrorGame";
 import RankingPage from "./routes/RankingPage";
 import TypeTest from "./routes/TypeTest";
 import PromotionPage from "./routes/PromotionPage";
-
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <UserProvider>
-      {' '}
+      {" "}
       {/* UserProvider로 App 전체를 감싸 context가 적용 */}
       <Header />
       <Routes>
@@ -33,8 +33,8 @@ function App() {
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/typetest" element={<TypeTest />} />
         <Route path="/promotion" element={<PromotionPage />} />
-
       </Routes>
+      <Footer />
     </UserProvider>
   );
 }
