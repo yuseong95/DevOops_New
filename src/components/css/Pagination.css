@@ -11,7 +11,7 @@
 .pagination span,
 .pagination button {
   font-size: 0.9em;
-  color: #333;
+  color: #fff;
   background: none; /* 배경색 제거 */
   border: none;
   cursor: pointer;

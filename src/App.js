@@ -14,6 +14,7 @@ import ErrorGame from "./routes/ErrorGame";
 import RankingPage from "./routes/RankingPage";
 import TypeTest from "./routes/TypeTest";
 import PromotionPage from "./routes/PromotionPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/typetest" element={<TypeTest />} />
         <Route path="/promotion" element={<PromotionPage />} />
       </Routes>
+      <Footer />
     </UserProvider>
   );
 }
