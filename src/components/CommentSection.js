@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux"; // Redux 상태 가져오기
 import Pagination from "./Pagination";
 import CommentItem from "./CommentItem";
 import "./css/CommentSection.css";
@@ -9,8 +10,61 @@ const CommentSection = ({ postId, comments, setComments, loggedInUser }) => {
   const [newComment, setNewComment] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [replyComment, setReplyComment] = useState({});
-  const [showModal, setShowModal] = useState(false); // 모달 표시 상태
-  const [modalMessage, setModalMessage] = useState(""); // 모달 메시지
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  // Redux에서 사용자 정보 가져오기
+  const users = useSelector((state) => state.users);
+
+  // 댓글 데이터를 로컬 스토리지에서 불러오기
+  useEffect(() => {
+    const storedComments = localStorage.getItem(`comments-${postId}`);
+    if (storedComments) {
+      try {
+        const parsedComments = JSON.parse(storedComments);
+        setComments(parsedComments);
+      } catch (err) {
+        console.error("Error parsing comments from localStorage:", err);
+      }
+    }
+  }, [postId, setComments]);
+
+  // Redux 사용자 정보와 댓글 데이터 동기화
+  useEffect(() => {
+    const syncCommentsWithUsers = () => {
+      const updatedComments = comments.map((comment) => {
+        const authorData = users.find((user) => user.id === comment.authorId);
+        return {
+          ...comment,
+          author: authorData?.name || "unknown",
+          authorProfile:
+            authorData?.profileImage || "https://via.placeholder.com/32",
+          replies: comment.replies.map((reply) => {
+            const replyAuthorData = users.find(
+              (user) => user.id === reply.authorId
+            );
+            return {
+              ...reply,
+              author: replyAuthorData?.name || "unknown",
+              authorProfile:
+                replyAuthorData?.profileImage ||
+                "https://via.placeholder.com/32",
+            };
+          }),
+        };
+      });
+
+      if (JSON.stringify(updatedComments) !== JSON.stringify(comments)) {
+        setComments(updatedComments);
+        localStorage.setItem(
+          `comments-${postId}`,
+          JSON.stringify(updatedComments)
+        );
+      }
+    };
+
+    syncCommentsWithUsers();
+  }, [comments, users, postId, setComments]);
 
   const handleCommentChange = (e) => {
     const input = e.target.value;
@@ -24,7 +78,7 @@ const CommentSection = ({ postId, comments, setComments, loggedInUser }) => {
     e.preventDefault();
     if (!loggedInUser) {
       setModalMessage("로그인이 필요합니다. 로그인 후 댓글을 작성해주세요.");
-      setShowModal(true); // 모달 표시
+      setShowModal(true);
       return;
     }
     if (newComment.trim()) {
@@ -33,13 +87,13 @@ const CommentSection = ({ postId, comments, setComments, loggedInUser }) => {
         content: newComment,
         createdAt: new Date().toISOString(),
         likes: 0,
+        likedBy: [],
         replies: [],
-        author: loggedInUser.name,
+        authorId: loggedInUser.id, // Redux에서 동기화하기 위한 ID 저장
       };
       const updatedComments = [...comments, comment];
       setComments(updatedComments);
       setNewComment("");
-
       localStorage.setItem(
         `comments-${postId}`,
         JSON.stringify(updatedComments)
