@@ -90,6 +90,19 @@ const userReducer = (state = initiState, action) => {
             : user
         ),
       };
+    case "UPDATE_AUTHOR_INFO": // 댓글 작성자 정보 업데이트
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.id
+            ? {
+                ...user,
+                name: action.payload.name,
+                profileImage: action.payload.profileImage,
+              }
+            : user
+        ),
+      };
     default:
       return state;
   }

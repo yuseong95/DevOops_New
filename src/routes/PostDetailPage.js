@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux"; // Redux 상태 가져오기
 import timeAgo from "../utils/timeAgo";
 import LikeSection from "../components/LikeSection";
 import CommentSection from "../components/CommentSection";
-import dummyUsers from "../data/dummyUsers";
 import "./css/PostDetailPage.css";
 
 const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
+  const users = useSelector((state) => state.users); // Redux에서 사용자 정보 가져오기
   const { id } = useParams();
   const navigate = useNavigate();
   const post = posts.find((p) => p.id === Number(id));
@@ -14,8 +15,8 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
   const [comments, setComments] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false); // 삭제 모달 표시 상태
 
-  // 작성자 정보 매핑
-  const author = post && dummyUsers.find((user) => user.id === post.authorId);
+  // Redux에서 작성자 정보 매핑
+  const author = post && users.find((user) => user.id === post.authorId);
 
   useEffect(() => {
     if (post) {
@@ -51,6 +52,7 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
     <div className="post-detail-page">
       <h2>{post.title}</h2>
 
+      {/* 작성자 정보 표시 */}
       {author && (
         <div className="author-info">
           <img
@@ -69,6 +71,7 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
 
       <hr className="post-separator" />
 
+      {/* 게시글 내용 */}
       <div className="content-wrapper">
         <div
           className="content"

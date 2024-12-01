@@ -1,14 +1,14 @@
-import { createStore } from 'redux';
-import userReducer from './userReducer';
-import dummyUsers from '../data/dummyUsers';
+import { createStore } from "redux";
+import userReducer from "./userReducer";
+import dummyUsers from "../data/dummyUsers";
 
 // localStorage에서 Redux 상태를 복원하는 함수
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('reduxState');
+    const serializedState = localStorage.getItem("reduxState");
     return serializedState ? JSON.parse(serializedState) : undefined;
   } catch (err) {
-    console.error('Could not load state', err);
+    console.error("Could not load state", err);
     return undefined;
   }
 };
@@ -17,9 +17,9 @@ const loadState = () => {
 const saveState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem('reduxState', serializedState);
+    localStorage.setItem("reduxState", serializedState);
   } catch (err) {
-    console.error('Could not save state', err);
+    console.error("Could not save state", err);
   }
 };
 
@@ -48,8 +48,14 @@ const store = createStore(userReducer, persistedState);
 
 // 상태 변경 시 localStorage에 저장
 store.subscribe(() => {
-  console.log('Redux 상태 변경:', store.getState());
+  console.log("Redux 상태 변경:", store.getState());
   saveState(store.getState());
 });
+
+// Redux에서 유저 정보를 쉽게 가져오는 유틸리티 함수
+export const getUserById = (id) => {
+  const state = store.getState();
+  return state.users.find((user) => user.id === id);
+};
 
 export default store;
