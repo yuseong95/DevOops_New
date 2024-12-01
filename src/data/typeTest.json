@@ -62,7 +62,7 @@
       "options": {
         "A": {
           "text": "바로 실행에 옮기며 실험해본다.",
-          "scores": [3, 5, 8]
+          "scores": [3, 8]
         },
         "B": {
           "text": "메모를 해두고 나중에 검토한다.",
@@ -174,42 +174,50 @@
     "1": {
       "name": "실용주의 엔지니어",
       "description": "빠르게 실행 가능한 솔루션을 선호하며, 실용적인 접근을 중시합니다.",
-      "recommended_languages": ["Python", "JavaScript"]
+      "recommended_languages": ["Python", "JavaScript"],
+      "imageURL": "images/typeTest/type1.png"
     },
     "2": {
       "name": "완벽주의 장인",
       "description": "높은 품질과 구조적 완성도를 목표로 하는 개발자입니다.",
-      "recommended_languages": ["Java", "C++"]
+      "recommended_languages": ["Java", "C++"],
+      "imageURL": "images/typeTest/type2.png"
     },
     "3": {
       "name": "창의적인 해결사",
       "description": "독창적이고 혁신적인 아이디어를 즐기는 유형입니다.",
-      "recommended_languages": ["Ruby", "Swift"]
+      "recommended_languages": ["Ruby", "Swift"],
+      "imageURL": "images/typeTest/type3.png"
     },
     "4": {
       "name": "퍼포먼스 애호가",
       "description": "최적화된 성능과 효율성을 중요하게 생각합니다.",
-      "recommended_languages": ["C", "Rust"]
+      "recommended_languages": ["C", "Rust"],
+      "imageURL": "images/typeTest/type4.png"
     },
     "5": {
       "name": "탐구하는 학자",
       "description": "이론적 배경과 복잡한 개념을 깊이 탐구하는 유형입니다.",
-      "recommended_languages": ["Haskell", "Scala"]
+      "recommended_languages": ["Haskell", "Scala"],
+      "imageURL": "images/typeTest/type5.png"
     },
     "6": {
       "name": "협업 중심의 커뮤니케이터",
       "description": "팀워크와 코드의 가독성을 중요시하는 유형입니다.",
-      "recommended_languages": ["TypeScript", "C#"]
+      "recommended_languages": ["TypeScript", "C#"],
+      "imageURL": "images/typeTest/type6.png"
     },
     "7": {
       "name": "데이터 마에스트로",
       "description": "데이터 중심의 사고를 하며 분석과 통계를 즐기는 유형입니다.",
-      "recommended_languages": ["R", "SQL"]
+      "recommended_languages": ["R", "SQL"],
+      "imageURL": "images/typeTest/type7.png"
     },
     "8": {
-      "name": "개척자(트렌드 세터)",
+      "name": "트렌드 세터",
       "description": "최신 기술을 탐구하며 트렌드를 선도하는 유형입니다.",
-      "recommended_languages": ["Go", "Kotlin"]
+      "recommended_languages": ["Go", "Kotlin"],
+      "imageURL": "images/typeTest/type8.png"
     }
   }
 }

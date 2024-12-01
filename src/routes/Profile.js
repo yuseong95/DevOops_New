@@ -1,20 +1,20 @@
 // src/routes/Profile.js
 
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { badgeIcons, skillIcons } from '../data/mappings';
-import './css/Profile.css';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { badgeIcons, skillIcons } from "../data/mappings";
+import "./css/Profile.css";
 
 const Profile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (storedUser) {
       setUser(storedUser);
     } else {
-      navigate('/login');
+      navigate("/login");
     }
   }, [navigate]);
 
@@ -27,9 +27,12 @@ const Profile = () => {
       <div className="profile-header">
         <img src={user.profileImage} alt="Profile" className="profile-image" />
         <h1 className="profile-id">{user.id}</h1>
-        <button className="edit-button" onClick={() => navigate('/profile/edit')}>
-        정보 수정
-      </button>
+        <button
+          className="edit-button"
+          onClick={() => navigate("/profile/edit")}
+        >
+          정보 수정
+        </button>
       </div>
 
       <div className="info-sections">
@@ -38,7 +41,7 @@ const Profile = () => {
           <div className="badges">
             {user.badges.map((badge, index) => (
               <span key={index} className="badge">
-                {badgeIcons[badge] || '🏅'}
+                {badgeIcons[badge] || "🏅"}
               </span>
             ))}
           </div>
@@ -50,7 +53,11 @@ const Profile = () => {
             {user.skills.map((skill, index) => (
               <div key={index} className="stack-icon">
                 {skillIcons[skill] ? (
-                  <img src={skillIcons[skill]} alt={skill} className="skill-image" />
+                  <img
+                    src={skillIcons[skill]}
+                    alt={skill}
+                    className="skill-image"
+                  />
                 ) : (
                   <span>{skill}</span>
                 )}
