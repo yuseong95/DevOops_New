@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux"; // Redux 상태 가져오기
 import { useLocation, useNavigate } from "react-router-dom";
 import BoardCard from "../components/BoardCard";
 import SubmitButton from "../components/SubmitButton";
 import Pagination from "../components/Pagination";
-import dummyUsers from "../data/dummyUsers";
 import "./css/BoardPage.css";
 
 const ITEMS_PER_PAGE = 12;
 
-const BoardPage = ({ posts, comments, likes, boardType, setPosts }) => {
+const BoardPage = ({ posts, boardType, setPosts }) => {
+  const users = useSelector((state) => state.users); // Redux에서 사용자 정보 가져오기
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,8 +19,9 @@ const BoardPage = ({ posts, comments, likes, boardType, setPosts }) => {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [showModal, setShowModal] = useState(false);
 
+  // 게시글 정보를 사용자 Redux 상태와 동기화
   const enrichedPosts = posts.map((post) => {
-    const authorData = dummyUsers.find((user) => user.name === post.author);
+    const authorData = users.find((user) => user.id === post.authorId); // Redux에서 작성자 정보 찾기
 
     const savedComments = localStorage.getItem(`comments-${post.id}`);
     let commentCount = 0;
@@ -39,6 +41,7 @@ const BoardPage = ({ posts, comments, likes, boardType, setPosts }) => {
 
     return {
       ...post,
+      author: authorData?.name || post.author, // Redux에서 이름 가져오기
       authorProfile:
         authorData?.profileImage || "https://via.placeholder.com/32",
       commentCount,
@@ -46,10 +49,12 @@ const BoardPage = ({ posts, comments, likes, boardType, setPosts }) => {
     };
   });
 
+  // 게시판 타입에 맞는 게시글 필터링 및 정렬
   const filteredPosts = enrichedPosts
     .filter((post) => post.boardType === boardType)
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
+  // 페이지네이션 로직
   const indexOfLastPost = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);

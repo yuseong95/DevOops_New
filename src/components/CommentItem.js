@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-
+import { useSelector } from "react-redux"; // Redux 상태 가져오기
 import timeAgo from "../utils/timeAgo";
-import dummyUsers from "../data/dummyUsers";
 import "./css/CommentItem.css";
 
 const CommentItem = ({
@@ -14,7 +13,11 @@ const CommentItem = ({
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
-  const author = dummyUsers.find((user) => user.name === comment.author);
+  // Redux에서 사용자 목록 가져오기
+  const users = useSelector((state) => state.users);
+
+  // 작성자 정보 가져오기
+  const author = users.find((user) => user.id === comment.authorId);
 
   const handleLike = (commentId, isReply = false, parentCommentId = null) => {
     if (!loggedInUser) {
@@ -32,7 +35,6 @@ const CommentItem = ({
             setShowModal(true);
             return c;
           }
-          // 대댓글 좋아요 수 증가 및 likedBy 배열에 사용자 추가
           return {
             ...c,
             replies: c.replies.map((reply) =>
@@ -51,7 +53,6 @@ const CommentItem = ({
             setShowModal(true);
             return c;
           }
-          // 댓글 좋아요 수 증가 및 likedBy 배열에 사용자 추가
           return {
             ...c,
             likes: c.likes + 1,
@@ -81,7 +82,7 @@ const CommentItem = ({
         createdAt: new Date().toISOString(),
         likes: 0,
         likedBy: [],
-        author: loggedInUser?.name,
+        authorId: loggedInUser?.id,
       };
       setComments((prevComments) =>
         prevComments.map((comment) =>
@@ -102,12 +103,12 @@ const CommentItem = ({
     <li className="comment-item">
       <div className="comment-header">
         <img
-          src={author?.profileImage}
+          src={author?.profileImage || "https://via.placeholder.com/32"}
           alt={author?.name || "unknown"}
           className="comment-profile-image"
         />
         <div className="comment-author-info">
-          <span className="comment-author">{comment.author}</span>
+          <span className="comment-author">{author?.name || "unknown"}</span>
           <span className="comment-dot"> • </span>
           <span className="comment-date">
             {timeAgo(new Date(comment.createdAt))}
@@ -125,7 +126,7 @@ const CommentItem = ({
           >
             ❤️ {comment.likes}
           </button>
-          {loggedInUser?.name === comment.author && (
+          {loggedInUser?.id === comment.authorId && (
             <button
               className="comment-delete-button"
               onClick={() =>
@@ -170,19 +171,24 @@ const CommentItem = ({
       {comment.replies.length > 0 && (
         <ul className="reply-list">
           {comment.replies.map((reply) => {
-            const replyAuthor = dummyUsers.find(
-              (user) => user.name === reply.author
+            const replyAuthor = users.find(
+              (user) => user.id === reply.authorId
             );
             return (
               <li key={reply.id} className="reply-item">
                 <div className="reply-header">
                   <img
-                    src={replyAuthor?.profileImage}
+                    src={
+                      replyAuthor?.profileImage ||
+                      "https://via.placeholder.com/32"
+                    }
                     alt={replyAuthor?.name || "unknown"}
                     className="reply-profile-image"
                   />
                   <div className="reply-author-info">
-                    <span className="reply-author">{reply.author}</span>
+                    <span className="reply-author">
+                      {replyAuthor?.name || "unknown"}
+                    </span>
                     <span className="reply-dot"> • </span>
                     <span className="reply-date">
                       {timeAgo(new Date(reply.createdAt))}
@@ -197,7 +203,7 @@ const CommentItem = ({
                   >
                     ❤️ {reply.likes}
                   </button>
-                  {loggedInUser?.name === reply.author && (
+                  {loggedInUser?.id === reply.authorId && (
                     <button
                       className="reply-delete-button"
                       onClick={() =>
@@ -227,7 +233,7 @@ const CommentItem = ({
       )}
       {showModal && (
         <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <div className="modal">
             <p>{modalMessage}</p>
             <button onClick={closeModal}>확인</button>
           </div>
