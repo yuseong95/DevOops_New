@@ -6,7 +6,13 @@ import "./css/CommentSection.css";
 
 const ITEMS_PER_PAGE = 10;
 
-const CommentSection = ({ postId, comments, setComments, loggedInUser }) => {
+const CommentSection = ({
+  boardType,
+  postId,
+  comments,
+  setComments,
+  loggedInUser,
+}) => {
   const [newComment, setNewComment] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [replyComment, setReplyComment] = useState({});
@@ -18,19 +24,35 @@ const CommentSection = ({ postId, comments, setComments, loggedInUser }) => {
 
   // 댓글 데이터를 로컬 스토리지에서 불러오기
   useEffect(() => {
-    const storedComments = localStorage.getItem(`comments-${postId}`);
+    if (!boardType || !postId) {
+      console.error("boardType 또는 postId가 정의되지 않았습니다.", {
+        boardType,
+        postId,
+      });
+      return;
+    }
+
+    console.log("boardType in CommentSection:", boardType); // 디버깅 로그
+    const storedComments = localStorage.getItem(
+      `comments-${boardType}-${postId}`
+    );
     if (storedComments) {
       try {
         const parsedComments = JSON.parse(storedComments);
         setComments(parsedComments);
       } catch (err) {
-        console.error("Error parsing comments from localStorage:", err);
+        console.error(
+          "로컬 스토리지에서 댓글 데이터를 파싱하는 중 오류 발생:",
+          err
+        );
       }
     }
-  }, [postId, setComments]);
+  }, [boardType, postId, setComments]);
 
   // Redux 사용자 정보와 댓글 데이터 동기화
   useEffect(() => {
+    if (!boardType || !postId) return;
+
     const syncCommentsWithUsers = () => {
       const updatedComments = comments.map((comment) => {
         const authorData = users.find((user) => user.id === comment.authorId);
@@ -57,14 +79,14 @@ const CommentSection = ({ postId, comments, setComments, loggedInUser }) => {
       if (JSON.stringify(updatedComments) !== JSON.stringify(comments)) {
         setComments(updatedComments);
         localStorage.setItem(
-          `comments-${postId}`,
+          `comments-${boardType}-${postId}`,
           JSON.stringify(updatedComments)
         );
       }
     };
 
     syncCommentsWithUsers();
-  }, [comments, users, postId, setComments]);
+  }, [comments, users, boardType, postId, setComments]);
 
   const handleCommentChange = (e) => {
     const input = e.target.value;
@@ -95,7 +117,7 @@ const CommentSection = ({ postId, comments, setComments, loggedInUser }) => {
       setComments(updatedComments);
       setNewComment("");
       localStorage.setItem(
-        `comments-${postId}`,
+        `comments-${boardType}-${postId}`,
         JSON.stringify(updatedComments)
       );
     }

@@ -21,9 +21,13 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
 
   // 게시글 정보를 사용자 Redux 상태와 동기화
   const enrichedPosts = posts.map((post) => {
-    const authorData = users.find((user) => user.id === post.authorId); // Redux에서 작성자 정보 찾기
+    console.log("boardType in BoardPage (enrichedPosts):", post.boardType); // 디버깅 로그
+    const authorData = users.find((user) => user.id === post.authorId);
 
-    const savedComments = localStorage.getItem(`comments-${post.id}`);
+    // 댓글 데이터 로드
+    const savedComments = localStorage.getItem(
+      `comments-${post.boardType}-${post.id}`
+    );
     let commentCount = 0;
     if (savedComments) {
       try {
@@ -36,7 +40,9 @@ const BoardPage = ({ posts, boardType, setPosts }) => {
       }
     }
 
-    const storedLikes = localStorage.getItem(`likes_${post.id}`);
+    // 좋아요 데이터 로드 (boardType 포함)
+    const likeKey = `likes-${post.boardType}-${post.id}`;
+    const storedLikes = localStorage.getItem(likeKey);
     const likeCount = storedLikes ? Number(storedLikes) : post.likeCount || 0;
 
     return {

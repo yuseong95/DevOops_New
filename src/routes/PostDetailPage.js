@@ -10,7 +10,11 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
   const users = useSelector((state) => state.users); // Redux에서 사용자 정보 가져오기
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const post = posts.find((p) => p.id === Number(id));
+
+  // `location.state`에서 boardType을 가져오거나, post.boardType을 사용
+  const boardType = location.state?.boardType || post?.boardType || "free";
 
   const [comments, setComments] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false); // 삭제 모달 표시 상태
@@ -20,7 +24,10 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
 
   useEffect(() => {
     if (post) {
-      const savedComments = localStorage.getItem(`comments-${post.id}`);
+      console.log("boardType in PostDetailPage:", boardType); // 디버깅 로그
+      const savedComments = localStorage.getItem(
+        `comments-${boardType}-${post.id}`
+      );
       if (savedComments) {
         try {
           setComments(JSON.parse(savedComments));
@@ -30,21 +37,24 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
         }
       }
     }
-  }, [post]);
+  }, [post, boardType]);
 
   useEffect(() => {
     if (post && comments.length > 0) {
-      localStorage.setItem(`comments-${post.id}`, JSON.stringify(comments));
+      localStorage.setItem(
+        `comments-${boardType}-${post.id}`,
+        JSON.stringify(comments)
+      );
     }
-  }, [comments, post]);
+  }, [comments, post, boardType]);
 
   if (!post) return <div>게시글을 찾을 수 없습니다.</div>;
 
   // 게시글 삭제 처리
   const confirmDelete = () => {
     setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id));
-    localStorage.removeItem(`comments-${post.id}`);
-    navigate(`/board/${post.boardType}`);
+    localStorage.removeItem(`comments-${boardType}-${post.id}`);
+    navigate(`/board/${boardType}`);
     setShowDeleteModal(false);
   };
 
@@ -93,11 +103,14 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
       <LikeSection
         loggedInUser={loggedInUser}
         postId={post.id}
+        boardType={boardType} // boardType 전달
         setPosts={setPosts}
       />
+
       {/* 댓글 섹션 */}
       <CommentSection
         postId={post.id}
+        boardType={boardType} // 올바른 boardType 전달
         comments={comments}
         setComments={setComments}
         loggedInUser={loggedInUser}

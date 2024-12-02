@@ -16,7 +16,11 @@ const BoardCard = ({ post }) => {
 
   return (
     <div className="board-card-wrapper">
-      <Link to={`/board/post/${post.id}`} className="board-card-link">
+      <Link
+        to={`/board/post/${post.id}`}
+        state={{ boardType: post.boardType }}
+        className="board-card-link"
+      >
         <div className="board-card">
           <h3>{post.title}</h3>
           <p>{cleanContent}</p>

@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./css/LikeSection.css";
 
-const LikeSection = ({ loggedInUser, postId, setPosts }) => {
+const LikeSection = ({ loggedInUser, postId, boardType, setPosts }) => {
   const [postLikes, setPostLikes] = useState(0);
   const [likedPosts, setLikedPosts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
+  // 로컬 스토리지 키 생성
+  const likeKey = `likes-${boardType}-${postId}`;
+  const userLikedPostsKey = `likedPosts-${boardType}-${loggedInUser?.id}`;
+
   useEffect(() => {
-    const storedLikes = localStorage.getItem(`likes_${postId}`);
-    const userLikedPostsKey = `likedPosts_${loggedInUser?.id}`;
+    const storedLikes = localStorage.getItem(likeKey);
     const storedLikedPosts =
       JSON.parse(localStorage.getItem(userLikedPostsKey)) || [];
 
     if (storedLikes) setPostLikes(Number(storedLikes));
     setLikedPosts(storedLikedPosts);
-  }, [postId, loggedInUser?.id]);
+  }, [likeKey, userLikedPostsKey]);
 
   const handleLikeClick = () => {
     if (!loggedInUser) {
@@ -23,8 +26,6 @@ const LikeSection = ({ loggedInUser, postId, setPosts }) => {
       setShowModal(true);
       return;
     }
-
-    const userLikedPostsKey = `likedPosts_${loggedInUser.id}`;
 
     if (likedPosts.includes(postId)) {
       setModalMessage("이미 좋아요한 글입니다.");
@@ -44,12 +45,14 @@ const LikeSection = ({ loggedInUser, postId, setPosts }) => {
       return updatedLikedPosts;
     });
 
-    localStorage.setItem(`likes_${postId}`, newLikes);
+    localStorage.setItem(likeKey, newLikes);
 
     // posts 상태 업데이트
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
-        post.id === postId ? { ...post, likeCount: newLikes } : post
+        post.id === postId && post.boardType === boardType
+          ? { ...post, likeCount: newLikes }
+          : post
       )
     );
   };
