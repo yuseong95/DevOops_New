@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux"; // Redux 상태 가져오기
 import timeAgo from "../utils/timeAgo";
 import LikeSection from "../components/LikeSection";
@@ -11,20 +11,23 @@ const PostDetailPage = ({ posts, setPosts, loggedInUser }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const post = posts.find((p) => p.id === Number(id));
 
-  // `location.state`에서 boardType을 가져오거나, post.boardType을 사용
-  const boardType = location.state?.boardType || post?.boardType || "free";
+  // `location.state`에서 boardType을 가져오거나 기본값 설정
+  const boardType = location.state?.boardType || "free";
+
+  // 게시글 필터링
+  const post = useMemo(() => {
+    return posts.find((p) => p.id === Number(id) && p.boardType === boardType);
+  }, [id, boardType, posts]);
 
   const [comments, setComments] = useState([]);
-  const [showDeleteModal, setShowDeleteModal] = useState(false); // 삭제 모달 표시 상태
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   // Redux에서 작성자 정보 매핑
   const author = post && users.find((user) => user.id === post.authorId);
 
   useEffect(() => {
     if (post) {
-      console.log("boardType in PostDetailPage:", boardType); // 디버깅 로그
       const savedComments = localStorage.getItem(
         `comments-${boardType}-${post.id}`
       );
